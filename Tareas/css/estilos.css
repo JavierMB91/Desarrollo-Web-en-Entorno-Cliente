@@ -1,0 +1,375 @@
+body {
+    background: linear-gradient(135deg, #2ec4b6 0%, #f7c873 50%, #ff6f61 100%);
+    font-family: 'Montserrat', 'Arial', sans-serif;
+    color: #2d2d2d;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5em;
+}
+
+h1, h2, h3 {
+    font-family: 'Alfa Slab One', cursive, sans-serif;
+    color: #ff6f61;
+    text-shadow: 2px 2px 0 #fff2b2, 4px 4px 0 #2ec4b6;
+    margin-bottom: 0.5em;
+    text-align: center;
+    letter-spacing: 2px;
+    transition: transform 0.2s, color 0.2s;
+}
+h1:hover, h2:hover, h3:hover {
+    color: #f7c873;
+    transform: scale(1.05) rotate(-2deg);
+    text-shadow: 2px 2px 0 #ff6f61, 4px 4px 0 #2ec4b6;
+}
+
+a {
+    color: #2ec4b6;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.2s, text-shadow 0.2s, background 0.2s;
+    padding: 0.2em 0.5em;
+    border-radius: 6px;
+}
+a:hover {
+    color: #fff;
+    background: #ff6f61;
+    text-shadow: 1px 1px 0 #f7c873, 0 0 8px #2ec4b6;
+}
+
+input[type="text"] {
+    font-size: 1.3em;
+    padding: 1em 2em;
+    border-radius: 16px;
+    border: 2px solid #2ec4b6;
+    margin-bottom: 1.5em;
+    outline: none;
+    box-shadow: 0 2px 12px #2ec4b655;
+    transition: border 0.2s, box-shadow 0.2s;
+}
+input[type="text"]:focus {
+    border: 2px solid #ff6f61;
+    box-shadow: 0 0 16px #ff6f6199;
+    outline: none;
+}
+
+button, button#add-button, ul#lista-tareas li button.eliminar {
+    font-size: 1.3em;
+    padding: 1em 2.2em;
+    outline: none;
+}
+button:focus, button#add-button:focus, ul#lista-tareas li button.eliminar:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+button#add-button {
+    cursor: url('https://cdn.jsdelivr.net/gh/ionic-team/ionicons@5.5.2/src/svg/add-circle-outline.svg'), pointer;
+    box-shadow: 0 0 16px #2ec4b6aa;
+    background: linear-gradient(90deg, #f7c873 0%, #2ec4b6 100%);
+    border: 2px solid #ff6f61;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+button#add-button:hover {
+    background: linear-gradient(90deg, #ff6f61 0%, #2ec4b6 100%);
+    color: #fff2b2;
+    box-shadow: 0 0 24px #ff6f6199;
+    border-color: #2ec4b6;
+    transform: scale(1.08) rotate(-2deg);
+}
+
+.container {
+    max-width: 1100px;
+    margin: 2em auto;
+    background: linear-gradient(120deg, #fff2b2cc 60%, #2ec4b633 100%);
+    border-radius: 24px;
+    box-shadow: 0 8px 32px #2ec4b655;
+    padding: 3em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+ul#lista-tareas {
+    list-style: none;
+    padding: 0;
+    margin: 2em 0 0 0;
+    width: 100%;
+    max-width: 800px;
+    background: linear-gradient(90deg, #fff2b2cc 60%, #2ec4b633 100%);
+    border-radius: 18px;
+    box-shadow: 0 4px 24px #2ec4b655;
+    border: 2px solid #2ec4b6;
+    overflow: hidden;
+}
+ul#lista-tareas li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: linear-gradient(90deg, #f7c873 0%, #ff6f6133 100%);
+    margin: 0.5em 1em;
+    padding: 1.3em 2em;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px #2ec4b655;
+    font-size: 1.5em;
+    color: #a51c30;
+    transition: background 0.2s, transform 0.2s;
+    position: relative;
+}
+ul#lista-tareas li:hover {
+    background: linear-gradient(90deg, #2ec4b6 0%, #f7c873 100%);
+    color: #fff;
+    transform: scale(1.03) rotate(-1deg);
+    box-shadow: 0 4px 16px #ff6f6199;
+}
+ul#lista-tareas li button.eliminar {
+    background: #ff6f61;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 0.5em 1.2em;
+    font-size: 1.1em;
+    cursor: pointer;
+    box-shadow: 1px 1px 6px #2ec4b655;
+    margin-left: 1em;
+    transition: background 0.2s, transform 0.2s;
+}
+ul#lista-tareas li button.eliminar:hover {
+    background: #2ec4b6;
+    color: #fff2b2;
+    transform: scale(1.1) rotate(2deg);
+    box-shadow: 0 0 8px #ff6f6199;
+}
+
+.card {
+    background: linear-gradient(120deg, #fff 80%, #f7c87333 100%);
+    border: 2px solid #2ec4b6;
+    border-radius: 18px;
+    box-shadow: 0 4px 16px #ff6f6155;
+    padding: 1.2em;
+    margin-bottom: 2em;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+.card:hover {
+    transform: scale(1.03) rotate(1deg);
+    box-shadow: 0 8px 32px #2ec4b699;
+    border-color: #ff6f61;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+    background: #f7c873;
+}
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, #2ec4b6 0%, #ff6f61 100%);
+    border-radius: 5px;
+}
+button#add-button {
+    cursor: url('https://cdn.jsdelivr.net/gh/ionic-team/ionicons@5.5.2/src/svg/add-circle-outline.svg'), pointer;
+    box-shadow: 0 0 16px #2ec4b6aa;
+    background: linear-gradient(90deg, #f7c873 0%, #2ec4b6 100%);
+    border: 2px solid #ff6f61;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+button#add-button:hover {
+    background: linear-gradient(90deg, #ff6f61 0%, #2ec4b6 100%);
+    color: #fff2b2;
+    box-shadow: 0 0 24px #ff6f6199;
+    border-color: #2ec4b6;
+    transform: scale(1.08) rotate(-2deg);
+}
+ul#lista-tareas {
+    list-style: none;
+    padding: 0;
+    margin: 2em 0 0 0;
+    width: 100%;
+    max-width: 500px;
+    background: linear-gradient(90deg, #fff2b2cc 60%, #2ec4b633 100%);
+    border-radius: 18px;
+    box-shadow: 0 4px 24px #2ec4b655;
+    border: 2px solid #2ec4b6;
+    overflow: hidden;
+}
+ul#lista-tareas li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: linear-gradient(90deg, #f7c873 0%, #ff6f6133 100%);
+    margin: 0.5em 1em;
+    padding: 1em 1.5em;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px #2ec4b655;
+    font-size: 1.1em;
+    color: #a51c30;
+    transition: background 0.2s, transform 0.2s;
+    position: relative;
+}
+
+ul#lista-tareas li:hover {
+    background: linear-gradient(90deg, #2ec4b6 0%, #f7c873 100%);
+    color: #fff;
+    transform: scale(1.03) rotate(-1deg);
+    box-shadow: 0 4px 16px #ff6f6199;
+}
+ul#lista-tareas li button.eliminar {
+    background: #ff6f61;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 0.3em 1em;
+    font-size: 0.95em;
+    cursor: pointer;
+    box-shadow: 1px 1px 6px #2ec4b655;
+    margin-left: 1em;
+    transition: background 0.2s, transform 0.2s;
+}
+
+ul#lista-tareas li button.eliminar:hover {
+    background: #2ec4b6;
+    color: #fff2b2;
+    transform: scale(1.1) rotate(2deg);
+    box-shadow: 0 0 8px #ff6f6199;
+}
+body {
+    background: linear-gradient(135deg, #f7c873 0%, #e94e77 100%);
+    font-family: 'Montserrat', 'Arial', sans-serif;
+    color: #2d2d2d;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+h1, h2, h3 {
+    font-family: 'Alfa Slab One', cursive, sans-serif;
+    color: #a51c30;
+    text-shadow: 2px 2px 0 #fff2b2, 4px 4px 0 #e94e77;
+    margin-bottom: 0.5em;
+    text-align: center;
+    letter-spacing: 2px;
+    transition: transform 0.2s, color 0.2s;
+}
+
+h1:hover, h2:hover, h3:hover {
+    color: #f7c873;
+    transform: scale(1.05) rotate(-2deg);
+    text-shadow: 2px 2px 0 #ff6f61, 4px 4px 0 #2ec4b6;
+
+a {
+    color: #e94e77;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.2s;
+}
+
+a:hover {
+    color: #f7c873;
+    text-shadow: 1px 1px 0 #a51c30;
+}
+
+button {
+    background: #a51c30;
+    color: #fff2b2;
+    transition: color 0.2s, text-shadow 0.2s, background 0.2s;
+    padding: 0.2em 0.5em;
+    border-radius: 6px;
+    border: none;
+
+a:hover {
+    color: #fff;
+    background: #ff6f61;
+    text-shadow: 1px 1px 0 #f7c873, 0 0 8px #2ec4b6;
+}
+    border-radius: 8px;
+    padding: 0.5em 1.5em;
+    font-size: 1em;
+    font-family: inherit;
+    cursor: pointer;
+    box-shadow: 2px 2px 8px #e94e7755;
+    transition: background 0.2s;
+}
+
+button:hover {
+    background: #e94e77;
+    color: #fff;
+    transform: scale(1.07) rotate(-2deg);
+}
+
+button {
+    background: linear-gradient(90deg, #2ec4b6 0%, #f7c873 100%);
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    padding: 0.7em 2em;
+    font-size: 1.1em;
+    font-family: inherit;
+    cursor: pointer;
+    box-shadow: 2px 2px 12px #ff6f6155;
+    transition: background 0.2s, transform 0.2s;
+    outline: none;
+}
+
+button:hover {
+    background: linear-gradient(90deg, #ff6f61 0%, #2ec4b6 100%);
+    color: #fff2b2;
+    box-shadow: 0 0 16px #f7c87399;
+}
+}
+
+.container {
+    max-width: 900px;
+    margin: 2em auto;
+    background: #fff2b2cc;
+    border-radius: 16px;
+    box-shadow: 0 4px 24px #a51c3055;
+    padding: 2em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.card {
+    background: #fff;
+    border: 2px solid #e94e77;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px #f7c87355;
+    padding: 1em;
+    margin-bottom: 1.5em;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+    transform: scale(1.03) rotate(1deg);
+    box-shadow: 0 8px 32px #2ec4b699;
+    border-color: #ff6f61;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+    background: #fff2b2;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #e94e77;
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+    background: #f7c873;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, #2ec4b6 0%, #ff6f61 100%);
+    border-radius: 5px;
+}
