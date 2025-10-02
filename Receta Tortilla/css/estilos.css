@@ -1,0 +1,28 @@
+body {
+    background-color: rgb(240, 203, 203);
+}
+
+.container {
+    background-color: white;
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+    border-radius: 20px;;
+}
+
+img {
+    width: 100%;
+    border-radius: 20px;
+}
+
+table {
+    width: 30%;
+    min-width: 200px;
+    margin: auto;
+    border: 1px solid black;
+}
+
+.derecha {
+    text-align: right;
+}
