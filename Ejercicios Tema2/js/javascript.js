@@ -134,3 +134,4 @@ console.log("La suma de sus dígitos es:", sumaDigitos(numero));
 
 
 
+
