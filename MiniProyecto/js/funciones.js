@@ -64,4 +64,12 @@ export function obtenerTop5PorPuntuacion(piezas) {
   return mostrarPiezas(arrayOrdenado.slice(0, 5));
 }
 
-export function
+export function verificacionCategoria(piezas, categoria) {
+  const resultado = piezas.filter(pieza => pieza.categoria === categoria);
+  
+  if (resultado.length > 0) {
+    return `Sí, se encontraron ${resultado.length} piezas de la categoría '${categoria}'.`;
+  } else {
+    return `No, no hay piezas de la categoría '${categoria}'.`;
+  }
+}
