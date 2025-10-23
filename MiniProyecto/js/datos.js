@@ -68,7 +68,7 @@ export const catalogoPiezas = [
     id: "ram-001",
     nombre: "Corsair Vengeance LPX 16GB (2x8GB) DDR4 3200MHz",
     categoria: "Memoria RAM",
-    precio: 49.99,
+    precio: 100,
     puntuacion: 7.5,
     tipo: "DDR4",
     capacidad: "16GB",

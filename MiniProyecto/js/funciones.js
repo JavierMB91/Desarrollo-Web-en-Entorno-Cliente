@@ -65,11 +65,40 @@ export function obtenerTop5PorPuntuacion(piezas) {
 }
 
 export function verificacionCategoria(piezas, categoria) {
-  const resultado = piezas.filter(pieza => pieza.categoria === categoria);
+  const resultadoCategoria = piezas.filter(pieza => pieza.categoria === categoria);
   
-  if (resultado.length > 0) {
-    return `Sí, se encontraron ${resultado.length} piezas de la categoría '${categoria}'.`;
+  if (resultadoCategoria.length > 0) {
+    return `Sí, se encontraron ${resultadoCategoria.length} piezas de la categoría '${categoria}'.`;
   } else {
     return `No, no hay piezas de la categoría '${categoria}'.`;
   }
+}
+
+export function precioPiezas(piezas, dinero) {
+  const resultadoPrecio = piezas.every(pieza  => pieza.precio >= dinero);
+  
+  if (resultadoPrecio) {
+    return `¿Todas las piezas valen mas de ${dinero}? Si.`;
+  } else {
+    return `¿Todas las piezas valen mas de ${dinero}? No.`;
+  }
+}
+
+export function tarjetasGraficas(piezas, categoria) {
+    const filtro = piezas.filter(pieza => pieza.categoria === categoria);
+
+    let contenido = "";
+    
+    if(filtro.length > 0){
+        filtro.forEach(pieza => {
+        contenido += `
+        <div class="catalogo">
+            <div class="catalogo-container">
+            <P>${pieza.nombre} - ${pieza.precio}€ - ⭐${pieza.puntuacion}</P>
+            </div>
+        </div>
+        `;
+         })
+    }
+    return contenido;
 }
