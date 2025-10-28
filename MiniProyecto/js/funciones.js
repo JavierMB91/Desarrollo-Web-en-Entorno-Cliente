@@ -102,3 +102,93 @@ export function tarjetasGraficas(piezas, categoria) {
     }
     return contenido;
 }
+
+export function mejorCalidad(piezas, puntuacion) {
+    const filtro = piezas.filter(pieza => pieza.puntuacion >= puntuacion);
+
+    let contenido = "";
+    if(filtro.length > 0){
+        filtro.forEach(pieza => {
+        contenido += `
+        <div class="catalogo">
+            <div class="catalogo-container">
+            <P>Piezas de Mas calidad: ${pieza.nombre}- ${pieza.categoria} - ⭐${pieza.puntuacion} - ${pieza.precio}€</P>
+            </div>
+        </div>
+        `;
+         })
+         return contenido;
+    }else{
+        return "No hay piezas con esa puntuación";
+    }
+}
+
+export function busquedaPorId(piezas, id) {
+    const pieza = piezas.find(pieza => pieza.id === id);
+
+    const indice = piezas.findIndex(pieza => pieza.id === id);
+
+    if (pieza) { 
+        const contenido = `
+            <div class="catalogo">
+                <div class="catalogo-container">
+                    <p>Pieza encontrada: Indice ${indice} ${pieza.id} - ${pieza.nombre} - ${pieza.categoria} - ⭐${pieza.puntuacion}/10 - ${pieza.precio}€</p>
+                </div>
+            </div>
+        `;
+        return contenido;
+    } else {
+        return "No hay piezas con ese ID";
+    }
+}
+
+export function busquedaporNombre(piezas, nombre) {
+    const pieza = piezas.find(pieza => pieza.nombre.toLowerCase() === nombre.toLowerCase());
+
+    if (pieza) { 
+        const contenido = `
+            <div class="catalogo">
+                <div class="catalogo-container">
+                    <p>Pieza encontrada:  ${pieza.nombre} - ${pieza.id} - ${pieza.categoria} - ⭐${pieza.puntuacion}/10 - ${pieza.precio}€</p>
+                </div>
+            </div>
+        `;
+        return contenido;
+    } else {
+        return "No hay piezas con ese Nombre";
+    }
+}
+
+export function obtenerPropiedades(pieza) {
+    let propiedades = Object.keys(pieza);
+
+    let html = '<p>'
+    propiedades.forEach(propiedad => {
+        html += `
+        <span>${propiedad}</span>
+        `
+    })
+    html += '</p>'
+
+    return html;
+}
+
+export function conversorEntradas(pieza) {
+    let conversor = Object.entries(pieza)
+   let html = ''
+    conversor.forEach(conversion => {
+        html += `
+        <p>${conversion[0]}: ${conversion[1]}</p>
+        `
+    })
+    return html;
+}
+
+export function obtenerTop5Baratos(piezas) {
+  // 1. Copiamos el array para no modificar el original con sort()
+  // 2. Ordenamos la copia de mayor a menor según la propiedad 'puntuacion'
+  const arrayOrdenado = [...piezas].sort((a, b) => a.precio - b.precio);
+  
+  // 3. Devolvemos solo los primeros 5 elementos
+  return mostrarPiezas(arrayOrdenado.slice(0, 5));
+}
