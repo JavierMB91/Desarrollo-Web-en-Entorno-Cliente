@@ -1,0 +1,109 @@
+/* ====== Estilo general ====== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background-color: #0f1117;
+  color: #e2e2e2;
+  line-height: 1.6;
+  padding: 2rem;
+}
+
+/* ====== Título principal ====== */
+h1 {
+  text-align: center;
+  color: #00aaff;
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  text-shadow: 0 0 6px rgba(0, 170, 255, 0.6);
+}
+
+/* ====== Secciones de contenido ====== */
+.container {
+  background: #181b23;
+  border: 1px solid #2b2f3a;
+  border-radius: 8px;
+  padding: 1rem 1.5rem;
+  margin-bottom: 1.5rem;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+  box-shadow: 0 3px 10px rgba(0, 170, 255, 0.08);
+}
+
+/* ====== Títulos automáticos para secciones ====== */
+#catalogo::before       { content: "📦 Catálogo Completo"; }
+#media::before          { content: "💰 Precio Promedio"; }
+#puntuacion::before     { content: "⭐ Puntuación Media"; }
+#total::before          { content: "🔢 Total de Piezas"; }
+#top5::before           { content: "🔥 Top 5 Mejor Puntuadas"; }
+#categoria::before      { content: "📁 Verificación: Tarjeta Gráfica"; }
+#categoria2::before     { content: "📁 Verificación: HDD"; }
+#precio::before         { content: "💸 Piezas con Precio > 500€"; }
+#precio2::before        { content: "💸 Piezas con Precio > 100€"; }
+#tarjetas::before       { content: "🧩 Tarjetas Gráficas"; }
+#mejorCalidad::before   { content: "🏆 Piezas de Alta Calidad (≥9.0)"; }
+#busquedaId::before     { content: "🔍 Búsqueda por ID"; }
+#busquedaNombre::before { content: "🔎 Búsqueda por Nombre"; }
+#propiedades::before    { content: "⚙️ Propiedades de Pieza"; }
+#conversor::before      { content: "🔧 Conversor de Propiedades"; }
+#topBaratos::before     { content: "💰 Top 5 Más Baratos"; }
+
+.container::before {
+  display: block;
+  font-weight: bold;
+  color: #00aaff;
+  margin-bottom: 0.8rem;
+  font-size: 1.05rem;
+}
+
+/* ====== Estilo tipo lista ====== */
+.catalogo, .lista-item {
+  border-bottom: 1px solid #2b2f3a;
+  padding: 0.6rem 0;
+}
+
+.catalogo:last-child, .lista-item:last-child {
+  border-bottom: none;
+}
+
+.catalogo-container p,
+.lista-item p {
+  margin: 0.2rem 0;
+  font-size: 0.95rem;
+}
+
+/* ====== Colores destacados ====== */
+strong, b {
+  color: #00aaff;
+}
+
+p span.valor {
+  color: #e0e0e0;
+  font-weight: 500;
+}
+
+/* ====== Hover opcional ====== */
+.catalogo:hover, .lista-item:hover {
+  background-color: rgba(0, 170, 255, 0.06);
+  transition: background-color 0.3s ease;
+}
+
+/* ====== Responsive ====== */
+@media (max-width: 768px) {
+  body {
+    padding: 1rem;
+  }
+
+  h1 {
+    font-size: 1.6rem;
+  }
+
+  .container {
+    padding: 1rem;
+  }
+}
