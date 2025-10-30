@@ -1,0 +1,95 @@
+/* ====== ESTILO GENERAL ====== */
+body {
+    font-family: "Segoe UI", "Roboto", sans-serif;
+    background: linear-gradient(180deg, #dfe9f3 0%, #ffffff 100%);
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h1 {
+    color: #003366;
+    text-transform: uppercase;
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+}
+
+/* ====== CONTENEDOR DEL AUTOCAR ====== */
+#asientos {
+    background-color: #f7f9fb;
+    border: 6px solid #003366;
+    border-radius: 20px;
+    padding: 15px 10px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+    width: max-content; /* 🔹 Se ajusta al contenido */
+    text-align: center;
+    line-height: 0; /* 🔹 Evita espacios verticales extra */
+    position: relative;
+}
+
+/* ====== FILAS Y PASILLO ====== */
+#asientos br {
+    display: block;
+    height: 10px; /* espacio entre filas */
+    content: "";
+}
+
+/* ====== ASIENTOS ====== */
+#asientos div {
+    display: inline-block;
+    text-align: center;
+    margin: 2px 4px;
+    vertical-align: middle;
+}
+
+#asientos img {
+    width: 36px;
+    height: 36px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    filter: drop-shadow(0 1px 2px rgba(0,0,0,0.2));
+}
+
+#asientos img:hover {
+    transform: scale(1.1);
+}
+
+/* Número debajo del asiento */
+#asientos small {
+    display: block;
+    font-size: 0.65rem;
+    color: #333;
+    margin-top: 2px;
+}
+
+/* ====== PASILLO CENTRAL VISUAL ====== */
+#asientos {
+    background-image: linear-gradient(
+        to bottom,
+        transparent 0,
+        transparent 8%,
+        rgba(210,210,210,0.3) 8%,
+        rgba(210,210,210,0.3) 92%,
+        transparent 92%,
+        transparent 100%
+    );
+    background-size: 60% 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+/* ====== OPCIONAL: RESPONSIVE ====== */
+@media (max-height: 700px) {
+    #asientos img {
+        width: 30px;
+        height: 30px;
+    }
+    #asientos small {
+        font-size: 0.55rem;
+    }
+    h1 {
+        font-size: 1rem;
+    }
+}
