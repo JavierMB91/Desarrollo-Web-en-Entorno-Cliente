@@ -17,7 +17,7 @@ const tienda = [
     "precio": 20,
     "publicacion": 2024,
     "copias": 500, //miles de copias
-    "caratula": "https://images-na.ssl-images-amazon.com/images/I/71o6gIerHwL._SY355_.jpg"
+    "caratula": "https://m.media-amazon.com/images/I/61ZLg0oDBjL._UF894,1000_QL80_.jpg"
   },
   {
     "titulo": "One night only",
