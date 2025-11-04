@@ -16,6 +16,48 @@ h1 {
     margin-bottom: 15px;
 }
 
+.footer, h1 {
+    text-align: center;
+}
+
+/* Contenedor general de la leyenda */
+.leyenda-asientos {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  font-family: Arial, sans-serif;
+  margin: 10px 0;
+}
+
+/* Cada ítem: cuadrado + texto */
+.leyenda-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Cuadrados base */
+.cuadro {
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  border: 1px solid #000;
+}
+
+/* Colores según estado */
+.cuadro.libre {
+  background-color: #007bff; /* Azul */
+}
+
+.cuadro.reservado {
+  background-color: #ffcc00; /* Amarillo */
+}
+
+.cuadro.ocupado {
+  background-color: #ff0000; /* Rojo */
+}
+
+
 /* ====== CONTENEDOR DEL AUTOCAR ====== */
 #asientos {
     background-color: #f7f9fb;
@@ -27,6 +69,7 @@ h1 {
     text-align: center;
     line-height: 0; /* 🔹 Evita espacios verticales extra */
     position: relative;
+    cursor: pointer;
 }
 
 /* ====== FILAS Y PASILLO ====== */
