@@ -1,0 +1,37 @@
+/* Reseteamos márgenes */
+body, ul {
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+/* Fondo del menú */
+nav {
+  background-color: #333;
+}
+
+/* Lista horizontal */
+.menu {
+  display: flex;
+  list-style: none;
+  justify-content: center;
+}
+
+/* Enlaces */
+.menu li a {
+  display: block;
+  padding: 15px 20px;
+  color: white;
+  text-decoration: none;
+  transition: background 0.3s;
+}
+
+/* Efecto hover */
+.menu li a:hover {
+  background-color: #555;
+}
