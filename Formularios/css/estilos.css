@@ -1,0 +1,170 @@
+/* ===== ESTILO METAL GEAR SOLID 1 ===== */
+
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+
+body {
+    background: radial-gradient(circle at center, #001a00 10%, #000 80%);
+    color: #00ff9d;
+    font-family: 'Share Tech Mono', monospace;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    padding: 20px;
+    overflow: hidden;
+}
+
+/* Contenedor principal */
+.container {
+    background: rgba(0, 30, 0, 0.85);
+    border: 2px solid #00ff9d;
+    border-radius: 8px;
+    box-shadow: 0 0 20px #00ff9d88;
+    padding: 30px;
+    max-width: 500px;
+    width: 100%;
+    animation: flicker 2s infinite alternate;
+}
+
+/* Título */
+h1 {
+    text-align: center;
+    font-size: 16px;
+    color: #00ff9d;
+    text-shadow: 0 0 8px #00ff9d;
+    margin-bottom: 25px;
+    letter-spacing: 2px;
+}
+
+/* Bloques del formulario */
+.bloque-form {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    font-size: 12px;
+    margin-bottom: 6px;
+    color: #00ff9d;
+    text-shadow: 0 0 6px #00ff9d88;
+}
+
+/* Inputs generales */
+input[type="text"],
+input[type="number"],
+input[type="file"],
+input[type="tel"],
+select {
+    width: 100%;
+    padding: 8px;
+    background: #001f0f;
+    color: #00ff9d;
+    border: 1px solid #00ff9d;
+    border-radius: 4px;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 12px;
+    outline: none;
+    box-shadow: inset 0 0 8px #00ff9d33;
+    transition: all 0.3s;
+}
+
+input:focus,
+select:focus {
+    background: #002a14;
+    box-shadow: 0 0 10px #00ff9d;
+}
+
+/* ===== Nueva clase para checkboxes ===== */
+.bloque-check {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.bloque-check input[type="checkbox"] {
+    accent-color: #00ff9d;
+    transform: scale(1.2);
+    cursor: pointer;
+}
+
+.bloque-check label {
+    display: inline-block;
+    margin: 0;
+    font-size: 12px;
+    text-shadow: 0 0 4px #00ff9d88;
+    cursor: pointer;
+}
+
+/* Botón de envío */
+button {
+    width: 100%;
+    padding: 10px;
+    background: #003322;
+    color: #00ff9d;
+    border: 2px solid #00ff9d;
+    border-radius: 5px;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 12px;
+    cursor: pointer;
+    text-transform: uppercase;
+    box-shadow: 0 0 10px #00ff9d44;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: #005533;
+    box-shadow: 0 0 15px #00ff9d;
+}
+
+button:active {
+    background: #00ff9d;
+    color: #003322;
+}
+
+/* Placeholder tenue verde */
+input::placeholder {
+    color: #00ff9d66;
+}
+
+/* Líneas de interferencia tipo monitor */
+body::before, body::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background: #00ff9d22;
+    animation: scan 2s linear infinite;
+}
+
+body::after {
+    animation-delay: 1s;
+}
+
+/* Animaciones */
+@keyframes flicker {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.95; }
+    60% { opacity: 0.9; }
+}
+
+@keyframes scan {
+    0% { top: 0; }
+    100% { top: 100%; }
+}
+
+/* Scrollbar estilo MGS */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #00ff9d88;
+    border-radius: 10px;
+}
+
+.error {
+    color: #ff0066;
+    font-size: 0.8rem;
+}

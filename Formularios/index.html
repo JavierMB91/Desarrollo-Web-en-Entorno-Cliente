@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/estilos.css">
+    <title>Formulario de Prueba</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Formulario de Prueba</h1>
+        <form action="" method="post" enctype="multipart/form-data" id="formulario">
+
+            <div class="bloque-form">
+                <label for="nombre">Nombre</label>
+                <input type="text" name="nombre" id="nombre" placeholder="Introduce tu nombre">
+                <span id="nombreError" class="error"></span>
+            </div>
+
+            <!-- ✅ Bloques de checkbox con nueva clase -->
+            <div class="bloque-check">
+                <input type="checkbox" name="acepto" id="acepto">
+                <label for="acepto">Acepto todos los términos y condiciones</label>
+                <span id="aceptoError" class="error"></span>
+            </div>
+
+            <div class="bloque-check">
+                <input type="checkbox" name="mayor" id="mayor">
+                <label for="mayor">Confirmo que soy mayor de 18 años</label>
+                <span id="edadError" class="error"></span>
+            </div>
+
+            <div class="bloque-form">
+                <label for="opciones">Selecciona una opción</label>
+                <select name="opciones" id="opciones">
+                    <option value="">Seleccione...</option>
+                    <option value="1">Opción 1</option>
+                    <option value="2">Opción 2</option>
+                    <option value="3">Opción 3</option>
+                </select>
+                <span id="opcionesError" class="error"></span>
+            </div>
+
+            <div class="bloque-form">
+                <input type="number" name="numero" id="numero">
+                <label for="numero">Introduce un número (1-100)</label>
+                <span id="numeroError" class="error"></span>
+            </div>
+
+            <div class="bloque-form">
+                <label for="archivo">Sube un archivo (JPEG o PNG, máximo 2MB)</label>
+                <input type="file" name="archivo" id="archivo">
+                <span id="archivoError" class="error"></span>
+            </div>
+
+            <div class="bloque-form">
+                <label for="telefono">Número de teléfono (formato: 612 345 678)</label>
+                <input type="tel" name="telefono" id="telefono" maxlength="9" placeholder="+34 612 345 678">
+                <span id="telefonoError" class="error"></span>
+            </div>
+
+            <div class="bloque-form">
+                <button type="submit">Enviar</button>
+            </div>
+        </form>
+    </div>
+    <script src="js/funciones.js"></script>
+</body>
+</html>
