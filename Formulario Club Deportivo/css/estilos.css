@@ -1,37 +1,508 @@
-/* Reseteamos márgenes */
-body, ul {
+/* ============================================================
+   CLUB DEPORTIVO — ESTILO GENERAL PREMIUM
+   ============================================================ */
+
+/* VARIABLES DE COLOR Y FUENTES */
+:root {
+  --azul: #0b1a2b;
+  --azul-suave: #132a46;
+  --oro: #c9a648;
+  --gris: #d7d7d7;
+  --blanco: #f5f5f5;
+  --sombra: 0 4px 12px rgba(0, 0, 0, 0.4);
+  --fuente-titulo: 'Playfair Display', serif;
+  --fuente-texto: 'Montserrat', sans-serif;
+}
+
+/* ============================================================
+   RESET Y BASE
+   ============================================================ */
+* {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
-h1 {
-    text-align: center;
-    margin-top: 20px;
-    margin-bottom: 20px;
+body {
+  background: linear-gradient(180deg, var(--azul) 0%, #091321 100%);
+  color: var(--blanco);
+  font-family: var(--fuente-texto);
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
-/* Fondo del menú */
-nav {
-  background-color: #333;
+/* ============================================================
+   HEADER GENERAL
+   ============================================================ */
+header {
+  background-color: var(--azul);
+  border-bottom: 4px solid var(--oro);
+  box-shadow: var(--sombra);
+  padding: 18px 12px 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  position: relative;
+  isolation: isolate;
 }
 
-/* Lista horizontal */
+header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 120%, rgba(201,166,72,0.15), transparent 70%);
+  z-index: 0;
+}
+
+.escudo-club {
+  display: block;
+  width: 80px;
+  height: 80px;
+  position: relative;
+  z-index: 2;
+  filter: drop-shadow(0 0 6px rgba(201,166,72,0.4));
+  transition: transform 0.3s ease;
+}
+.escudo-club:hover {
+  transform: scale(1.05);
+}
+
+.titulo-club {
+  font-family: var(--fuente-titulo);
+  text-align: center;
+  font-size: 34px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  color: var(--oro);
+  margin: 0;
+  padding: 6px 0;
+  border-bottom: 2px solid var(--oro);
+  position: relative;
+  z-index: 2;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+}
+
+/* ============================================================
+   NAVEGADOR / MENÚ
+   ============================================================ */
+.navegador {
+  width: 100%;
+  z-index: 2;
+}
+
 .menu {
   display: flex;
-  list-style: none;
   justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  list-style: none;
 }
 
-/* Enlaces */
 .menu li a {
   display: block;
-  padding: 15px 20px;
-  color: white;
+  padding: 10px 22px;
+  color: var(--blanco);
   text-decoration: none;
-  transition: background 0.3s;
+  font-weight: 500;
+  font-size: 15px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  position: relative;
 }
 
-/* Efecto hover */
+.menu li a::after {
+  content: "";
+  position: absolute;
+  bottom: 6px;
+  left: 50%;
+  width: 0%;
+  height: 2px;
+  background-color: var(--oro);
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
+}
+
 .menu li a:hover {
-  background-color: #555;
+  color: var(--oro);
+}
+.menu li a:hover::after {
+  width: 60%;
+}
+
+/* ============================================================
+   INDEX PRINCIPAL
+   ============================================================ */
+.index-body main {
+  flex: 1;
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.index-body main p {
+  font-size: 18px;
+  max-width: 700px;
+  margin: 0 auto;
+  color: var(--gris);
+  background: rgba(255, 255, 255, 0.03);
+  padding: 24px 28px;
+  border-radius: 12px;
+  border: 1px solid rgba(201,166,72,0.1);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+}
+
+/* ============================================================
+   SECCIÓN SOCIOS — FORMULARIO PREMIUM COMPACTO
+   ============================================================ */
+
+.socio-body {
+  background: linear-gradient(180deg, var(--azul) 0%, #091321 100%);
+  color: var(--blanco);
+  font-family: var(--fuente-texto);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+/* Título más refinado y ligero */
+.socio-body .titulo-club {
+  font-family: var(--fuente-titulo);
+  font-size: 30px;
+  color: var(--oro);
+  margin-bottom: 24px;
+  border-bottom: 2px solid var(--oro);
+  letter-spacing: 1.5px;
+  text-align: center;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.4);
+}
+
+/* FORMULARIO */
+#formularioSocio {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(201,166,72,0.15);
+  border-radius: 14px;
+  box-shadow: 0 3px 18px rgba(0, 0, 0, 0.35);
+  padding: 26px 32px;
+  max-width: 420px;
+  width: 100%;
+  backdrop-filter: blur(6px);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#formularioSocio:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+}
+
+/* BLOQUES DEL FORMULARIO */
+.bloque-form {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 14px;
+}
+
+.bloque-form label {
+  color: var(--oro);
+  font-weight: 600;
+  margin-bottom: 4px;
+  font-size: 14px;
+  letter-spacing: 0.4px;
+}
+
+.bloque-form input[type="text"],
+.bloque-form input[type="number"],
+.bloque-form input[type="password"],
+.bloque-form input[type="tel"],
+.bloque-form input[type="file"] {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(201,166,72,0.2);
+  border-radius: 8px;
+  padding: 8px 12px;
+  color: var(--blanco);
+  font-size: 14px;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.bloque-form input::placeholder {
+  color: rgba(255,255,255,0.5);
+}
+
+.bloque-form input:focus {
+  border-color: var(--oro);
+  box-shadow: 0 0 5px rgba(201,166,72,0.4);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* ERRORES */
+.error {
+  color: #e57373;
+  font-size: 12px;
+  margin-top: 2px;
+  min-height: 14px;
+}
+
+/* BOTÓN COMPACTO */
+#formularioSocio button {
+  display: block;
+  width: 100%;
+  background: var(--oro);
+  color: var(--azul);
+  font-weight: 700;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 8px;
+  padding: 10px;
+  margin-top: 10px;
+  cursor: pointer;
+  font-size: 14px;
+  letter-spacing: 0.8px;
+  transition: all 0.3s ease;
+}
+
+#formularioSocio button:hover {
+  background: #e3bf5a;
+  box-shadow: 0 0 10px rgba(201,166,72,0.4);
+  transform: translateY(-1px);
+}
+
+/* AJUSTES RESPONSIVE */
+@media (max-height: 700px) {
+  .socio-body {
+    padding: 10px;
+  }
+  #formularioSocio {
+    padding: 20px;
+    max-width: 380px;
+  }
+  .socio-body .titulo-club {
+    font-size: 26px;
+    margin-bottom: 18px;
+  }
+}
+
+/* ============================================================
+   BOTÓN ATRÁS — ESTILO CLUB DEPORTIVO ELEGANTE
+   ============================================================ */
+
+.btn-atras {
+  display: inline-block;
+  background: transparent;
+  border: 2px solid var(--oro);
+  color: var(--oro);
+  font-family: var(--fuente-texto);
+  font-weight: 600;
+  font-size: 15px;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 10px;
+  padding: 10px 24px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  box-shadow: 0 0 0 rgba(201,166,72,0);
+}
+
+.btn-atras:hover {
+  background: var(--oro);
+  color: var(--azul);
+  box-shadow: 0 0 14px rgba(201,166,72,0.4);
+  transform: translateY(-2px);
+}
+
+.btn-atras:active {
+  transform: scale(0.98);
+  box-shadow: 0 0 8px rgba(201,166,72,0.3);
+}
+
+/* Si quieres ubicarlo debajo del formulario centrado */
+.contenedor-atras {
+  margin-top: 20px;
+  text-align: center;
+}
+
+/* ============================================================
+   SECCIÓN SERVICIOS — FORMULARIO PREMIUM CENTRADO
+   ============================================================ */
+
+.servicio-body {
+  background: linear-gradient(180deg, var(--azul) 0%, #091321 100%);
+  color: var(--blanco);
+  font-family: var(--fuente-texto);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 40px 20px;
+  gap: 18px;
+}
+
+/* TÍTULO PRINCIPAL */
+.servicio-body h1 {
+  font-family: var(--fuente-titulo);
+  font-size: 30px;
+  color: var(--oro);
+  border-bottom: 2px solid var(--oro);
+  letter-spacing: 1.5px;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.4);
+  margin-bottom: 10px;
+  padding-bottom: 4px;
+}
+
+/* ESCUDO */
+.servicio-body .escudo-club {
+  width: 80px;
+  height: 80px;
+  filter: drop-shadow(0 0 6px rgba(201,166,72,0.4));
+  transition: transform 0.3s ease;
+}
+.servicio-body .escudo-club:hover {
+  transform: scale(1.05);
+}
+
+/* FORMULARIO */
+#formulario-servicio {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(201,166,72,0.15);
+  border-radius: 14px;
+  box-shadow: 0 3px 18px rgba(0, 0, 0, 0.35);
+  padding: 26px 32px;
+  max-width: 420px;
+  width: 100%;
+  backdrop-filter: blur(6px);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-align: left;
+}
+
+#formulario-servicio:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+}
+
+/* BLOQUES DEL FORMULARIO */
+#formulario-servicio .bloque-form {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 14px;
+}
+
+#formulario-servicio label {
+  color: var(--oro);
+  font-weight: 600;
+  margin-bottom: 4px;
+  font-size: 14px;
+  letter-spacing: 0.4px;
+}
+
+#formulario-servicio input[type="text"],
+#formulario-servicio input[type="number"] {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(201,166,72,0.2);
+  border-radius: 8px;
+  padding: 8px 12px;
+  color: var(--blanco);
+  font-size: 14px;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+#formulario-servicio input::placeholder {
+  color: rgba(255,255,255,0.5);
+}
+
+#formulario-servicio input:focus {
+  border-color: var(--oro);
+  box-shadow: 0 0 5px rgba(201,166,72,0.4);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* ERRORES */
+#formulario-servicio .error {
+  color: #e57373;
+  font-size: 12px;
+  margin-top: 2px;
+  min-height: 14px;
+}
+
+/* BOTÓN ENVIAR */
+#formulario-servicio button {
+  display: block;
+  width: 100%;
+  background: var(--oro);
+  color: var(--azul);
+  font-weight: 700;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 8px;
+  padding: 10px;
+  margin-top: 10px;
+  cursor: pointer;
+  font-size: 14px;
+  letter-spacing: 0.8px;
+  transition: all 0.3s ease;
+}
+
+#formulario-servicio button:hover {
+  background: #e3bf5a;
+  box-shadow: 0 0 10px rgba(201,166,72,0.4);
+  transform: translateY(-1px);
+}
+
+/* BOTÓN ATRÁS */
+.contenedor-atras {
+  margin-top: 22px;
+  text-align: center;
+}
+
+.btn-atras {
+  display: inline-block;
+  background: transparent;
+  border: 2px solid var(--oro);
+  color: var(--oro);
+  font-family: var(--fuente-texto);
+  font-weight: 600;
+  font-size: 15px;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 10px;
+  padding: 10px 24px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  box-shadow: 0 0 0 rgba(201,166,72,0);
+}
+
+.btn-atras:hover {
+  background: var(--oro);
+  color: var(--azul);
+  box-shadow: 0 0 14px rgba(201,166,72,0.4);
+  transform: translateY(-2px);
+}
+
+.btn-atras:active {
+  transform: scale(0.98);
+  box-shadow: 0 0 8px rgba(201,166,72,0.3);
+}
+
+/* RESPONSIVE */
+@media (max-height: 700px) {
+  .servicio-body {
+    padding: 10px;
+    gap: 10px;
+  }
+  #formulario-servicio {
+    padding: 20px;
+    max-width: 380px;
+  }
+  .servicio-body h1 {
+    font-size: 26px;
+  }
 }
