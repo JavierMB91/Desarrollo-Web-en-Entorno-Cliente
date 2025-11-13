@@ -155,6 +155,29 @@ header::before {
 }
 
 /* ============================================================
+   ESTILO ITÁLICO PARA TEXTOS INTERNOS DE FORMULARIOS
+   ============================================================ */
+
+/* Placeholders */
+input::placeholder,
+textarea::placeholder {
+  font-style: italic;
+}
+
+/* Texto visible dentro de los campos */
+input,
+textarea,
+select {
+  font-style: italic;
+}
+
+/* Texto del botón "Ningún archivo seleccionado" (navegadores modernos) */
+input[type="file"] {
+  font-style: italic;
+}
+
+
+/* ============================================================
    SECCIÓN SOCIOS — FORMULARIO PREMIUM COMPACTO
    ============================================================ */
 
@@ -503,6 +526,530 @@ header::before {
     max-width: 380px;
   }
   .servicio-body h1 {
+    font-size: 26px;
+  }
+}
+
+/* ============================================================
+   SECCIÓN TESTIMONIOS — FORMULARIO PREMIUM ELEGANTE
+   ============================================================ */
+
+.testimonio-body {
+  background: linear-gradient(180deg, var(--azul) 0%, #091321 100%);
+  color: var(--blanco);
+  font-family: var(--fuente-texto);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+}
+
+/* Título refinado */
+.testimonio-body .titulo-club {
+  font-family: var(--fuente-titulo);
+  font-size: 30px;
+  color: var(--oro);
+  margin-bottom: 22px;
+  border-bottom: 2px solid var(--oro);
+  letter-spacing: 1.5px;
+  text-align: center;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.4);
+}
+
+/* FORMULARIO TESTIMONIO */
+#formularioTestimonio {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(201,166,72,0.15);
+  border-radius: 14px;
+  box-shadow: 0 3px 18px rgba(0, 0, 0, 0.35);
+  padding: 26px 32px;
+  max-width: 420px;
+  width: 100%;
+  backdrop-filter: blur(6px);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#formularioTestimonio:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+}
+
+/* BLOQUES DEL FORMULARIO */
+#formularioTestimonio .bloque-form {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 14px;
+}
+
+#formularioTestimonio label {
+  color: var(--oro);
+  font-weight: 600;
+  margin-bottom: 4px;
+  font-size: 14px;
+  letter-spacing: 0.4px;
+}
+
+/* CAMPOS */
+#formularioTestimonio input[type="text"],
+#formularioTestimonio textarea {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(201,166,72,0.2);
+  border-radius: 8px;
+  padding: 8px 12px;
+  color: var(--blanco);
+  font-size: 14px;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+/* Ajuste especial para el TEXTAREA */
+#formularioTestimonio textarea {
+  resize: none;
+  min-height: 80px;     /* Altura ideal para testimonios cortos */
+  max-height: 120px;
+  line-height: 1.5;
+  font-family: var(--fuente-texto);
+}
+
+/* Contador de caracteres */
+#formularioTestimonio p {
+  color: rgba(255,255,255,0.6);
+  font-size: 12px;
+  margin-top: 4px;
+  text-align: right;
+  font-style: italic;
+}
+
+#formularioTestimonio input::placeholder,
+#formularioTestimonio textarea::placeholder {
+  color: rgba(255,255,255,0.5);
+}
+
+#formularioTestimonio input:focus,
+#formularioTestimonio textarea:focus {
+  border-color: var(--oro);
+  box-shadow: 0 0 5px rgba(201,166,72,0.4);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* ERRORES */
+#formularioTestimonio .error {
+  color: #e57373;
+  font-size: 12px;
+  margin-top: 2px;
+  min-height: 14px;
+}
+
+/* BOTÓN ENVIAR */
+#formularioTestimonio button {
+  display: block;
+  width: 100%;
+  background: var(--oro);
+  color: var(--azul);
+  font-weight: 700;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 8px;
+  padding: 10px;
+  margin-top: 10px;
+  cursor: pointer;
+  font-size: 14px;
+  letter-spacing: 0.8px;
+  transition: all 0.3s ease;
+}
+
+#formularioTestimonio button:hover {
+  background: #e3bf5a;
+  box-shadow: 0 0 10px rgba(201,166,72,0.4);
+  transform: translateY(-1px);
+}
+
+/* BOTÓN ATRÁS */
+.contenedor-atras {
+  margin-top: 22px;
+  text-align: center;
+}
+
+.btn-atras {
+  display: inline-block;
+  background: transparent;
+  border: 2px solid var(--oro);
+  color: var(--oro);
+  font-family: var(--fuente-texto);
+  font-weight: 600;
+  font-size: 15px;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 10px;
+  padding: 10px 24px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  box-shadow: 0 0 0 rgba(201,166,72,0);
+}
+
+.btn-atras:hover {
+  background: var(--oro);
+  color: var(--azul);
+  box-shadow: 0 0 14px rgba(201,166,72,0.4);
+  transform: translateY(-2px);
+}
+
+.btn-atras:active {
+  transform: scale(0.98);
+  box-shadow: 0 0 8px rgba(201,166,72,0.3);
+}
+
+/* RESPONSIVE */
+@media (max-height: 700px) {
+  .testimonio-body {
+    padding: 10px;
+  }
+
+  #formularioTestimonio {
+    padding: 20px;
+    max-width: 380px;
+  }
+
+  .testimonio-body .titulo-club {
+    font-size: 26px;
+    margin-bottom: 18px;
+  }
+}
+
+/* ============================================================
+   SECCIÓN NOTICIA — FORMULARIO PREMIUM
+   ============================================================ */
+
+.noticia-body {
+  background: linear-gradient(180deg, var(--azul) 0%, #091321 100%);
+  color: var(--blanco);
+  font-family: var(--fuente-texto);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+}
+
+/* Título */
+.noticia-body .titulo-club {
+  font-family: var(--fuente-titulo);
+  font-size: 30px;
+  color: var(--oro);
+  margin-bottom: 22px;
+  border-bottom: 2px solid var(--oro);
+  letter-spacing: 1.5px;
+  text-align: center;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.4);
+}
+
+/* Formulario */
+#formularioNoticia {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(201,166,72,0.15);
+  border-radius: 14px;
+  box-shadow: 0 3px 18px rgba(0, 0, 0, 0.35);
+  padding: 26px 32px;
+  max-width: 420px;
+  width: 100%;
+  backdrop-filter: blur(6px);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-align: left;
+}
+
+#formularioNoticia:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+}
+
+#formularioNoticia .bloque-form {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 14px;
+}
+
+#formularioNoticia label {
+  color: var(--oro);
+  font-weight: 600;
+  margin-bottom: 4px;
+  font-size: 14px;
+  letter-spacing: 0.4px;
+}
+
+#formularioNoticia p {
+  color: rgba(255,255,255,0.6);
+  font-size: 12px;
+  margin-top: 4px;
+  text-align: right;
+  font-style: italic;
+}
+
+/* Inputs y textarea */
+#formularioNoticia input[type="text"],
+#formularioNoticia input[type="date"],
+#formularioNoticia input[type="file"],
+#formularioNoticia textarea {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(201,166,72,0.2);
+  border-radius: 8px;
+  padding: 8px 12px;
+  color: var(--blanco);
+  font-size: 14px;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+#formularioNoticia input:focus,
+#formularioNoticia textarea:focus {
+  border-color: var(--oro);
+  box-shadow: 0 0 5px rgba(201,166,72,0.4);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* Textarea más acorde al límite de 100 caracteres */
+#formularioNoticia textarea {
+  resize: none;
+  min-height: 80px;
+  max-height: 100px;
+  line-height: 1.4;
+}
+
+.contador-textarea {
+  font-size: 12px;
+  color: var(--gris);
+  text-align: right;
+  margin-top: 4px;
+}
+
+/* Errores */
+#formularioNoticia .error {
+  color: #e57373;
+  font-size: 12px;
+  margin-top: 2px;
+  min-height: 14px;
+}
+
+/* Botón */
+#formularioNoticia button {
+  display: block;
+  width: 100%;
+  background: var(--oro);
+  color: var(--azul);
+  font-weight: 700;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 8px;
+  padding: 10px;
+  margin-top: 10px;
+  cursor: pointer;
+  font-size: 14px;
+  letter-spacing: 0.8px;
+  transition: all 0.3s ease;
+}
+
+#formularioNoticia button:hover {
+  background: #e3bf5a;
+  box-shadow: 0 0 10px rgba(201,166,72,0.4);
+  transform: translateY(-1px);
+}
+
+/* Responsive */
+@media (max-height: 700px) {
+  .noticia-body {
+    padding: 10px;
+  }
+
+  #formularioNoticia {
+    padding: 20px;
+    max-width: 380px;
+  }
+
+  .noticia-body .titulo-club {
+    font-size: 26px;
+    margin-bottom: 18px;
+  }
+}
+
+/* ============================================================
+   SECCIÓN CITAS — FORMULARIO PREMIUM
+   ============================================================ */
+
+.cita-body {
+  background: linear-gradient(180deg, var(--azul) 0%, #091321 100%);
+  color: var(--blanco);
+  font-family: var(--fuente-texto);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 40px 20px;
+  gap: 18px;
+}
+
+/* TÍTULO PRINCIPAL */
+.cita-body .titulo-club {
+  font-family: var(--fuente-titulo);
+  font-size: 30px;
+  color: var(--oro);
+  border-bottom: 2px solid var(--oro);
+  letter-spacing: 1.5px;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.4);
+  margin-bottom: 10px;
+  padding-bottom: 4px;
+}
+
+/* FORMULARIO */
+#formularioCita {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(201,166,72,0.15);
+  border-radius: 14px;
+  box-shadow: 0 3px 18px rgba(0, 0, 0, 0.35);
+  padding: 26px 32px;
+  max-width: 420px;
+  width: 100%;
+  backdrop-filter: blur(6px);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-align: left;
+}
+
+#formularioCita:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+}
+
+/* BLOQUES DEL FORMULARIO */
+#formularioCita .bloque-form {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 14px;
+}
+
+#formularioCita label {
+  color: var(--oro);
+  font-weight: 600;
+  margin-bottom: 4px;
+  font-size: 14px;
+  letter-spacing: 0.4px;
+}
+
+/* CAMPOS */
+#formularioCita input[type="text"],
+#formularioCita input[type="date"],
+#formularioCita input[type="time"],
+#formularioCita select {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(201,166,72,0.2);
+  border-radius: 8px;
+  padding: 8px 12px;
+  color: var(--blanco);
+  font-size: 14px;
+  outline: none;
+  transition: all 0.3s ease;
+  font-style: italic;
+}
+
+#formularioCita select option {
+  color: var(--azul);
+}
+
+#formularioCita input::placeholder,
+#formularioCita select:invalid {
+  color: rgba(255,255,255,0.5);
+  font-style: italic;
+}
+
+#formularioCita input:focus,
+#formularioCita select:focus {
+  border-color: var(--oro);
+  box-shadow: 0 0 5px rgba(201,166,72,0.4);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* ERRORES */
+#formularioCita .error {
+  color: #e57373;
+  font-size: 12px;
+  margin-top: 2px;
+  min-height: 14px;
+}
+
+/* BOTÓN ENVIAR */
+#formularioCita button {
+  display: block;
+  width: 100%;
+  background: var(--oro);
+  color: var(--azul);
+  font-weight: 700;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 8px;
+  padding: 10px;
+  margin-top: 10px;
+  cursor: pointer;
+  font-size: 14px;
+  letter-spacing: 0.8px;
+  transition: all 0.3s ease;
+}
+
+#formularioCita button:hover {
+  background: #e3bf5a;
+  box-shadow: 0 0 10px rgba(201,166,72,0.4);
+  transform: translateY(-1px);
+}
+
+/* BOTÓN ATRÁS */
+.cita-body .contenedor-atras {
+  margin-top: 22px;
+  text-align: center;
+}
+
+.cita-body .btn-atras {
+  display: inline-block;
+  background: transparent;
+  border: 2px solid var(--oro);
+  color: var(--oro);
+  font-family: var(--fuente-texto);
+  font-weight: 600;
+  font-size: 15px;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 10px;
+  padding: 10px 24px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  box-shadow: 0 0 0 rgba(201,166,72,0);
+}
+
+.cita-body .btn-atras:hover {
+  background: var(--oro);
+  color: var(--azul);
+  box-shadow: 0 0 14px rgba(201,166,72,0.4);
+  transform: translateY(-2px);
+}
+
+.cita-body .btn-atras:active {
+  transform: scale(0.98);
+  box-shadow: 0 0 8px rgba(201,166,72,0.3);
+}
+
+/* RESPONSIVE */
+@media (max-height: 700px) {
+  .cita-body {
+    padding: 10px;
+    gap: 10px;
+  }
+  #formularioCita {
+    padding: 20px;
+    max-width: 380px;
+  }
+  .cita-body .titulo-club {
     font-size: 26px;
   }
 }

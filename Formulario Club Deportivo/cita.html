@@ -1,13 +1,50 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/estilos.css">
-    <title>Cita</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/estilos.css">
+  <title>Cita</title>
 </head>
-<body>
-    
+<body class="testimonio-body">
+  <h1 class="titulo-club">Citas</h1>
+
+  <form action="" method="post" enctype="multipart/form-data" id="formularioCita">
+    <div class="bloque-form">
+      <label for="cliente">Cliente</label>
+      <select id="cliente" name="cliente">
+        <option value="">Seleccionar cliente</option>
+      </select>
+      <span id="clienteError" class="error"></span>
+    </div>
+
+    <div class="bloque-form">
+      <label for="servicio">Servicio</label>
+      <select id="servicio" name="servicio">
+        <option value="">Seleccionar servicio</option>
+      </select>
+      <span id="servicioError" class="error"></span>
+    </div>
+
+    <div class="bloque-form">
+      <label for="dia">Día</label>
+      <input type="date" id="dia" name="dia">
+      <span id="diaError" class="error"></span>
+    </div>
+
+    <div class="bloque-form">
+      <label for="hora">Hora</label>
+      <input type="time" id="hora" name="hora">
+      <span id="horaError" class="error"></span>
+    </div>
+
+    <button type="submit">Enviar</button>
+  </form>
+
+  <div class="contenedor-atras">
+    <a href="index.html" class="btn-atras">Atrás</a>
+  </div>
+
+  <script src="js/funcionesCita.js"></script>
 </body>
-<script src="js/funciones.js"></script>
 </html>

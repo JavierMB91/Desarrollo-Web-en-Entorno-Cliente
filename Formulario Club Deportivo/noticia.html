@@ -6,8 +6,37 @@
     <link rel="stylesheet" href="css/estilos.css">
     <title>Noticia</title>
 </head>
-<body>
-    
+<body class="noticia-body">
+  <h1 class="titulo-club">Noticia</h1>
+ <form action="" method="post" enctype="multipart/form-data" id="formularioNoticia">
+    <div class="bloque-form">
+      <label for="titulo">Titulo</label>
+      <input type="text" id="titulo" name="titulo" placeholder="">
+      <span id="tituloError" class="error"></span>
+    </div>
+    <div class="bloque-form">
+        <label for="noticia">Noticia</label>
+        <textarea maxlength="100" id="noticia" name="noticia"></textarea>
+        <p><span id="contador">0</span>/100 caracteres</p>
+        <span id="noticiaError" class="error"></span>
+    </div>
+
+    <div class="bloque-form">
+      <label for="fecha">Fecha de publicacion</label>
+      <input type="date" id="fecha" name="fecha">
+      <span id="fechaError" class="error"></span>
+    </div>
+    <div class="bloque-form">
+      <label for="imagen">Foto de la noticia</label>
+      <input type="file" id="imagen" name="imagen" placeholder="DD/MM/YYYY">
+      <span id="imagenError" class="error"></span>
+    </div>
+    <button type="submit">Enviar</button>
+  </form>
+
+  <div class="contenedor-atras">
+    <a href="index.html" class="btn-atras">Atrás</a>
+  </div>
 </body>
-<script src="js/funciones.js"></script>
+<script src="js/funcionesNoticia.js"></script>
 </html>
