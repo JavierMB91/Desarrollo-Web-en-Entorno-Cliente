@@ -8,24 +8,21 @@ formularioCita.addEventListener('submit', (e) => {
         span.innerText = ""
     })
 
-  // Obtener valores
   const cliente = document.getElementById('cliente').value
   const servicio = document.getElementById('servicio').value
   const dia = document.getElementById('dia').value
   const hora = document.getElementById('hora').value
 
-  // Expresiones regulares
   const soloLetras = /^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/
 
-  // Validaciones
   if (cliente.trim().length < 3 || !soloLetras.test(cliente.trim())) {
     document.getElementById('clienteError').innerText = 
-      "Introduce un nombre válido (mínimo 3 letras, solo texto)."
+      "Introduce un nombre válido."
   }
 
   if (servicio.trim().length < 3) {
     document.getElementById('servicioError').innerText = 
-      "Introduce un servicio válido (mínimo 3 caracteres)."
+      "Selecciona una actividad válida."
   }
 
   if (!dia) {
@@ -38,7 +35,7 @@ formularioCita.addEventListener('submit', (e) => {
 
     if (fechaIngresada <= hoy) {
       document.getElementById('diaError').innerText = 
-        "La fecha debe ser posterior a la actual."
+        "La fecha debe ser posterior a hoy."
     }
   }
 

@@ -4,24 +4,24 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="css/estilos.css">
-  <title>Cita</title>
+  <title>Agendar Lectura</title>
 </head>
-<body class="testimonio-body">
-  <h1 class="titulo-club">Citas</h1>
+<body class="lectura-body">
+  <h1 class="titulo-club">Agendar Lectura Guiada</h1>
 
   <form action="" method="post" enctype="multipart/form-data" id="formularioCita">
     <div class="bloque-form">
-      <label for="cliente">Cliente</label>
+      <label for="cliente">Participante</label>
       <select id="cliente" name="cliente">
-        <option value="">Seleccionar cliente</option>
+        <option value="">Seleccionar participante</option>
       </select>
       <span id="clienteError" class="error"></span>
     </div>
 
     <div class="bloque-form">
-      <label for="servicio">Servicio</label>
+      <label for="servicio">Libro / Actividad</label>
       <select id="servicio" name="servicio">
-        <option value="">Seleccionar servicio</option>
+        <option value="">Seleccionar libro o actividad</option>
       </select>
       <span id="servicioError" class="error"></span>
     </div>
@@ -38,7 +38,7 @@
       <span id="horaError" class="error"></span>
     </div>
 
-    <button type="submit">Enviar</button>
+    <button type="submit">Agendar</button>
   </form>
 
   <div class="contenedor-atras">

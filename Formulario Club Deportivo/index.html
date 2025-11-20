@@ -5,45 +5,41 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="css/estilos.css">
 
-  <title>Inicio | Club Deportivo</title>
+  <title>Inicio | Club de Lectura</title>
 </head>
 <body class="index-body">
 
   <header>
-    <h1 class="titulo-club">CLUB DEPORTIVO</h1>
-
-    <!-- Escudo Club Deportivo -->
-    <svg class="escudo-club" width="70" height="70" viewBox="0 0 100 100">
-      <defs>
-        <style>
-          .bord { fill: none; stroke: #bfa065; stroke-width: 4; }
-          .letra { fill: #bfa065; font-size: 38px; font-weight: 600; font-family: 'Montserrat', sans-serif; }
-        </style>
-      </defs>
-      <path class="bord" d="M10 20 L50 5 L90 20 L90 60 Q50 95 10 60 Z"/>
-      <text x="50%" y="52%" text-anchor="middle" class="letra">CD</text>
-    </svg>
-
-    <nav class="navegador">
-      <ul class="menu">
-        <li><a href="socio.html">Hazte Socio</a></li>
-        <li><a href="servicio.html">Nuevo Servicio</a></li>
-        <li><a href="testimonio.html">Nuevo Testimonio</a></li>
-        <li><a href="noticia.html">Nueva Noticia</a></li>
-        <li><a href="cita.html">Nueva Cita</a></li>
-      </ul>
-    </nav>
+    <h1 class="titulo-club">CLUB DE LECTURA</h1>
+    <div id="nav"></div>
   </header>
+
+  
+   <script>
+    fetch('nav.html')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('nav').innerHTML = data;
+      })
+      .catch(err => console.error('Error cargando nav:', err));
+  </script>
+
 
   <main>
     <section>
-      <p>Bienvenido al Club Deportivo. Selecciona una opción del menú para gestionar socios, servicios o noticias.</p>
+      <p>Bienvenido al Club de Lectura. Gestiona miembros, actividades, publicaciones y sesiones de lectura.</p>
     </section>
   </main>
+  
 
-  <footer>
-    <p>© 2025 Club Deportivo. Todos los derechos reservados.</p>
-  </footer>
-
+  <script>
+    fetch('footer.html')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('footer').innerHTML = data;
+      })
+      .catch(err => console.error('Error cargando footer:', err));
+  </script>
+  <div id="footer"></div>
 </body>
 </html>

@@ -4,34 +4,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/estilos.css">
-    <title>Noticia</title>
+    <title>Publicación</title>
 </head>
 <body class="noticia-body">
-  <h1 class="titulo-club">Noticia</h1>
+  <h1 class="titulo-club">Nueva Publicación</h1>
+
  <form action="" method="post" enctype="multipart/form-data" id="formularioNoticia">
     <div class="bloque-form">
-      <label for="titulo">Titulo</label>
-      <input type="text" id="titulo" name="titulo" placeholder="">
+      <label for="titulo">Título</label>
+      <input type="text" id="titulo" name="titulo">
       <span id="tituloError" class="error"></span>
     </div>
+
     <div class="bloque-form">
-        <label for="noticia">Noticia</label>
+        <label for="noticia">Contenido</label>
         <textarea maxlength="100" id="noticia" name="noticia"></textarea>
         <p><span id="contador">0</span>/100 caracteres</p>
         <span id="noticiaError" class="error"></span>
     </div>
 
     <div class="bloque-form">
-      <label for="fecha">Fecha de publicacion</label>
+      <label for="fecha">Fecha de publicación</label>
       <input type="date" id="fecha" name="fecha">
       <span id="fechaError" class="error"></span>
     </div>
+
     <div class="bloque-form">
-      <label for="imagen">Foto de la noticia</label>
-      <input type="file" id="imagen" name="imagen" placeholder="DD/MM/YYYY">
+      <label for="imagen">Imagen asociada</label>
+      <input type="file" id="imagen" name="imagen">
       <span id="imagenError" class="error"></span>
     </div>
-    <button type="submit">Enviar</button>
+
+    <button type="submit">Publicar</button>
   </form>
 
   <div class="contenedor-atras">

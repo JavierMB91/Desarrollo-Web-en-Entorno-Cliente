@@ -5,43 +5,51 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/estilos.css">
 
-    <title>Socio</title>
+    <title>Registro de Miembro</title>
 </head>
 <body class="socio-body">
-    <h1 class="titulo-club">Inscripción</h1>
+    <h1 class="titulo-club">Registro de Miembro</h1>
+
     <form action="" method="post" enctype="multipart/form-data" id="formularioSocio">
         <div class="bloque-form">
-            <label for="nombre">Nombre</label>
-            <input type="text" name="nombre" id="nombre" placeholder="Introduce tu nombre">
+            <label for="nombre">Nombre completo</label>
+            <input type="text" name="nombre" id="nombre">
             <span id="nombreError" class="error"></span>
         </div>
+
         <div class="bloque-form">
             <label for="usuario">Usuario</label>
-            <input type="text" name="usuario" id="usuario" placeholder="Introduce tu usuario">
+            <input type="text" name="usuario" id="usuario">
             <span id="usuarioError" class="error"></span>
         </div>
+
         <div class="bloque-form">
             <label for="edad">Edad</label>
-            <input type="number" name="edad" id="edad" placeholder="Introduce tu edad">
+            <input type="number" name="edad" id="edad">
             <span id="edadError" class="error"></span>
         </div>
+
         <div class="bloque-form">
-            <label for="password">Contraseña de acceso</label>
-            <input type="password" name="password" id="password" placeholder="Introduce tu contraseña">
+            <label for="password">Contraseña</label>
+            <input type="password" name="password" id="password">
             <span id="passwordError" class="error"></span>
         </div>
+
         <div class="bloque-form">
-            <label for="telefono">Número de teléfono</label>
+            <label for="telefono">Teléfono</label>
             <input type="tel" name="telefono" id="telefono" maxlength="12" placeholder="653 48 78 96">
             <span id="telefonoError" class="error"></span>
         </div>
+
         <div class="bloque-form">
-            <label for="imagen">Foto del socio</label>
+            <label for="imagen">Foto del miembro</label>
             <input type="file" name="imagen" id="imagen">
             <span id="imagenError" class="error"></span>
         </div>
-        <button type="submit">Enviar</button>
+
+        <button type="submit">Registrarse</button>
     </form>
+
     <div class="contenedor-atras">
         <a href="index.html" class="btn-atras">Atrás</a>
     </div>

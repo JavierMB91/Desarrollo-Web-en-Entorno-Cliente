@@ -1,17 +1,18 @@
 /* ============================================================
-   CLUB DEPORTIVO — ESTILO GENERAL PREMIUM
+   CLUB DE LECTURA — ESTILO GENERAL OSCURO BIBLIOTECA VINTAGE
    ============================================================ */
 
 /* VARIABLES DE COLOR Y FUENTES */
 :root {
-  --azul: #0b1a2b;
-  --azul-suave: #132a46;
-  --oro: #c9a648;
-  --gris: #d7d7d7;
-  --blanco: #f5f5f5;
-  --sombra: 0 4px 12px rgba(0, 0, 0, 0.4);
+  --fondo-principal: #1e1b18;
+  --madera-oscura: #2d2620;
+  --dorado: #f4e4c3;
+  --dorado-suave: #b28b60;
+  --texto-claro: #e4d5b7;
+  --error: #e57373;
+  --sombra: 0 4px 12px rgba(0, 0, 0, 0.5);
   --fuente-titulo: 'Playfair Display', serif;
-  --fuente-texto: 'Montserrat', sans-serif;
+  --fuente-texto: 'Merriweather', serif;
 }
 
 /* ============================================================
@@ -24,8 +25,8 @@
 }
 
 body {
-  background: linear-gradient(180deg, var(--azul) 0%, #091321 100%);
-  color: var(--blanco);
+  background: var(--fondo-principal) url('https://www.transparenttextures.com/patterns/dark-wood.png');
+  color: var(--texto-claro);
   font-family: var(--fuente-texto);
   line-height: 1.6;
   min-height: 100vh;
@@ -37,8 +38,8 @@ body {
    HEADER GENERAL
    ============================================================ */
 header {
-  background-color: var(--azul);
-  border-bottom: 4px solid var(--oro);
+  background-color: var(--madera-oscura);
+  border-bottom: 4px solid var(--dorado);
   box-shadow: var(--sombra);
   padding: 18px 12px 12px;
   display: flex;
@@ -46,43 +47,19 @@ header {
   align-items: center;
   gap: 10px;
   position: relative;
-  isolation: isolate;
-}
-
-header::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(circle at 50% 120%, rgba(201,166,72,0.15), transparent 70%);
-  z-index: 0;
-}
-
-.escudo-club {
-  display: block;
-  width: 80px;
-  height: 80px;
-  position: relative;
-  z-index: 2;
-  filter: drop-shadow(0 0 6px rgba(201,166,72,0.4));
-  transition: transform 0.3s ease;
-}
-.escudo-club:hover {
-  transform: scale(1.05);
 }
 
 .titulo-club {
   font-family: var(--fuente-titulo);
   text-align: center;
-  font-size: 34px;
+  font-size: 2.8rem;
   font-weight: 600;
-  letter-spacing: 3px;
-  color: var(--oro);
+  letter-spacing: 2px;
+  color: var(--dorado);
   margin: 0;
   padding: 6px 0;
-  border-bottom: 2px solid var(--oro);
-  position: relative;
-  z-index: 2;
-  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+  border-bottom: 2px solid var(--dorado);
+  text-shadow: 0 2px 6px rgba(0,0,0,0.6);
 }
 
 /* ============================================================
@@ -90,7 +67,6 @@ header::before {
    ============================================================ */
 .navegador {
   width: 100%;
-  z-index: 2;
 }
 
 .menu {
@@ -104,33 +80,22 @@ header::before {
 .menu li a {
   display: block;
   padding: 10px 22px;
-  color: var(--blanco);
+  color: var(--texto-claro);
   text-decoration: none;
   font-weight: 500;
   font-size: 15px;
-  border: 1px solid transparent;
   border-radius: 8px;
+  background: var(--madera-oscura);
+  border: 1px solid rgba(255,255,255,0.1);
   transition: all 0.3s ease;
   position: relative;
 }
 
-.menu li a::after {
-  content: "";
-  position: absolute;
-  bottom: 6px;
-  left: 50%;
-  width: 0%;
-  height: 2px;
-  background-color: var(--oro);
-  transition: all 0.3s ease;
-  transform: translateX(-50%);
-}
-
 .menu li a:hover {
-  color: var(--oro);
-}
-.menu li a:hover::after {
-  width: 60%;
+  color: var(--dorado-suave);
+  background: #3a3029;
+  transform: scale(1.05);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.5);
 }
 
 /* ============================================================
@@ -143,87 +108,20 @@ header::before {
 }
 
 .index-body main p {
-  font-size: 18px;
+  font-size: 1.2rem;
   max-width: 700px;
   margin: 0 auto;
-  color: var(--gris);
-  background: rgba(255, 255, 255, 0.03);
+  color: var(--texto-claro);
+  background: rgba(40,34,30,0.88);
   padding: 24px 28px;
-  border-radius: 12px;
-  border: 1px solid rgba(201,166,72,0.1);
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+  border-radius: 16px;
+  border: 1px solid rgba(255,220,160,0.1);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.25);
 }
 
 /* ============================================================
-   ESTILO ITÁLICO PARA TEXTOS INTERNOS DE FORMULARIOS
+   FORMULARIOS GENERALES
    ============================================================ */
-
-/* Placeholders */
-input::placeholder,
-textarea::placeholder {
-  font-style: italic;
-}
-
-/* Texto visible dentro de los campos */
-input,
-textarea,
-select {
-  font-style: italic;
-}
-
-/* Texto del botón "Ningún archivo seleccionado" (navegadores modernos) */
-input[type="file"] {
-  font-style: italic;
-}
-
-
-/* ============================================================
-   SECCIÓN SOCIOS — FORMULARIO PREMIUM COMPACTO
-   ============================================================ */
-
-.socio-body {
-  background: linear-gradient(180deg, var(--azul) 0%, #091321 100%);
-  color: var(--blanco);
-  font-family: var(--fuente-texto);
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-}
-
-/* Título más refinado y ligero */
-.socio-body .titulo-club {
-  font-family: var(--fuente-titulo);
-  font-size: 30px;
-  color: var(--oro);
-  margin-bottom: 24px;
-  border-bottom: 2px solid var(--oro);
-  letter-spacing: 1.5px;
-  text-align: center;
-  text-shadow: 0 2px 8px rgba(0,0,0,0.4);
-}
-
-/* FORMULARIO */
-#formularioSocio {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(201,166,72,0.15);
-  border-radius: 14px;
-  box-shadow: 0 3px 18px rgba(0, 0, 0, 0.35);
-  padding: 26px 32px;
-  max-width: 420px;
-  width: 100%;
-  backdrop-filter: blur(6px);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-#formularioSocio:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 20px rgba(0,0,0,0.4);
-}
-
-/* BLOQUES DEL FORMULARIO */
 .bloque-form {
   display: flex;
   flex-direction: column;
@@ -231,52 +129,54 @@ input[type="file"] {
 }
 
 .bloque-form label {
-  color: var(--oro);
+  color: var(--dorado);
   font-weight: 600;
   margin-bottom: 4px;
   font-size: 14px;
   letter-spacing: 0.4px;
 }
 
-.bloque-form input[type="text"],
-.bloque-form input[type="number"],
-.bloque-form input[type="password"],
-.bloque-form input[type="tel"],
-.bloque-form input[type="file"] {
-  background: rgba(255, 255, 255, 0.05);
+.bloque-form input,
+.bloque-form select,
+.bloque-form textarea {
+  background: rgba(255,255,255,0.05);
   border: 1px solid rgba(201,166,72,0.2);
   border-radius: 8px;
   padding: 8px 12px;
-  color: var(--blanco);
+  color: var(--texto-claro);
   font-size: 14px;
   outline: none;
   transition: all 0.3s ease;
 }
 
-.bloque-form input::placeholder {
+.bloque-form input::placeholder,
+.bloque-form textarea::placeholder {
   color: rgba(255,255,255,0.5);
+  font-style: italic;
 }
 
-.bloque-form input:focus {
-  border-color: var(--oro);
-  box-shadow: 0 0 5px rgba(201,166,72,0.4);
-  background: rgba(255, 255, 255, 0.08);
+.bloque-form input:focus,
+.bloque-form textarea:focus,
+.bloque-form select:focus {
+  border-color: var(--dorado);
+  box-shadow: 0 0 6px rgba(201,166,72,0.4);
+  background: rgba(255,255,255,0.08);
 }
 
 /* ERRORES */
 .error {
-  color: #e57373;
+  color: var(--error);
   font-size: 12px;
   margin-top: 2px;
   min-height: 14px;
 }
 
-/* BOTÓN COMPACTO */
-#formularioSocio button {
+/* BOTONES GENERALES */
+button {
   display: block;
   width: 100%;
-  background: var(--oro);
-  color: var(--azul);
+  background: var(--dorado);
+  color: var(--madera-oscura);
   font-weight: 700;
   text-transform: uppercase;
   border: none;
@@ -289,767 +189,209 @@ input[type="file"] {
   transition: all 0.3s ease;
 }
 
-#formularioSocio button:hover {
-  background: #e3bf5a;
+button:hover {
+  background: var(--dorado-suave);
   box-shadow: 0 0 10px rgba(201,166,72,0.4);
   transform: translateY(-1px);
 }
 
-/* AJUSTES RESPONSIVE */
-@media (max-height: 700px) {
-  .socio-body {
-    padding: 10px;
-  }
-  #formularioSocio {
-    padding: 20px;
-    max-width: 380px;
-  }
-  .socio-body .titulo-club {
-    font-size: 26px;
-    margin-bottom: 18px;
-  }
-}
-
-/* ============================================================
-   BOTÓN ATRÁS — ESTILO CLUB DEPORTIVO ELEGANTE
-   ============================================================ */
-
+/* BOTONES ATRÁS */
 .btn-atras {
   display: inline-block;
   background: transparent;
-  border: 2px solid var(--oro);
-  color: var(--oro);
-  font-family: var(--fuente-texto);
+  border: 2px solid var(--dorado);
+  color: var(--dorado);
   font-weight: 600;
-  font-size: 15px;
-  letter-spacing: 0.8px;
-  text-transform: uppercase;
-  text-decoration: none;
   border-radius: 10px;
   padding: 10px 24px;
+  text-decoration: none;
   transition: all 0.3s ease;
-  cursor: pointer;
-  box-shadow: 0 0 0 rgba(201,166,72,0);
 }
 
 .btn-atras:hover {
-  background: var(--oro);
-  color: var(--azul);
+  background: var(--dorado);
+  color: var(--madera-oscura);
   box-shadow: 0 0 14px rgba(201,166,72,0.4);
   transform: translateY(-2px);
 }
 
-.btn-atras:active {
-  transform: scale(0.98);
-  box-shadow: 0 0 8px rgba(201,166,72,0.3);
-}
-
-/* Si quieres ubicarlo debajo del formulario centrado */
-.contenedor-atras {
-  margin-top: 20px;
-  text-align: center;
-}
-
 /* ============================================================
-   SECCIÓN SERVICIOS — FORMULARIO PREMIUM CENTRADO
+   SECCIONES INDIVIDUALES — estilos compartidos
+   ------------------------------------------------------------
+   Se mantienen sólo las propiedades específicas de cada página.
+   El fondo, color y fuente se heredan del `body` para evitar
+   duplicidad de reglas.
    ============================================================ */
-
-.servicio-body {
-  background: linear-gradient(180deg, var(--azul) 0%, #091321 100%);
-  color: var(--blanco);
-  font-family: var(--fuente-texto);
+.socio-body,
+.servicio-body,
+.testimonio-body,
+.noticia-body,
+.lectura-body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  text-align: center;
   padding: 40px 20px;
   gap: 18px;
+  text-align: center;
 }
 
-/* TÍTULO PRINCIPAL */
-.servicio-body h1 {
+/* TÍTULOS DE SECCIONES */
+.socio-body .titulo-club,
+.servicio-body h1,
+.servicio-body .titulo-club,
+.testimonio-body .titulo-club,
+.noticia-body .titulo-club,
+.lectura-body .titulo-club {
   font-family: var(--fuente-titulo);
   font-size: 30px;
-  color: var(--oro);
-  border-bottom: 2px solid var(--oro);
+  color: var(--dorado);
+  border-bottom: 2px solid var(--dorado);
   letter-spacing: 1.5px;
   text-shadow: 0 2px 8px rgba(0,0,0,0.4);
-  margin-bottom: 10px;
+  margin-bottom: 20px;
   padding-bottom: 4px;
 }
 
-/* ESCUDO */
-.servicio-body .escudo-club {
-  width: 80px;
-  height: 80px;
-  filter: drop-shadow(0 0 6px rgba(201,166,72,0.4));
-  transition: transform 0.3s ease;
-}
-.servicio-body .escudo-club:hover {
-  transform: scale(1.05);
-}
-
-/* FORMULARIO */
-#formulario-servicio {
-  background: rgba(255, 255, 255, 0.03);
+/* FORMULARIOS INDIVIDUALES */
+#formularioSocio,
+[id^="formulario"] {
+  background: rgba(40,34,30,0.88);
   border: 1px solid rgba(201,166,72,0.15);
-  border-radius: 14px;
-  box-shadow: 0 3px 18px rgba(0, 0, 0, 0.35);
+  border-radius: 16px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.5);
   padding: 26px 32px;
   max-width: 420px;
   width: 100%;
+  margin: 0 auto;
   backdrop-filter: blur(6px);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  text-align: left;
+  transition: box-shadow 0.3s ease;
 }
 
-#formulario-servicio:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+[id^="formulario"]:hover {
+  /* Eliminada la transformación vertical para evitar movimiento */
+  box-shadow: 0 6px 20px rgba(0,0,0,0.6);
 }
 
-/* BLOQUES DEL FORMULARIO */
-#formulario-servicio .bloque-form {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 14px;
-}
-
-#formulario-servicio label {
-  color: var(--oro);
-  font-weight: 600;
-  margin-bottom: 4px;
-  font-size: 14px;
-  letter-spacing: 0.4px;
-}
-
-#formulario-servicio input[type="text"],
-#formulario-servicio input[type="number"] {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(201,166,72,0.2);
-  border-radius: 8px;
-  padding: 8px 12px;
-  color: var(--blanco);
-  font-size: 14px;
-  outline: none;
-  transition: all 0.3s ease;
-}
-
-#formulario-servicio input::placeholder {
-  color: rgba(255,255,255,0.5);
-}
-
-#formulario-servicio input:focus {
-  border-color: var(--oro);
-  box-shadow: 0 0 5px rgba(201,166,72,0.4);
-  background: rgba(255, 255, 255, 0.08);
-}
-
-/* ERRORES */
-#formulario-servicio .error {
-  color: #e57373;
-  font-size: 12px;
-  margin-top: 2px;
-  min-height: 14px;
-}
-
-/* BOTÓN ENVIAR */
-#formulario-servicio button {
-  display: block;
-  width: 100%;
-  background: var(--oro);
-  color: var(--azul);
-  font-weight: 700;
-  text-transform: uppercase;
-  border: none;
-  border-radius: 8px;
-  padding: 10px;
-  margin-top: 10px;
-  cursor: pointer;
-  font-size: 14px;
-  letter-spacing: 0.8px;
-  transition: all 0.3s ease;
-}
-
-#formulario-servicio button:hover {
-  background: #e3bf5a;
-  box-shadow: 0 0 10px rgba(201,166,72,0.4);
-  transform: translateY(-1px);
-}
-
-/* BOTÓN ATRÁS */
-.contenedor-atras {
-  margin-top: 22px;
-  text-align: center;
-}
-
-.btn-atras {
-  display: inline-block;
-  background: transparent;
-  border: 2px solid var(--oro);
-  color: var(--oro);
-  font-family: var(--fuente-texto);
-  font-weight: 600;
-  font-size: 15px;
-  letter-spacing: 0.8px;
-  text-transform: uppercase;
-  text-decoration: none;
-  border-radius: 10px;
-  padding: 10px 24px;
-  transition: all 0.3s ease;
-  cursor: pointer;
-  box-shadow: 0 0 0 rgba(201,166,72,0);
-}
-
-.btn-atras:hover {
-  background: var(--oro);
-  color: var(--azul);
-  box-shadow: 0 0 14px rgba(201,166,72,0.4);
-  transform: translateY(-2px);
-}
-
-.btn-atras:active {
-  transform: scale(0.98);
-  box-shadow: 0 0 8px rgba(201,166,72,0.3);
-}
-
-/* RESPONSIVE */
-@media (max-height: 700px) {
-  .servicio-body {
-    padding: 10px;
-    gap: 10px;
-  }
-  #formulario-servicio {
-    padding: 20px;
-    max-width: 380px;
-  }
-  .servicio-body h1 {
-    font-size: 26px;
-  }
-}
-
-/* ============================================================
-   SECCIÓN TESTIMONIOS — FORMULARIO PREMIUM ELEGANTE
-   ============================================================ */
-
-.testimonio-body {
-  background: linear-gradient(180deg, var(--azul) 0%, #091321 100%);
-  color: var(--blanco);
-  font-family: var(--fuente-texto);
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 40px 20px;
-}
-
-/* Título refinado */
-.testimonio-body .titulo-club {
-  font-family: var(--fuente-titulo);
-  font-size: 30px;
-  color: var(--oro);
-  margin-bottom: 22px;
-  border-bottom: 2px solid var(--oro);
-  letter-spacing: 1.5px;
-  text-align: center;
-  text-shadow: 0 2px 8px rgba(0,0,0,0.4);
-}
-
-/* FORMULARIO TESTIMONIO */
-#formularioTestimonio {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(201,166,72,0.15);
-  border-radius: 14px;
-  box-shadow: 0 3px 18px rgba(0, 0, 0, 0.35);
-  padding: 26px 32px;
-  max-width: 420px;
-  width: 100%;
-  backdrop-filter: blur(6px);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-#formularioTestimonio:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 20px rgba(0,0,0,0.4);
-}
-
-/* BLOQUES DEL FORMULARIO */
-#formularioTestimonio .bloque-form {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 14px;
-}
-
-#formularioTestimonio label {
-  color: var(--oro);
-  font-weight: 600;
-  margin-bottom: 4px;
-  font-size: 14px;
-  letter-spacing: 0.4px;
-}
-
-/* CAMPOS */
-#formularioTestimonio input[type="text"],
-#formularioTestimonio textarea {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(201,166,72,0.2);
-  border-radius: 8px;
-  padding: 8px 12px;
-  color: var(--blanco);
-  font-size: 14px;
-  outline: none;
-  transition: all 0.3s ease;
-}
-
-/* Ajuste especial para el TEXTAREA */
-#formularioTestimonio textarea {
+/* TEXTAREA */
+#formularioTestimonio textarea,
+#formularioNoticia textarea {
   resize: none;
-  min-height: 80px;     /* Altura ideal para testimonios cortos */
+  min-height: 80px;
   max-height: 120px;
   line-height: 1.5;
   font-family: var(--fuente-texto);
 }
 
-/* Contador de caracteres */
-#formularioTestimonio p {
-  color: rgba(255,255,255,0.6);
-  font-size: 12px;
-  margin-top: 4px;
-  text-align: right;
-  font-style: italic;
-}
-
-#formularioTestimonio input::placeholder,
-#formularioTestimonio textarea::placeholder {
-  color: rgba(255,255,255,0.5);
-}
-
-#formularioTestimonio input:focus,
-#formularioTestimonio textarea:focus {
-  border-color: var(--oro);
-  box-shadow: 0 0 5px rgba(201,166,72,0.4);
-  background: rgba(255, 255, 255, 0.08);
-}
-
-/* ERRORES */
-#formularioTestimonio .error {
-  color: #e57373;
-  font-size: 12px;
-  margin-top: 2px;
-  min-height: 14px;
-}
-
-/* BOTÓN ENVIAR */
-#formularioTestimonio button {
-  display: block;
-  width: 100%;
-  background: var(--oro);
-  color: var(--azul);
-  font-weight: 700;
-  text-transform: uppercase;
-  border: none;
-  border-radius: 8px;
-  padding: 10px;
-  margin-top: 10px;
-  cursor: pointer;
-  font-size: 14px;
-  letter-spacing: 0.8px;
-  transition: all 0.3s ease;
-}
-
-#formularioTestimonio button:hover {
-  background: #e3bf5a;
-  box-shadow: 0 0 10px rgba(201,166,72,0.4);
-  transform: translateY(-1px);
-}
-
-/* BOTÓN ATRÁS */
+/* BOTÓN ATRÁS CENTRADO EN TODAS LAS SECCIONES */
 .contenedor-atras {
   margin-top: 22px;
   text-align: center;
 }
 
-.btn-atras {
+.contenedor-atras .btn-atras {
+  margin: 0 auto;
   display: inline-block;
-  background: transparent;
-  border: 2px solid var(--oro);
-  color: var(--oro);
-  font-family: var(--fuente-texto);
-  font-weight: 600;
-  font-size: 15px;
-  letter-spacing: 0.8px;
-  text-transform: uppercase;
-  text-decoration: none;
-  border-radius: 10px;
-  padding: 10px 24px;
-  transition: all 0.3s ease;
-  cursor: pointer;
-  box-shadow: 0 0 0 rgba(201,166,72,0);
-}
-
-.btn-atras:hover {
-  background: var(--oro);
-  color: var(--azul);
-  box-shadow: 0 0 14px rgba(201,166,72,0.4);
-  transform: translateY(-2px);
-}
-
-.btn-atras:active {
-  transform: scale(0.98);
-  box-shadow: 0 0 8px rgba(201,166,72,0.3);
 }
 
 /* RESPONSIVE */
 @media (max-height: 700px) {
-  .testimonio-body {
-    padding: 10px;
+  .socio-body, .servicio-body, .testimonio-body, .noticia-body, .lectura-body {
+    padding: 20px;
+    gap: 12px;
   }
 
-  #formularioTestimonio {
+  [id^="formulario"] {
     padding: 20px;
     max-width: 380px;
   }
 
-  .testimonio-body .titulo-club {
+  .socio-body .titulo-club,
+  .servicio-body h1,
+  .servicio-body .titulo-club,
+  .testimonio-body .titulo-club,
+  .noticia-body .titulo-club,
+  .lectura-body .titulo-club {
     font-size: 26px;
     margin-bottom: 18px;
   }
 }
 
 /* ============================================================
-   SECCIÓN NOTICIA — FORMULARIO PREMIUM
+   PIE DE PÁGINA
    ============================================================ */
-
-.noticia-body {
-  background: linear-gradient(180deg, var(--azul) 0%, #091321 100%);
-  color: var(--blanco);
-  font-family: var(--fuente-texto);
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 40px 20px;
-}
-
-/* Título */
-.noticia-body .titulo-club {
-  font-family: var(--fuente-titulo);
-  font-size: 30px;
-  color: var(--oro);
-  margin-bottom: 22px;
-  border-bottom: 2px solid var(--oro);
-  letter-spacing: 1.5px;
+footer {
+  width: 100%;
   text-align: center;
-  text-shadow: 0 2px 8px rgba(0,0,0,0.4);
-}
-
-/* Formulario */
-#formularioNoticia {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(201,166,72,0.15);
-  border-radius: 14px;
-  box-shadow: 0 3px 18px rgba(0, 0, 0, 0.35);
-  padding: 26px 32px;
-  max-width: 420px;
-  width: 100%;
-  backdrop-filter: blur(6px);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  text-align: left;
-}
-
-#formularioNoticia:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 20px rgba(0,0,0,0.4);
-}
-
-#formularioNoticia .bloque-form {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 14px;
-}
-
-#formularioNoticia label {
-  color: var(--oro);
-  font-weight: 600;
-  margin-bottom: 4px;
-  font-size: 14px;
-  letter-spacing: 0.4px;
-}
-
-#formularioNoticia p {
-  color: rgba(255,255,255,0.6);
-  font-size: 12px;
-  margin-top: 4px;
-  text-align: right;
-  font-style: italic;
-}
-
-/* Inputs y textarea */
-#formularioNoticia input[type="text"],
-#formularioNoticia input[type="date"],
-#formularioNoticia input[type="file"],
-#formularioNoticia textarea {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(201,166,72,0.2);
-  border-radius: 8px;
-  padding: 8px 12px;
-  color: var(--blanco);
-  font-size: 14px;
-  outline: none;
-  transition: all 0.3s ease;
-}
-
-#formularioNoticia input:focus,
-#formularioNoticia textarea:focus {
-  border-color: var(--oro);
-  box-shadow: 0 0 5px rgba(201,166,72,0.4);
-  background: rgba(255, 255, 255, 0.08);
-}
-
-/* Textarea más acorde al límite de 100 caracteres */
-#formularioNoticia textarea {
-  resize: none;
-  min-height: 80px;
-  max-height: 100px;
-  line-height: 1.4;
-}
-
-.contador-textarea {
-  font-size: 12px;
-  color: var(--gris);
-  text-align: right;
-  margin-top: 4px;
-}
-
-/* Errores */
-#formularioNoticia .error {
-  color: #e57373;
-  font-size: 12px;
-  margin-top: 2px;
-  min-height: 14px;
-}
-
-/* Botón */
-#formularioNoticia button {
-  display: block;
-  width: 100%;
-  background: var(--oro);
-  color: var(--azul);
-  font-weight: 700;
-  text-transform: uppercase;
-  border: none;
-  border-radius: 8px;
-  padding: 10px;
-  margin-top: 10px;
-  cursor: pointer;
-  font-size: 14px;
-  letter-spacing: 0.8px;
-  transition: all 0.3s ease;
-}
-
-#formularioNoticia button:hover {
-  background: #e3bf5a;
-  box-shadow: 0 0 10px rgba(201,166,72,0.4);
-  transform: translateY(-1px);
-}
-
-/* Responsive */
-@media (max-height: 700px) {
-  .noticia-body {
-    padding: 10px;
-  }
-
-  #formularioNoticia {
-    padding: 20px;
-    max-width: 380px;
-  }
-
-  .noticia-body .titulo-club {
-    font-size: 26px;
-    margin-bottom: 18px;
-  }
+  padding: 18px 10px;
+  background: var(--madera-oscura);
+  border-top: 3px solid var(--dorado);
+  color: var(--dorado);
+  margin-top: auto;
 }
 
 /* ============================================================
-   SECCIÓN CITAS — FORMULARIO PREMIUM
+   UNIFICAR ESTILO DE CONTENIDO PARA TODAS LAS SECCIONES
    ============================================================ */
-
-.cita-body {
-  background: linear-gradient(180deg, var(--azul) 0%, #091321 100%);
-  color: var(--blanco);
-  font-family: var(--fuente-texto);
-  min-height: 100vh;
+.socio-body main,
+.servicio-body main,
+.testimonio-body main,
+.noticia-body main,
+.lectura-body main {
+  flex: 1;
+  padding: 60px 20px;
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+}
+
+/* Caja estilo index */
+.socio-body main .contenedor-estilo,
+.servicio-body main .contenedor-estilo,
+.testimonio-body main .contenedor-estilo,
+.noticia-body main .contenedor-estilo,
+.lectura-body main .contenedor-estilo {
+  background: rgba(40,34,30,0.88);
+  padding: 24px 28px;
+  max-width: 700px;
+  border-radius: 16px;
+  border: 1px solid rgba(255,220,160,0.1);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.25);
   text-align: center;
-  padding: 40px 20px;
-  gap: 18px;
+  font-size: 1.2rem;
+  line-height: 1.6;
 }
 
-/* TÍTULO PRINCIPAL */
-.cita-body .titulo-club {
-  font-family: var(--fuente-titulo);
-  font-size: 30px;
-  color: var(--oro);
-  border-bottom: 2px solid var(--oro);
-  letter-spacing: 1.5px;
-  text-shadow: 0 2px 8px rgba(0,0,0,0.4);
-  margin-bottom: 10px;
-  padding-bottom: 4px;
+/* ============================================================
+   AJUSTES ESPECÍFICOS: FORMULARIO SOCIO
+   ------------------------------------------------------------
+   Reducir padding y tamaños dentro del formulario de socio
+   para que quepa en pantallas habituales sin necesitar scroll
+   vertical, manteniendo aspecto relativo con otros formularios.
+   ============================================================ */
+.socio-body [id^="formulario"] {
+  padding: 18px 20px; /* menos padding que el resto */
+  max-width: 380px;   /* ancho ligeramente menor para mantener proporción */
 }
 
-/* FORMULARIO */
-#formularioCita {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(201,166,72,0.15);
-  border-radius: 14px;
-  box-shadow: 0 3px 18px rgba(0, 0, 0, 0.35);
-  padding: 26px 32px;
-  max-width: 420px;
-  width: 100%;
-  backdrop-filter: blur(6px);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  text-align: left;
+.socio-body [id^="formulario"] .bloque-form {
+  margin-bottom: 10px; /* menos separación entre campos */
 }
 
-#formularioCita:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+.socio-body [id^="formulario"] input,
+.socio-body [id^="formulario"] select,
+.socio-body [id^="formulario"] textarea {
+  padding: 6px 10px; /* inputs más compactos */
+  font-size: 13px;   /* texto ligeramente más pequeño */
 }
 
-/* BLOQUES DEL FORMULARIO */
-#formularioCita .bloque-form {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 14px;
+.socio-body button {
+  padding: 8px;      /* botón más compacto */
+  font-size: 13px;
 }
 
-#formularioCita label {
-  color: var(--oro);
-  font-weight: 600;
-  margin-bottom: 4px;
-  font-size: 14px;
-  letter-spacing: 0.4px;
-}
-
-/* CAMPOS */
-#formularioCita input[type="text"],
-#formularioCita input[type="date"],
-#formularioCita input[type="time"],
-#formularioCita select {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(201,166,72,0.2);
-  border-radius: 8px;
-  padding: 8px 12px;
-  color: var(--blanco);
-  font-size: 14px;
-  outline: none;
-  transition: all 0.3s ease;
-  font-style: italic;
-}
-
-#formularioCita select option {
-  color: var(--azul);
-}
-
-#formularioCita input::placeholder,
-#formularioCita select:invalid {
-  color: rgba(255,255,255,0.5);
-  font-style: italic;
-}
-
-#formularioCita input:focus,
-#formularioCita select:focus {
-  border-color: var(--oro);
-  box-shadow: 0 0 5px rgba(201,166,72,0.4);
-  background: rgba(255, 255, 255, 0.08);
-}
-
-/* ERRORES */
-#formularioCita .error {
-  color: #e57373;
-  font-size: 12px;
-  margin-top: 2px;
-  min-height: 14px;
-}
-
-/* BOTÓN ENVIAR */
-#formularioCita button {
-  display: block;
-  width: 100%;
-  background: var(--oro);
-  color: var(--azul);
-  font-weight: 700;
-  text-transform: uppercase;
-  border: none;
-  border-radius: 8px;
-  padding: 10px;
-  margin-top: 10px;
-  cursor: pointer;
-  font-size: 14px;
-  letter-spacing: 0.8px;
-  transition: all 0.3s ease;
-}
-
-#formularioCita button:hover {
-  background: #e3bf5a;
-  box-shadow: 0 0 10px rgba(201,166,72,0.4);
-  transform: translateY(-1px);
-}
-
-/* BOTÓN ATRÁS */
-.cita-body .contenedor-atras {
-  margin-top: 22px;
-  text-align: center;
-}
-
-.cita-body .btn-atras {
-  display: inline-block;
-  background: transparent;
-  border: 2px solid var(--oro);
-  color: var(--oro);
-  font-family: var(--fuente-texto);
-  font-weight: 600;
-  font-size: 15px;
-  letter-spacing: 0.8px;
-  text-transform: uppercase;
-  text-decoration: none;
-  border-radius: 10px;
-  padding: 10px 24px;
-  transition: all 0.3s ease;
-  cursor: pointer;
-  box-shadow: 0 0 0 rgba(201,166,72,0);
-}
-
-.cita-body .btn-atras:hover {
-  background: var(--oro);
-  color: var(--azul);
-  box-shadow: 0 0 14px rgba(201,166,72,0.4);
-  transform: translateY(-2px);
-}
-
-.cita-body .btn-atras:active {
-  transform: scale(0.98);
-  box-shadow: 0 0 8px rgba(201,166,72,0.3);
-}
-
-/* RESPONSIVE */
-@media (max-height: 700px) {
-  .cita-body {
-    padding: 10px;
-    gap: 10px;
-  }
-  #formularioCita {
-    padding: 20px;
-    max-width: 380px;
-  }
-  .cita-body .titulo-club {
-    font-size: 26px;
-  }
+.socio-body .titulo-club {
+  font-size: 28px;   /* reducir título para ahorrar espacio vertical */
+  margin-bottom: 12px;
 }
