@@ -7,9 +7,21 @@
     <title>Comentario</title>
 </head>
 <body class="testimonio-body">
-    <h1 class="titulo-club">Nuevo Comentario</h1>
+    <header>
+        <h1 class="titulo-club">Nuevo Comentario</h1>
+        <div id="nav"></div>
+    </header>
 
-    <form action="" method="post" enctype="multipart/form-data" id="formularioTestimonio">
+    <script>
+        fetch('nav.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('nav').innerHTML = data;
+            })
+            .catch(err => console.error('Error cargando nav:', err));
+    </script>
+
+        <form action="" method="post" enctype="multipart/form-data" id="formularioTestimonio">
         <div class="bloque-form">
             <label for="autor">Autor del comentario</label>
             <input type="text" name="autor" id="autor">
@@ -26,9 +38,21 @@
         <button type="submit">Enviar</button>
     </form>
 
-    <div class="contenedor-atras">
-        <a href="index.html" class="btn-atras">Atrás</a>
-    </div>
+        <div class="contenedor-atras">
+                <a href="index.html" class="btn-atras">Atrás</a>
+        </div>
+
+    <script>
+        fetch('footer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('footer').innerHTML = data;
+            })
+            .catch(err => console.error('Error cargando footer:', err));
+    </script>
+
+    <div id="footer"></div>
+
+    <script src="js/funcionesTestimonio.js"></script>
 </body>
-<script src="js/funcionesTestimonio.js"></script>
 </html>

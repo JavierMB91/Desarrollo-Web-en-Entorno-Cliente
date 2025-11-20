@@ -7,7 +7,19 @@
     <title>Publicación</title>
 </head>
 <body class="noticia-body">
-  <h1 class="titulo-club">Nueva Publicación</h1>
+  <header>
+    <h1 class="titulo-club">Nueva Publicación</h1>
+    <div id="nav"></div>
+  </header>
+
+  <script>
+    fetch('nav.html')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('nav').innerHTML = data;
+      })
+      .catch(err => console.error('Error cargando nav:', err));
+  </script>
 
  <form action="" method="post" enctype="multipart/form-data" id="formularioNoticia">
     <div class="bloque-form">
@@ -41,6 +53,18 @@
   <div class="contenedor-atras">
     <a href="index.html" class="btn-atras">Atrás</a>
   </div>
+
+  <script>
+    fetch('footer.html')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('footer').innerHTML = data;
+      })
+      .catch(err => console.error('Error cargando footer:', err));
+  </script>
+
+  <div id="footer"></div>
+
+  <script src="js/funcionesNoticia.js"></script>
 </body>
-<script src="js/funcionesNoticia.js"></script>
 </html>

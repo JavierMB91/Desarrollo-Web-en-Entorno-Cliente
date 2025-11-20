@@ -7,7 +7,19 @@
     <title>Actividad</title>
 </head>
 <body class="servicio-body">
-  <h1 class="titulo-club">Nueva Actividad</h1>
+  <header>
+    <h1 class="titulo-club">Nueva Actividad</h1>
+    <div id="nav"></div>
+  </header>
+
+  <script>
+    fetch('nav.html')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('nav').innerHTML = data;
+      })
+      .catch(err => console.error('Error cargando nav:', err));
+  </script>
 
   <form action="" method="post" enctype="multipart/form-data" id="formulario-servicio">
     <div class="bloque-form">
@@ -35,5 +47,17 @@
     <a href="index.html" class="btn-atras">Atrás</a>
   </div>
 
+  <script>
+    fetch('footer.html')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('footer').innerHTML = data;
+      })
+      .catch(err => console.error('Error cargando footer:', err));
+  </script>
+
+  <div id="footer"></div>
+
   <script src="js/funcionesServicio.js"></script>
 </body>
+</html>
