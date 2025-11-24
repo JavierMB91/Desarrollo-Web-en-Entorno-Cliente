@@ -35,12 +35,12 @@
             <span id="testimonioError" class="error"></span>
         </div>
 
-        <button type="submit">Enviar</button>
-    </form>
-
-        <div class="contenedor-atras">
-                <a href="index.html" class="btn-atras">Atrás</a>
+        <!-- Contenedor para los botones -->
+        <div class="contenedor-botones">
+            <button type="submit"><span>Enviar</span></button>
+            <a href="index.html" class="btn-atras"><span>Atrás</span></a>
         </div>
+    </form>
 
     <script>
         fetch('footer.html')
@@ -50,7 +50,6 @@
             })
             .catch(err => console.error('Error cargando footer:', err));
     </script>
-
     <div id="footer"></div>
 
     <script src="js/funcionesTestimonio.js"></script>

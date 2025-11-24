@@ -6,7 +6,7 @@
   <link rel="stylesheet" href="css/estilos.css">
   <title>Agendar Lectura</title>
 </head>
-<body class="lectura-body">
+<body class="cita-body">
   <header>
     <h1 class="titulo-club">Agendar Lectura Guiada</h1>
     <div id="nav"></div>
@@ -50,12 +50,12 @@
       <span id="horaError" class="error"></span>
     </div>
 
-    <button type="submit">Agendar</button>
+    <!-- Contenedor para los botones -->
+    <div class="contenedor-botones">
+        <button type="submit"><span>Agendar</span></button>
+        <a href="index.html" class="btn-atras"><span>Atrás</span></a>
+    </div>
   </form>
-
-  <div class="contenedor-atras">
-    <a href="index.html" class="btn-atras">Atrás</a>
-  </div>
 
   <script>
     fetch('footer.html')
@@ -65,7 +65,6 @@
       })
       .catch(err => console.error('Error cargando footer:', err));
   </script>
-
   <div id="footer"></div>
 
   <script src="js/funcionesCita.js"></script>
