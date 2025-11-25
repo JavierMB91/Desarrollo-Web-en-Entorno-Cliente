@@ -13,14 +13,6 @@
         <div id="nav"></div>
     </header>
 
-    <script>
-        fetch('nav.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('nav').innerHTML = data;
-            })
-            .catch(err => console.error('Error cargando nav:', err));
-    </script>
 
     <form action="" method="post" enctype="multipart/form-data" id="formularioSocio">
         <div class="bloque-form">
@@ -62,20 +54,14 @@
         <!-- Contenedor para los botones -->
         <div class="contenedor-botones">
             <button type="submit"><span>Registrarse</span></button>
-            <a href="index.html" class="btn-atras"><span>Atrás</span></a>
+            <a href="index.php" class="btn-atras"><span>Atrás</span></a>
         </div>
     </form>
 
-    <script>
-        fetch('footer.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('footer').innerHTML = data;
-            })
-            .catch(err => console.error('Error cargando footer:', err));
-    </script>
     <div id="footer"></div>
 
     <script src="js/funcionesSocio.js"></script>
+    <script src="js/nav.js"></script>
+    <script src="js/footer.js"></script>
 </body>
 </html>

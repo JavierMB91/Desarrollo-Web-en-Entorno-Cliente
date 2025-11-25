@@ -370,8 +370,120 @@ form::after {
 }
 
 .bloque-form textarea {
-    resize: vertical;
+    /* Evitamos que el usuario pueda cambiar el tamaño con el ratón */
+    resize: none;
     min-height: 100px;
+}
+
+/* ===== CENTRADO PARA ELEMENTOS DEL INDEX QUE NO TIENEN ESTILO PROPIO ===== */
+/* Centrar secciones y contenidos cuando la página sea index */
+.index-body section {
+    max-width: 1100px;
+    margin: 2rem auto;
+    text-align: center; /* centro el contenido de las secciones */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+/* Estilizamos la lista/colección de noticias para que los cards se muestren centrados */
+/* Lista/colección de noticias: mostramos en filas de hasta 3 columnas (izquierda -> derecha) */
+.ultimas-noticias .noticias-grid,
+.lista-noticias .noticias-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* hasta 3 columnas */
+    gap: 1.75rem; /* separación entre cards */
+    justify-items: start; /* items alineados a la izquierda dentro del grid */
+    align-items: stretch; /* obliga a los hijos a rellenar la altura de la celda */
+    grid-auto-rows: 1fr; /* cada fila tiene la misma altura relativa */
+    width: 100%;
+}
+
+/* Responsive: 2 columnas en pantallas medianas */
+@media (max-width: 992px) {
+    .ultimas-noticias .noticias-grid,
+    .lista-noticias .noticias-grid {
+        grid-template-columns: repeat(2, 1fr);
+        justify-items: center;
+    }
+
+    .noticia-card { max-width: 420px; min-height: 420px; }
+}
+
+/* Responsive: 1 columna en móviles */
+@media (max-width: 600px) {
+    .ultimas-noticias .noticias-grid,
+    .lista-noticias .noticias-grid {
+        grid-template-columns: 1fr;
+        justify-items: center;
+    }
+
+    .noticia-card {
+        max-width: 700px;
+        min-height: auto;
+        align-items: center;
+        text-align: center;
+        justify-content: flex-start; /* en móvil dejamos que el contenido fluya hacia arriba */
+    }
+
+    /* imágenes más compactas en móviles (thumbnail) */
+    .noticia-card .imagen-noticia {
+        height: 200px;
+        width: 100%;
+        object-fit: cover;
+        border-radius: 6px;
+    }
+}
+
+.noticia-card {
+    width: 100%; /* toma la columna del grid */
+    max-width: 360px; /* límite visual para mantener la proporción */
+    background: linear-gradient(135deg, rgba(255,255,255,0.95), rgba(255,255,255,0.9));
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.18);
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    align-items: flex-start; /* contenido alineado a la izquierda */
+    height: 100%; /* ocupa toda la altura de la celda del grid */
+    justify-content: space-between; /* empuja el botón al fondo para igualar altura */
+    min-height: 420px; /* tamaño base para que todos los cards se vean iguales en desktop */
+}
+
+/* Thumbnail image inside noticia card */
+.noticia-card .imagen-noticia {
+    width: 100%;
+    height: 220px; /* altura fija para thumbnails dentro del grid */
+    object-fit: cover;
+    border-radius: 6px;
+}
+
+.noticia-card h3 {
+    margin: 0.25rem 0 0.35rem 0;
+    font-size: 1.15rem;
+    line-height: 1.2;
+    min-height: 2.5rem; /* reserva espacio para títulos */
+}
+
+.noticia-card p {
+    margin: 0;
+    color: var(--madera-ebano);
+    font-size: 0.98rem;
+    line-height: 1.4;
+    overflow: hidden; /* evita que un card sea más alto por texto largo */
+    display: -webkit-box;
+    -webkit-line-clamp: 4; /* limitar a 4 líneas */
+    line-clamp: 4;
+    -webkit-box-orient: vertical;
+}
+
+/* Aseguramos que la sección de contacto (index) esté centrada y ordenada */
+.index-body .contacto {
+    max-width: 900px;
+    margin: 2rem auto;
+    text-align: center;
 }
 
 .error {
@@ -426,6 +538,40 @@ button[type="submit"] span,
     position: relative;
     z-index: 1;
 }
+
+/* ===== BOTONES GENERALES (para enlaces tipo botón) ===== */
+.btn {
+    background: linear-gradient(135deg, var(--ebano-oscuro), var(--ebano-medio));
+    color: var(--papel-antiguo);
+    padding: 1rem 2rem;
+    border: 2px solid var(--dorado-viejo);
+    border-radius: 5px;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 10px var(--sombra-ebano);
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px var(--sombra-ebano);
+    color: var(--papel-antiguo);
+}
+
+.btn span {
+    position: relative;
+    z-index: 1;
+}
+
 
 /* ===== CONTADOR DE CARACTERES ===== */
 .bloque-form p {
@@ -514,6 +660,62 @@ footer p {
 
 .noticia-body .titulo-club::after {
     content: '📰';
+}
+
+/* ===== VER NOTICIA (DETALLE) ===== */
+.ver-noticia {
+    max-width: 1100px;
+    margin: 2.5rem auto;
+    padding: 0 1rem;
+    display: flex;
+    justify-content: center;
+}
+
+.noticia-detalle {
+    width: 100%;
+    max-width: 900px;
+    background: linear-gradient(135deg, var(--papel-antiguo) 0%, var(--papel-antiguo-manchado) 100%);
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 15px 35px var(--sombra-ebano);
+    border: 1px solid var(--madera-ebano-claro);
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.imagen-noticia {
+    width: 100%;
+    max-height: 450px;
+    object-fit: cover; /* mantiene proporción recortando si es necesario */
+    border-radius: 8px;
+    box-shadow: 0 8px 18px rgba(0,0,0,0.25);
+    display: block;
+}
+
+.contenido-noticia {
+    color: var(--madera-ebano);
+    font-size: 1.05rem;
+    line-height: 1.8;
+    text-align: left; /* lectura más natural */
+    max-width: 850px;
+    margin: 0 auto;
+}
+
+.texto-noticia {
+    text-align: justify; /* distribuir el texto para una lectura clara */
+    text-justify: inter-word;
+    white-space: pre-wrap; /* respetar saltos y espacios */
+}
+
+.noticia-detalle .contenedor-botones {
+    justify-content: center; /* centrar botón volver */
+    margin-top: 1rem;
+}
+
+@media (max-width: 768px) {
+    .imagen-noticia { max-height: 300px; }
+    .contenido-noticia { font-size: 1rem; }
 }
 
 .servicio-body .titulo-club::after {

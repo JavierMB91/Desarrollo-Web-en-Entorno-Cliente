@@ -53,20 +53,13 @@
     <!-- Contenedor para los botones -->
     <div class="contenedor-botones">
         <button type="submit"><span>Agendar</span></button>
-        <a href="index.html" class="btn-atras"><span>Atrás</span></a>
+        <a href="index.php" class="btn-atras"><span>Atrás</span></a>
     </div>
   </form>
-
-  <script>
-    fetch('footer.html')
-      .then(response => response.text())
-      .then(data => {
-        document.getElementById('footer').innerHTML = data;
-      })
-      .catch(err => console.error('Error cargando footer:', err));
-  </script>
   <div id="footer"></div>
 
   <script src="js/funcionesCita.js"></script>
+  <script src="js/nav.js"></script>
+  <script src="js/footer.js"></script>
 </body>
 </html>

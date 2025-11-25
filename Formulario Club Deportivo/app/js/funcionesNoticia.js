@@ -1,16 +1,16 @@
-const formularioNoticia = document.getElementById('formularioNoticia')
+const formulariocontenido = document.getElementById('formularioNoticia')
 
-const textarea = document.getElementById('noticia')
+const textarea = document.getElementById('contenido')
 const contador = document.getElementById('contador')
 
-formularioNoticia.addEventListener('submit', (e) => {
+formulariocontenido.addEventListener('submit', (e) => {
     e.preventDefault();
 
     let spanErrors = document.querySelectorAll('.error')
     spanErrors.forEach(span => span.innerText = "")
 
     const titulo = document.getElementById('titulo').value
-    const noticia = document.getElementById('noticia').value
+    const contenido = document.getElementById('contenido').value
     const fecha = document.getElementById('fecha').value
     const fechaError = document.getElementById('fechaError');
     const imagen = document.getElementById('imagen')
@@ -19,7 +19,7 @@ formularioNoticia.addEventListener('submit', (e) => {
         document.getElementById('tituloError').innerText = "Título demasiado corto.";  
     }
 
-    if (noticia.trim().length < 3) {
+    if (contenido.trim().length < 3) {
         document.getElementById('noticiaError').innerText = "Escribe un contenido válido.";  
     }
 
