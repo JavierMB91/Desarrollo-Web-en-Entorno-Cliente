@@ -15,19 +15,19 @@
     <form action="" method="post" id="formularioContacto">
         <div class="bloque-form">
             <label for="nombre">Nombre:</label>
-            <input type="text" id="nombre" name="nombre" required>
+            <input type="text" id="nombre" name="nombre">
             <span id="nombreError" class="error"></span>
         </div>
 
         <div class="bloque-form">
             <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
+            <input type="email" id="email" name="email">
             <span id="emailError" class="error"></span>
         </div>
 
         <div class="bloque-form">
             <label for="mensaje">Mensaje:</label>
-            <textarea id="mensaje" name="mensaje" required></textarea>
+            <textarea id="mensaje" name="mensaje"></textarea>
             <span id="mensajeError" class="error"></span>
         </div>
 
@@ -39,6 +39,7 @@
 
     <div id="footer"></div>
 
+    <script src="js/funcionesContacto.js"></script>
     <script src="js/nav.js"></script>
     <script src="js/footer.js"></script>
 </body>
