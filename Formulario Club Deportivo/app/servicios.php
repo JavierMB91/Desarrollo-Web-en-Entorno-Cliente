@@ -7,19 +7,22 @@
     <title>Lista Servicios</title>
 </head>
 <body class="index-body">
+    <div class="container">
 
     <header>
         <h1 class="titulo-club">Actividades</h1>
         <div id="nav"></div>
     </header>
+    <main>
     <!-- Contenedor para los botones -->
     <div class="contenedor-botones">
         <a class="btn" href="servicio.php"><span>Nueva Actividad</span></a>
         <a href="index.php" class="btn-atras"><span>Atrás</span></a>
     </div>
-
+    </main>
     <div id="footer"></div>
     <script src="js/nav.js"></script>
     <script src="js/footer.js"></script>
+    </div>
 </body>
 </html>

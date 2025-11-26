@@ -8,12 +8,13 @@
     <title>Registro de Miembro</title>
 </head>
 <body class="socio-body">
+    <div class="container">
     <header>
         <h1 class="titulo-club">Registro de Miembro</h1>
         <div id="nav"></div>
     </header>
 
-
+    <main>
     <form action="" method="post" enctype="multipart/form-data" id="formularioSocio">
         <div class="bloque-form">
             <label for="nombre">Nombre completo</label>
@@ -57,11 +58,13 @@
             <a href="index.php" class="btn-atras"><span>Atrás</span></a>
         </div>
     </form>
+    </main>
 
     <div id="footer"></div>
 
     <script src="js/funcionesSocio.js"></script>
     <script src="js/nav.js"></script>
     <script src="js/footer.js"></script>
+    </div>
 </body>
 </html>

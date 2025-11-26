@@ -7,11 +7,12 @@
     <title>Comentario</title>
 </head>
 <body class="testimonio-body">
+    <div class="container">
     <header>
         <h1 class="titulo-club">Nuevo Comentario</h1>
         <div id="nav"></div>
     </header>
-
+<main>
         <form action="" method="post" enctype="multipart/form-data" id="formularioTestimonio">
         <div class="bloque-form">
             <label for="autor">Autor del comentario</label>
@@ -32,11 +33,13 @@
             <a href="comentario.php" class="btn-atras"><span>Atrás</span></a>
         </div>
     </form>
+</main>
 
     <div id="footer"></div>
 
     <script src="js/funcionesTestimonio.js"></script>
     <script src="js/nav.js"></script>
     <script src="js/footer.js"></script>
+    </div>
 </body>
 </html>

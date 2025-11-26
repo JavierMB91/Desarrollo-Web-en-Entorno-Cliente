@@ -1,19 +1,5 @@
 <?php
-$host = getenv("DB_HOST");
-$db   = getenv("DB_NAME");
-$user = getenv("DB_USER");
-$pass = getenv("DB_PASSWORD");
-
-try {
-    $pdo = new PDO(
-        "mysql:host=$host;dbname=$db;charset=utf8",
-        $user,
-        $pass,
-        [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]
-    );
-} catch (PDOException $e) {
-    die("Error de conexión: " . $e->getMessage());
-}
+require 'conexion.php';
 
 // Traemos solo las 3 últimas noticias que ya estén publicadas
 $sql = "SELECT id, titulo, contenido, imagen, fecha_publicacion
@@ -35,12 +21,14 @@ $noticias = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <title>Noticias</title>
 </head>
 <body class="index-body">
+    <div class="container">
 
 <header>
     <h1 class="titulo-club">Noticias</h1>
     <div id="nav"></div>
 </header>
-
+<main>
+<!-- Contenedor para los botones -->
 <div class="contenedor-botones">
     <a class="btn" href="noticia.php"><span>Nueva Noticia</span></a>
     <a href="index.php" class="btn-atras"><span>Atrás</span></a>
@@ -54,9 +42,11 @@ $noticias = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <?php foreach ($noticias as $n): ?>
             <article class="noticia-card">
                 <!-- Ruta absoluta desde la raíz del servidor -->
-                <img src="/uploads/noticias/<?= htmlspecialchars($n["imagen"]) ?>" 
-                     alt="<?= htmlspecialchars($n["titulo"]) ?>" 
-                     class="imagen-noticia">
+               <img src="<?= htmlspecialchars($n["imagen"]) ?>" 
+     alt="<?= htmlspecialchars($n["titulo"]) ?>" 
+     class="imagen-noticia">
+
+
 
                 <h3><?= htmlspecialchars($n['titulo']) ?></h3>
 
@@ -71,12 +61,11 @@ $noticias = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <?php endif; ?>
 </section>
 
-
-
-
+</main>
 
 <div id="footer"></div>
 <script src="js/nav.js"></script>
 <script src="js/footer.js"></script>
+</div>
 </body>
 </html>

@@ -7,11 +7,12 @@
     <title>Contacto</title>
 </head>
 <body class="contacto-body">
+    <div class="container">
     <header>
         <h1 class="titulo-club">Contacto</h1>
         <div id="nav"></div>
     </header>
-
+    <main>
     <form action="" method="post" id="formularioContacto">
         <div class="bloque-form">
             <label for="nombre">Nombre:</label>
@@ -36,11 +37,12 @@
             <a href="index.php" class="btn-atras"><span>Atrás</span></a>
         </div>
     </form>
-
+    </main>
     <div id="footer"></div>
 
     <script src="js/funcionesContacto.js"></script>
     <script src="js/nav.js"></script>
     <script src="js/footer.js"></script>
+    </div>
 </body>
 </html>

@@ -1,19 +1,5 @@
 <?php
-$host = getenv("DB_HOST");
-$db   = getenv("DB_NAME");
-$user = getenv("DB_USER");
-$pass = getenv("DB_PASSWORD");
-
-try {
-    $pdo = new PDO(
-        "mysql:host=$host;dbname=$db;charset=utf8",
-        $user,
-        $pass,
-        [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]
-    );
-} catch (PDOException $e) {
-    die("Error de conexión: " . $e->getMessage());
-}
+require 'conexion.php';
 
 /* =============================
    OBTENER ÚLTIMAS 3 NOTICIAS
@@ -48,6 +34,7 @@ $testimonio = $stmtTestimonio->fetch(PDO::FETCH_ASSOC);
   <title>Inicio | Club de Lectura</title>
 </head>
 <body class="index-body">
+  <div class="container">
 
 <header>
   <h1 class="titulo-club">CLUB DE LECTURA</h1>
@@ -68,7 +55,7 @@ $testimonio = $stmtTestimonio->fetch(PDO::FETCH_ASSOC);
     <div class="noticias-grid">
     <?php foreach ($ultimasNoticias as $n): ?>
       <article class="noticia-card">
-        <img src="uploads/noticias/<?= htmlspecialchars($n['imagen']) ?>" 
+        <img src="<?= htmlspecialchars($n['imagen']) ?>" 
              alt="<?= htmlspecialchars($n['titulo']) ?>" 
              class="imagen-noticia">
         <h3><?= htmlspecialchars($n['titulo']) ?></h3>
@@ -109,6 +96,7 @@ $testimonio = $stmtTestimonio->fetch(PDO::FETCH_ASSOC);
 <div id="footer"></div>
 <script src="js/nav.js"></script>
 <script src="js/footer.js"></script>
+</div>
 
 </body>
 </html>

@@ -14,9 +14,9 @@ CREATE TABLE IF NOT EXISTS usuarios
 INSERT INTO usuarios 
     (nombre, clave, rol, telefono, foto) 
 VALUES
-    ('Juan Perez', '12345', 'administrador', '600123456', 'imagenes/usuarios/juan_perez.jpg'),
-    ('Maria Garcia', '12345', 'socio', '600234567', 'imagenes/usuarios/maria_garcia.jpg'),
-    ('Carlos Lopez', '12345', 'socio', '600345678', 'imagenes/usuarios/carlos_lopez.jpg');
+    ('Juan Perez', '12345', 'administrador', '600123456', 'uploads/usuarios/juan_perez.jpg'),
+    ('Maria Garcia', '12345', 'socio', '600234567', 'uploads/usuarios/maria_garcia.jpg'),
+    ('Carlos Lopez', '12345', 'socio', '600345678', 'uploads/usuarios/carlos_lopez.jpg');
 
 
 -- Tabla de servicios: id, descripcion, duracion (minutos), precio (e.g., euros)
@@ -69,9 +69,9 @@ CREATE TABLE IF NOT EXISTS noticia
 -- Tres noticias de ejemplo (una con fecha futura)
 INSERT INTO noticia (titulo, contenido, imagen, fecha_publicacion)
 VALUES
-    ('Nueva sección juvenil en la biblioteca', 'Abrimos una nueva sección dedicada a jóvenes con títulos actualizados y actividades semanales para adolescentes.', 'imagenes/noticias/juvenil.jpg', '2025-11-30 10:00:00'),
-    ('Horario especial de navidad', 'Durante las fiestas ampliamos el horario de apertura para facilitar el acceso a la comunidad.', 'imagenes/noticias/navidad.jpg', '2025-12-20 09:00:00'),
-    ('Inauguración del espacio multimedia', 'Contamos ahora con un espacio multimedia equipado con ordenadores y recursos digitales para investigación.', 'imagenes/noticias/multimedia.jpg', '2026-01-10 11:00:00');
+    ('Nueva sección juvenil en la biblioteca', 'Abrimos una nueva sección dedicada a jóvenes con títulos actualizados y actividades semanales para adolescentes.', 'uploads/noticias/juvenil.jpg', '2025-11-30 10:00:00'),
+    ('Horario especial de navidad', 'Durante las fiestas ampliamos el horario de apertura para facilitar el acceso a la comunidad.', 'uploads/noticias/navidad.jpg', '2025-12-20 09:00:00'),
+    ('Inauguración del espacio multimedia', 'Contamos ahora con un espacio multimedia equipado con ordenadores y recursos digitales para investigación.', 'uploads/noticias/multimedia.jpg', '2026-01-10 11:00:00');
 
 
 -- Tabla de citas: id, socio_id, servicio_id, fecha (DATE), hora (TIME)

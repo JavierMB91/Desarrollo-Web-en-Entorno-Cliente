@@ -1,21 +1,7 @@
 <?php
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
-    $host = getenv("DB_HOST");
-    $db   = getenv("DB_NAME");
-    $user = getenv("DB_USER");
-    $pass = getenv("DB_PASSWORD");
-
-    try {
-        $pdo = new PDO(
-            "mysql:host=$host;dbname=$db;charset=utf8",
-            $user,
-            $pass,
-            [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]
-        );
-    } catch (PDOException $e) {
-        die("Error de conexión: " . $e->getMessage());
-    }
+    require 'conexion.php';
 
     $titulo = $_POST["titulo"];
     $contenido = $_POST["contenido"];
@@ -46,11 +32,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <title>Nueva Noticia</title>
 </head>
 <body class="noticia-body">
+    <div class="container">
 <header>
     <h1 class="titulo-club">Nueva Noticia</h1>
     <div id="nav"></div>
 </header>
-
+<main>
 <form action="" method="post" enctype="multipart/form-data" id="formularioNoticia">
     <div class="bloque-form">
         <label for="titulo">Título</label>
@@ -82,10 +69,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         <a href="noticias.php" class="btn-atras"><span>Atrás</span></a>
     </div>
 </form>
+</main>
 
 <div id="footer"></div>
 <script src="js/funcionesNoticia.js"></script>
 <script src="js/nav.js"></script>
 <script src="js/footer.js"></script>
+</div>
 </body>
 </html>

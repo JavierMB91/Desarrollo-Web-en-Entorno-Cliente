@@ -1,19 +1,5 @@
 <?php
-$host = getenv("DB_HOST");
-$db   = getenv("DB_NAME");
-$user = getenv("DB_USER");
-$pass = getenv("DB_PASSWORD");
-
-try {
-    $pdo = new PDO(
-        "mysql:host=$host;dbname=$db;charset=utf8",
-        $user,
-        $pass,
-        [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]
-    );
-} catch (PDOException $e) {
-    die("Error de conexión: " . $e->getMessage());
-}
+require 'conexion.php';
 
 $id = $_GET["id"];
 
@@ -32,6 +18,7 @@ $noticia = $stmt->fetch(PDO::FETCH_ASSOC);
 <title><?= htmlspecialchars($noticia["titulo"]) ?></title>
 </head>
 <body class="noticia-body">
+<div class="container">
 
 <header>
     <h1 class="titulo-club"><?= htmlspecialchars($noticia["titulo"]) ?></h1>
@@ -41,8 +28,10 @@ $noticia = $stmt->fetch(PDO::FETCH_ASSOC);
 <main class="ver-noticia">
     <article class="noticia-detalle">
         <img src="<?= htmlspecialchars($noticia["imagen"]) ?>" 
-     class="imagen-noticia" 
-     alt="<?= htmlspecialchars($noticia["titulo"]) ?>">
+     alt="<?= htmlspecialchars($noticia["titulo"]) ?>" 
+     class="imagen-noticia">
+
+
 
 
 
@@ -60,5 +49,6 @@ $noticia = $stmt->fetch(PDO::FETCH_ASSOC);
 <div id="footer"></div>
 <script src="js/nav.js"></script>
 <script src="js/footer.js"></script>
+</div>
 </body>
 </html>
