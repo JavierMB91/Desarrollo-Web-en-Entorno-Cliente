@@ -1,7 +1,7 @@
 <?php
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
-    require 'conexion.php';
+    require_once 'conexion.php';
 
     $titulo = $_POST["titulo"];
     $contenido = $_POST["contenido"];

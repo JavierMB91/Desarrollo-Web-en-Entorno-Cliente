@@ -1,5 +1,5 @@
 <?php
-require 'conexion.php';
+require_once 'conexion.php';
 
 // Traemos solo las 3 últimas noticias que ya estén publicadas
 $sql = "SELECT id, titulo, contenido, imagen, fecha_publicacion

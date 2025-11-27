@@ -224,7 +224,7 @@ form {
     text-align: left;
     overflow: hidden;
     display: -webkit-box;
-    -webkit-line-clamp: 3;
+    line-clamp: 3;
     -webkit-box-orient: vertical;
     flex-grow: 1; /* El párrafo ocupa el espacio libre */
 }
@@ -304,7 +304,7 @@ footer {
 }
 
 /* ===== SOCIOS ===== */
-.socios-lista {
+.socios-lista{
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
@@ -315,12 +315,33 @@ footer {
 .socio-card {
     width: 100%;
     max-width: 350px;
-    background: rgba(255,255,255,0.9);
+    background: linear-gradient(135deg, var(--papel-antiguo), #E6D7C3);
     padding: 1.5rem;
     border-radius: 8px;
     box-shadow: 0 5px 15px rgba(0,0,0,0.1);
     text-align: center;
 }
+
+/* ==== Servicios ==== */
+.servicios-lista {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center; /* Centra horizontalmente */
+    margin: 2rem auto;
+    max-width: 1200px; /* Aseguramos suficiente ancho para 3 tarjetas */
+}
+
+.servicio-card {
+    flex: 0 0 calc((100% / 3) - 13.33px); /* 3 por fila, ajustando gap */
+    background: linear-gradient(135deg, var(--papel-antiguo), #E6D7C3);
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    text-align: center;
+    box-sizing: border-box;
+}
+
 
 /* ===== ERRORES ===== */
 .error {
@@ -363,18 +384,20 @@ main form .btn-atras {
 /* ===== ESTILOS ESPECÍFICOS PARA EL BUSCADOR DE SOCIOS ===== */
 
 /* 1. Estilo para el formulario del buscador */
-form[action="socios.php"] {
+form[action="socios.php"],
+form[action="servicios.php"] {
     max-width: 600px;
     margin: 2rem auto;
     padding: 2rem;
     background: linear-gradient(135deg, var(--papel-antiguo), #E6D7C3);
     border-radius: 10px;
     box-shadow: 0 5px 15px var(--sombra-ebano);
-    text-align: center; /* Centra el input y los botones */
+    text-align: center;
 }
 
-/* 2. Estilo para el campo de texto del buscador (la parte más importante) */
-form[action="socios.php"] input[type="text"] {
+/* 2. Estilo para el input dentro del formulario */
+form[action="socios.php"] input[type="text"],
+form[action="servicios.php"] input[type="text"] {
     width: 100%;
     padding: 0.8rem 1rem;
     border-radius: 5px;
@@ -382,16 +405,26 @@ form[action="socios.php"] input[type="text"] {
     font-family: 'Crimson Text', serif;
     font-size: 1rem;
     background: rgba(255, 255, 255, 0.8);
-    box-sizing: border-box; /* Evita problemas con el padding y el ancho */
-    margin-bottom: 1.5rem; /* Espacio entre el input y los botones */
+    box-sizing: border-box;
+    margin-bottom: 1.5rem;
 }
 
-/* 3. Ajuste para el contenedor de botones del buscador */
-form[action="socios.php"] .contenedor-botones {
-    margin-top: 0; /* El espacio ya lo da el margin-bottom del input */
-    margin-bottom: 0; /* Evita un espacio extra al final */
+/* 3. Contenedor de botones dentro del formulario */
+form[action="socios.php"] .contenedor-botones,
+form[action="servicios.php"] .contenedor-botones {
+    margin-top: 0;
+    margin-bottom: 0;
     justify-content: center;
 }
+
+
+.fecha-noticia {
+    font-size: 0.9rem;
+    color: var(--ebano-oscuro);;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
 
 
 /* ===== RESPONSIVE ===== */
@@ -423,5 +456,19 @@ form[action="socios.php"] .contenedor-botones {
     
     section, form {
         padding: 1rem;
+    }
+}
+
+/* Tablets - 2 tarjetas por fila */
+@media (max-width: 1024px) {
+    .servicio-card {
+        flex: 0 0 calc((100% / 2) - 10px);
+    }
+}
+
+/* Móviles - 1 tarjeta por fila */
+@media (max-width: 768px) {
+    .servicio-card {
+        flex: 0 0 100%;
     }
 }
