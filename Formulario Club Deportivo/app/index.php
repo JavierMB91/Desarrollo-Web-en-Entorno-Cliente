@@ -96,6 +96,7 @@ $testimonio = $stmtTestimonio->fetch(PDO::FETCH_ASSOC);
 <div id="footer"></div>
 <script src="js/nav.js"></script>
 <script src="js/footer.js"></script>
+<script src="js/transiciones.js"></script>
 </div>
 
 </body>

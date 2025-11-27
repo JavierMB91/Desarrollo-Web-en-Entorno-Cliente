@@ -75,6 +75,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 <script src="js/funcionesNoticia.js"></script>
 <script src="js/nav.js"></script>
 <script src="js/footer.js"></script>
+<script src="js/transiciones.js"></script>
 </div>
 </body>
 </html>

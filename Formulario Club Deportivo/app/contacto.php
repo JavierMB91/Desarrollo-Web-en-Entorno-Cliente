@@ -43,6 +43,7 @@
     <script src="js/funcionesContacto.js"></script>
     <script src="js/nav.js"></script>
     <script src="js/footer.js"></script>
+    <script src="js/transiciones.js"></script>
     </div>
 </body>
 </html>

@@ -6,7 +6,7 @@
     <title>Agregar nuevo socio</title>
     <link rel="stylesheet" href="css/estilos.css">
 </head>
-<body class="nuevoSocio-body">
+< class="nuevoSocio-body">
 
 <header>
     <h1 class="titulo-club">Nuevo Socio</h1>
@@ -23,10 +23,10 @@
     <input type="number" name="edad" placeholder="Edad">
     </div>
     <div class="bloque-form">
-    <input type="text" name="telefono" placeholder="Teléfono">
+    <input type="text" name="telefono" placeholder="612 - 345 - 678">
     </div>
     <div class="bloque-form">
-    <input type="file" name="foto">
+    <input type="file" name="foto" accept="image/jpg" placeholder="Foto (JPG)">
     </div>
     <div class="contenedor-botones">
             <button type="submit"><span>Agregar socio</span></button>
@@ -34,7 +34,11 @@
     </div>
 </form>
 </main>
-
+    <div id="footer"></div>
 </div>
+<script src="js/nav.js"></script>
+<script src="js/footer.js"></script>
+<script src="js/funcionesAñadirSocio.js"></script>
+<script src="js/transiciones.js"></script>
 </body>
 </html>

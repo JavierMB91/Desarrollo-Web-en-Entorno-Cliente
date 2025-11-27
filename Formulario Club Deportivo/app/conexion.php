@@ -12,5 +12,7 @@ try {
         [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]
     );
 } catch (PDOException $e) {
-    die("Error de conexión: " . $e->getMessage());
+    // Mostrar un mensaje amigable o registrar el error
+    echo '<p class="error">❌ No se pudo conectar a la base de datos</p>';
+    error_log($e->getMessage());
 }
