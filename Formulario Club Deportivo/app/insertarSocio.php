@@ -11,7 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $foto = null;
     if (!empty($_FILES['foto']['name'])) {
         $foto = time() . '_' . $_FILES['foto']['name'];
-        move_uploaded_file($_FILES['foto']['tmp_name'], 'uploads/fotos/' . $foto);
+        move_uploaded_file($_FILES['foto']['tmp_name'], 'uploads/usuarios/' . $foto);
     }
 
     // Insertar socio

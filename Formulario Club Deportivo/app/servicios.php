@@ -20,85 +20,98 @@ require_once 'conexion.php';
             // ========================
             // 1. Búsqueda
             // ========================
-           $busqueda = $_GET['q'] ?? '';
+            $busqueda = $_GET['q'] ?? '';
 
             $sql = "SELECT * FROM servicio 
-            WHERE nombre LIKE :q";
+                    WHERE nombre LIKE :q";
 
             $stmt = $pdo->prepare($sql);
             $stmt->execute(['q' => "%$busqueda%"]);
-?>
+        ?>
     </div>
 
+    <!-- ======================== -->
+    <!-- CONTENEDOR PRINCIPAL -->
+    <!-- ======================== -->
+    <div class="container">
+
+    <!-- ======================== -->
+    <!-- HEADER -->
+    <!-- ======================== -->
     <header>
         <h1 class="titulo-club">Actividades</h1>
         <div id="nav"></div>
-        <div class="container">
     </header>
 
-    <!-- ======================== -->
-    <!-- BUSCADOR + BOTONES -->
-    <!-- ======================== -->
+        <!-- ======================== -->
+        <!-- BUSCADOR + BOTONES -->
+        <!-- ======================== -->
+        <main>
+            <form method="get" action="servicios.php">
+                <input type="text" name="q" 
+                       placeholder="Buscar por nombre de actividad"
+                       value="<?= htmlspecialchars($busqueda) ?>">
 
-    <main>
-        <form method="get" action="servicios.php">
-            <input type="text" name="q" 
-                   placeholder="Buscar por nombre de actividad"
-                   value="<?= htmlspecialchars($busqueda) ?>">
+                <div class="contenedor-botones">
+                    <button type="submit"><span>Buscar</span></button>
+                    <a href="servicio.php" class="btn-atras"><span>Agregar nuevo servicio</span></a>
+                    <a href="servicios.php" class="btn-atras"><span>Mostrar todos</span></a>
+                </div>
+            </form>
+        </main>
 
-            <div class="contenedor-botones">
-                <button type="submit"><span>Buscar</span></button>
-                <a href="servicio.php" class="btn-atras"><span>Agregar nuevo servicio</span></a>
-                <a href="servicios.php" class="btn-atras"><span>Mostrar todos</span></a>
-            </div>
-        </form>
+        <h2 class="titulo-club">Listado de Servicios</h2>
 
-    </main>
-     <h2 class="titulo-club">Listado de Servicios</h2>
+        <!-- ======================== -->
+        <!-- LISTADO DE SERVICIOS -->
+        <!-- ======================== -->
+        <div class="servicios-lista">
+            <?php
+            if ($stmt->rowCount() > 0) {
 
-    <div class="servicios-lista">
-        <?php
-        if ($stmt->rowCount() > 0) {
+                while ($servicio = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                    
+                    echo '<div class="servicio-card">';
 
-            while ($servicio = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                
-                echo '<div class="servicio-card">';
+                    // DATOS
+                    echo '<p><strong>Nombre:</strong> ' . htmlspecialchars($servicio['nombre']) . '</p>';
+                    echo '<p><strong>Descripción:</strong> ' . htmlspecialchars($servicio['descripcion']) . '</p>';
+                    echo '<p><strong>Duración:</strong> ' . htmlspecialchars($servicio['duracion']) . '</p>';
+                    echo '<p><strong>Precio:</strong> ' . htmlspecialchars($servicio['precio']) . '</p>';
 
-                // // FOTO
-                // echo '<img src="' . htmlspecialchars($servicio['foto']) . '" width="100" alt="Foto servicio">';
+                    // 🔥 NUEVO: MOSTRAR HORA
+                    if (!empty($servicio['hora'])) {
+                        echo '<p><strong>Hora:</strong> ' . htmlspecialchars($servicio['hora']) . '</p>';
+                    }
 
-                // DATOS
-                echo '<p><strong>Nombre:</strong> ' . htmlspecialchars($servicio['nombre']) . '</p>';
-                echo '<p><strong>Descripción:</strong> ' . htmlspecialchars($servicio['descripcion']) . '</p>';
-                echo '<p><strong>Duración:</strong> ' . htmlspecialchars($servicio['duracion']) . '</p>';
-                echo '<p><strong>Precio:</strong> ' . htmlspecialchars($servicio['precio']) . '</p>';
+                    // BOTÓN EDITAR
+                    echo '<div class="contenedor-botones">
+                            <a href="editarServicio.php?id=' . $servicio['id'] . '" class="btn-atras">
+                                <span>Editar</span>
+                            </a>
+                          </div>';
 
-                // BOTÓN EDITAR
-                echo '<div class="contenedor-botones">
-                        <a href="editarServicio.php?id=' . $servicio['id'] . '" class="btn-atras">
-                            <span>Editar</span>
-                        </a>
-                      </div>';
+                    echo '</div>';
+                }
 
-                echo '</div>';
+            } else {
+                echo "<p>No se encontraron servicios.</p>";
             }
+            ?>
+        </div>
 
-        } else {
-            echo "<p>No se encontraron servicios.</p>";
-        }
-        ?>
-
-        
-
-
-    </div>
-
+        <!-- BOTÓN ATRÁS -->
         <div class="contenedor-botones">
             <a href="index.php" class="btn-atras"><span>Atrás</span></a>
         </div>
 
-    </div>
+    </div> <!-- CIERRE DEL CONTAINER -->
+
+    <!-- ======================== -->
+    <!-- FOOTER -->
+    <!-- ======================== -->
     <div id="footer"></div>
+    
     <script src="js/nav.js"></script>
     <script src="js/footer.js"></script>
     <script src="js/transiciones.js"></script>

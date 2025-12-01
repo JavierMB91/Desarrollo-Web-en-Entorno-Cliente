@@ -81,24 +81,45 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <form method="post" enctype="multipart/form-data">
 
+    <div class="bloque-form">
     <input type="hidden" name="foto_actual" value="<?= htmlspecialchars($socio['foto']) ?>">
+    </div>
 
     Nombre:<br>
-    <input type="text" name="nombre" value="<?= htmlspecialchars($socio['nombre']) ?>"><br><br>
+<div class="bloque-form">
+    <input type="text" id="nombre" name="nombre" value="<?= htmlspecialchars($socio['nombre']) ?>">
+    <span class="error" id="nombreError"></span>
+    <br><br>
+</div>
 
-    Edad:<br>
-    <input type="number" name="edad" value="<?= htmlspecialchars($socio['edad']) ?>"><br><br>
+Edad:<br>
+<div class="bloque-form">
+    <input type="number" id="edad" name="edad" value="<?= htmlspecialchars($socio['edad']) ?>">
+    <span class="error" id="edadError"></span>
+    <br><br>
+</div>
 
-    Teléfono:<br>
-    <input type="text" name="telefono" value="<?= htmlspecialchars($socio['telefono']) ?>"><br><br>
+Teléfono:<br>
+<div class="bloque-form">
+    <input type="text" id="telefono" name="telefono" value="<?= htmlspecialchars($socio['telefono']) ?>">
+    <span class="error" id="telefonoError"></span>
+    <br><br>
+</div>
 
-    Foto actual:<br>
+Foto actual:<br>
+<div class="bloque-form">
     <?php if ($socio['foto']): ?>
         <img src="<?= htmlspecialchars($socio['foto']) ?>" width="80"><br><br>
     <?php endif; ?>
+</div>
 
-    Nueva foto:<br>
-    <input type="file" name="foto"><br><br>
+Nueva foto (obligatoria JPG):<br>
+<div class="bloque-form">
+    <input type="file" id="foto" name="foto" accept=".jpg,.jpeg">
+    <span class="error" id="fotoError"></span>
+    <br><br>
+</div>
+
 
     <button type="submit">Guardar cambios</button>
     <a href="socios.php" class="btn-atras">Cancelar</a>
@@ -109,6 +130,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <div id="footer"></div>
 <script src="js/nav.js"></script>
+<script src="js/funcionesEditarSocio.js"></script>
 <script src="js/footer.js"></script>
 <script src="js/transiciones.js"></script>
 </body>

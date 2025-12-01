@@ -6,7 +6,7 @@ $sql = "SELECT id, titulo, contenido, imagen, fecha_publicacion
         FROM noticias
         WHERE fecha_publicacion <= NOW()
         ORDER BY fecha_publicacion DESC
-        LIMIT 3";
+        LIMIT 4";
 
 $stmt = $pdo->query($sql);
 $noticias = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -31,7 +31,6 @@ $noticias = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <!-- Contenedor para los botones -->
 <div class="contenedor-botones">
     <a class="btn" href="noticia.php"><span>Nueva Noticia</span></a>
-    <a href="index.php" class="btn-atras"><span>Atrás</span></a>
 </div>
 
 <section class="lista-noticias">
@@ -62,6 +61,10 @@ $noticias = $stmt->fetchAll(PDO::FETCH_ASSOC);
 </section>
 
 </main>
+
+<div class="contenedor-botones">
+    <a href="index.php" class="btn-atras"><span>Atrás</span></a>
+</div>
 
 <div id="footer"></div>
 <script src="js/nav.js"></script>

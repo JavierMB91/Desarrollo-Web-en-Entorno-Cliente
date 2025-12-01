@@ -1,68 +1,105 @@
-const formulariocontenido = document.getElementById('formularioNoticia')
+const formulariocontenido = document.getElementById('formularioNoticia');
 
-const textarea = document.getElementById('contenido')
-const contador = document.getElementById('contador')
+const textarea = document.getElementById('contenido');
+const contador = document.getElementById('contador');
 
 formulariocontenido.addEventListener('submit', (e) => {
     e.preventDefault();
 
-    let spanErrors = document.querySelectorAll('.error')
-    spanErrors.forEach(span => span.innerText = "")
+    let hasError = false; // <-- CONTROL REAL DE ERRORES
 
-    const titulo = document.getElementById('titulo').value
-    const contenido = document.getElementById('contenido').value
-    const fecha = document.getElementById('fecha').value
+    // Limpiar errores previos
+    let spanErrors = document.querySelectorAll('.error');
+    spanErrors.forEach(span => span.innerText = "");
+
+    // Valores
+    const titulo = document.getElementById('titulo').value;
+    const contenido = document.getElementById('contenido').value;
+    const fecha = document.getElementById('fecha').value;
     const fechaError = document.getElementById('fechaError');
-    const imagen = document.getElementById('imagen')
+    const imagen = document.getElementById('imagen');
 
+    // =========================
+    // VALIDACIÓN TÍTULO
+    // =========================
     if (titulo.trim().length < 3) {
-        document.getElementById('tituloError').innerText = "Título demasiado corto.";  
+        document.getElementById('tituloError').innerText = "Título demasiado corto.";
+        hasError = true;
     }
 
+    // =========================
+    // VALIDACIÓN CONTENIDO
+    // =========================
     if (contenido.trim().length < 3) {
-        document.getElementById('noticiaError').innerText = "Escribe un contenido válido.";  
+        document.getElementById('noticiaError').innerText = "Escribe un contenido válido.";
+        hasError = true;
     }
 
+    // =========================
+    // VALIDACIÓN FECHA
+    // =========================
     if (!fecha) {
         fechaError.innerText = "Selecciona una fecha";
+        hasError = true;
     } else {
         const [año, mes, dia] = fecha.split('-');
         const fechaIngresada = new Date(año, mes - 1, dia);
         const hoy = new Date();
 
-        hoy.setHours(0,0,0,0);
-        fechaIngresada.setHours(0,0,0,0);
+        hoy.setHours(0, 0, 0, 0);
+        fechaIngresada.setHours(0, 0, 0, 0);
 
         if (fechaIngresada <= hoy) {
             fechaError.innerText = "Debe ser una fecha futura.";
+            hasError = true;
         }
     }
 
-    let imagenError = comprobarImagen(imagen)
+    // =========================
+    // VALIDACIÓN IMAGEN
+    // =========================
+    const imagenError = comprobarImagen(imagen);
+
     imagenError.forEach(error => {
-        document.getElementById('imagenError').innerHTML += `<p>${error}</p>`
-    })
-})
+        document.getElementById('imagenError').innerHTML += `<p>${error}</p>`;
+        hasError = true;
+    });
 
+    // =========================
+    // ENVIAR FORMULARIO
+    // =========================
+    if (!hasError) {
+        formulariocontenido.submit();
+    }
+});
+
+// ===============================
+// FUNCION VALIDAR IMAGEN
+// ===============================
 function comprobarImagen(imagen) {
-    let imagenError = []
+    let errores = [];
 
-    if(imagen.files.length === 0) {
-        imagenError.push("No seleccionaste ninguna imagen")
-        return imagenError
+    if (imagen.files.length === 0) {
+        errores.push("No seleccionaste ninguna imagen");
+        return errores;
     }
 
-    if(imagen.files[0].type !== 'image/jpeg') {
-        imagenError.push("La imagen debe ser JPEG")
+    const archivo = imagen.files[0];
+
+    if (archivo.type !== 'image/jpeg') {
+        errores.push("La imagen debe ser JPEG");
     }
 
-    if(imagen.files[0].size > 5 * 1024 * 1024) {
-        imagenError.push("La imagen es demasiado grande")
+    if (archivo.size > 5 * 1024 * 1024) {
+        errores.push("La imagen es demasiado grande (máx 5MB)");
     }
 
-    return imagenError
+    return errores;
 }
 
-textarea.addEventListener('input', function(){
-    contador.textContent = this.value.length
-})
+// ===============================
+// CONTADOR DE CARACTERES
+// ===============================
+textarea.addEventListener('input', function () {
+    contador.textContent = this.value.length;
+});

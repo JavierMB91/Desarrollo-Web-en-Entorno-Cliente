@@ -3,6 +3,8 @@ const formularioNuevoSocio = document.getElementById('formularioNuevoSocio');
 formularioNuevoSocio.addEventListener('submit', (e) => {
     e.preventDefault();
 
+    let hasError = false; // <-- CONTROL REAL DE ERRORES
+
     // Limpiar errores anteriores
     let spanErrors = document.querySelectorAll('.error');
     spanErrors.forEach(span => span.innerText = "");
@@ -17,7 +19,9 @@ formularioNuevoSocio.addEventListener('submit', (e) => {
     const soloLetras = /^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/;
     const telefonoEspaña = /^\d{9}$/;
 
-    let hasError = false;
+    // =========================
+    // VALIDACIONES
+    // =========================
 
     // Validación nombre
     if (nombre.trim().length < 4 || nombre.trim().length > 50 || !soloLetras.test(nombre.trim())) {
@@ -26,14 +30,14 @@ formularioNuevoSocio.addEventListener('submit', (e) => {
     }
 
     // Validación edad
-    if (Number(edad.trim()) < 18) {
+    if (!edad.trim() || Number(edad.trim()) < 18) {
         mostrarError('edad', 'Debes ser mayor de edad');
         hasError = true;
     }
 
     // Validación teléfono
     if (!telefonoEspaña.test(telefono.trim())) {
-        mostrarError('telefono', 'Teléfono no válido');
+        mostrarError('telefono', 'Teléfono no válido (9 dígitos)');
         hasError = true;
     }
 
@@ -44,47 +48,60 @@ formularioNuevoSocio.addEventListener('submit', (e) => {
         hasError = true;
     }
 
+    // =========================
+    // ENVIAR FORMULARIO SI TODO ESTÁ CORRECTO
+    // =========================
     if (!hasError) {
-        formularioNuevoSocio.submit(); // Enviar formulario si todo está correcto
+        formularioNuevoSocio.submit();
     }
 });
 
-// Función para mostrar errores
+
+// ===============================
+// FUNCIÓN PARA MOSTRAR ERRORES
+// ===============================
 function mostrarError(campo, mensaje) {
     let input = document.querySelector(`input[name="${campo}"]`);
     let span = input.nextElementSibling;
+
     if (!span || !span.classList.contains('error')) {
         span = document.createElement('span');
         span.classList.add('error');
         input.parentNode.appendChild(span);
     }
+
     span.innerText = mensaje;
 }
 
-// Función para validar imagen
+
+// ===============================
+// VALIDACIÓN DE IMAGEN
+// ===============================
 function comprobarImagen(imagen) {
-    let imagenError = [];
+    let errores = [];
 
     if (imagen.files.length === 0) {
-        imagenError.push("No has seleccionado ninguna imagen");
-        return imagenError;
+        errores.push("No has seleccionado ninguna imagen");
+        return errores;
     }
+
+    const archivo = imagen.files[0];
 
     // Validar extensión .jpg o .jpeg
-    const archivo = imagen.files[0].name.toLowerCase();
-    if (!archivo.endsWith('.jpg') && !archivo.endsWith('.jpeg')) {
-        imagenError.push("La imagen debe ser un archivo JPG");
+    const nombreArchivo = archivo.name.toLowerCase();
+    if (!nombreArchivo.endsWith('.jpg') && !nombreArchivo.endsWith('.jpeg')) {
+        errores.push("La imagen debe ser un archivo JPG");
     }
 
-    // Validar tipo MIME también por seguridad
-    if (imagen.files[0].type !== 'image/jpeg') {
-        imagenError.push("La imagen debe ser un JPEG");
+    // Validar tipo MIME
+    if (archivo.type !== 'image/jpeg') {
+        errores.push("La imagen debe ser un JPEG válido");
     }
 
-    // Validar tamaño máximo
-    if (imagen.files[0].size > 5 * 1024 * 1024) {
-        imagenError.push("La imagen es demasiado grande (máx 5MB)");
+    // Tamaño máximo 5MB
+    if (archivo.size > 5 * 1024 * 1024) {
+        errores.push("La imagen es demasiado grande (máx 5MB)");
     }
 
-    return imagenError;
+    return errores;
 }

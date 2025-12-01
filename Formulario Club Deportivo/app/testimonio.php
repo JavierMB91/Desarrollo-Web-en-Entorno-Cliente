@@ -1,3 +1,11 @@
+<?php
+require_once 'conexion.php';
+
+// Obtener todos los usuarios para el select
+$stmt = $pdo->query("SELECT id, nombre FROM usuarios ORDER BY nombre");
+$usuarios = $stmt->fetchAll(PDO::FETCH_ASSOC);
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -13,26 +21,30 @@
         <div id="nav"></div>
     </header>
 <main>
-        <form action="" method="post" enctype="multipart/form-data" id="formularioTestimonio">
-        <div class="bloque-form">
-            <label for="autor">Autor del comentario</label>
-            <input type="text" name="autor" id="autor">
-            <span id="autorError" class="error"></span>
-        </div>
+        <form action="insertarComentario.php" method="post" id="formularioTestimonio">
+    <div class="bloque-form">
+        <label for="autor_id">Autor del comentario</label>
+        <select name="autor_id" id="autor_id">
+            <?php foreach($usuarios as $u): ?>
+                <option value="<?= $u['id'] ?>"><?= htmlspecialchars($u['nombre']) ?></option>
+            <?php endforeach; ?>
+        </select>
+        <span id="autorError" class="error"></span>
+    </div>
 
-        <div class="bloque-form">
-            <label for="testimonio">Comentario</label>
-            <textarea maxlength="100" id="testimonio" name="testimonio"></textarea>
-            <p><span id="contador">0</span>/100 caracteres</p>
-            <span id="testimonioError" class="error"></span>
-        </div>
+    <div class="bloque-form">
+        <label for="contenido">Comentario</label>
+        <textarea maxlength="100" id="contenido" name="contenido"></textarea>
+        <p><span id="contador">0</span>/100 caracteres</p>
+        <span id="testimonioError" class="error"></span>
+    </div>
 
-        <!-- Contenedor para los botones -->
-        <div class="contenedor-botones">
-            <button type="submit"><span>Enviar</span></button>
-            <a href="comentario.php" class="btn-atras"><span>Atrás</span></a>
-        </div>
-    </form>
+    <div class="contenedor-botones">
+        <button type="submit"><span>Enviar</span></button>
+        <a href="comentario.php" class="btn-atras"><span>Atrás</span></a>
+    </div>
+</form>
+
 </main>
 
     <div id="footer"></div>

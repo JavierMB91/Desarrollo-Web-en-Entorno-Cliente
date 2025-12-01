@@ -33,12 +33,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $descripcion = $_POST['descripcion'];
     $duracion = $_POST['duracion'];
     $precio = $_POST['precio'];
+    $hora = $_POST['hora'];  // <--- NUEVO
 
     $sqlUpdate = "UPDATE servicio SET 
                     nombre = :nombre,
                     descripcion = :descripcion,
                     duracion = :duracion,
-                    precio = :precio
+                    precio = :precio,
+                    hora = :hora     -- <--- NUEVO
                   WHERE id = :id";
 
     $stmtUpdate = $pdo->prepare($sqlUpdate);
@@ -47,6 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'descripcion' => $descripcion,
         'duracion' => $duracion,
         'precio' => $precio,
+        'hora' => $hora,      // <--- NUEVO
         'id' => $id
     ]);
 
@@ -72,33 +75,60 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <main>
 
+<form method="post" enctype="multipart/form-data" id="formulario-servicio">
 
-<form method="post" enctype="multipart/form-data">
+    <div class="bloque-form">
+        <label for="nombre">Nombre de la actividad</label>
+        <input type="text" id="nombre" name="nombre"
+               value="<?= htmlspecialchars($servicio['nombre']) ?>">
+        <span id="nombreError" class="error"></span>
+    </div>
 
-    <!-- <input type="hidden" name="foto_actual" value="<?= htmlspecialchars($servicio['foto']) ?>"> -->
+    <div class="bloque-form">
+        <label for="descripcion">Descripción</label>
+        <textarea id="descripcion" name="descripcion" maxlength="300"><?= htmlspecialchars($servicio['descripcion']) ?></textarea>
+        <p><span id="contador"><?= strlen($servicio['descripcion']) ?></span>/300 caracteres</p>
+        <span id="descripcionError" class="error"></span>
+    </div>
 
-    Nombre:<br>
-    <input type="text" name="nombre" value="<?= htmlspecialchars($servicio['nombre']) ?>"><br><br>
+    <div class="bloque-form">
+        <label for="duracion">Duración (minutos)</label>
+        <input type="number" id="duracion" name="duracion"
+               value="<?= htmlspecialchars($servicio['duracion']) ?>">
+        <span id="duracionError" class="error"></span>
+    </div>
 
-    Descripción:<br>
-    <input type="text" name="descripcion" value="<?= htmlspecialchars($servicio['descripcion']) ?>"><br><br>
+    <div class="bloque-form">
+        <label for="precio">Costo (€)</label>
+        <input type="number" id="precio" name="precio"
+               value="<?= htmlspecialchars($servicio['precio']) ?>">
+        <span id="precioError" class="error"></span>
+    </div>
 
-    Duración:<br>
-    <input type="text" name="duracion" value="<?= htmlspecialchars($servicio['duracion']) ?>"><br><br>
+    <div class="bloque-form">
+        <label for="hora">Hora</label>
+        <input type="time" id="hora" name="hora"
+               value="<?= htmlspecialchars($servicio['hora']) ?>">
+        <span id="horaError" class="error"></span>
+    </div>
 
-    Precio:<br>
-    <input type="number" name="precio" value="<?= htmlspecialchars($servicio['precio']) ?>"><br><br>
-
-    <button type="submit">Guardar cambios</button>
-    <a href="servicios.php" class="btn-atras">Cancelar</a>
+    <div class="contenedor-botones">
+        <button type="submit"><span>Guardar cambios</span></button>
+        <a href="servicios.php" class="btn-atras"><span>Cancelar</span></a>
+    </div>
 
 </form>
 
+
+
 </main>
 </div>
+
 <div id="footer"></div>
+
 <script src="js/nav.js"></script>
 <script src="js/footer.js"></script>
+<script src="js/funcionesEditarServicio.js"></script>
 <script src="js/transiciones.js"></script>
 </body>
 </html>
