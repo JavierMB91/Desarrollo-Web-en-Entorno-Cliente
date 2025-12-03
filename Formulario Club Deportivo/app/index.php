@@ -40,7 +40,7 @@ require_once 'conexion.php';
         $stmt = $pdo->query($sqlNoticias);
 
         if ($stmt->rowCount() > 0) {
-            echo '<div class="noticias-grid">';
+            echo '<div class="noticias-grid-3">';
             while ($n = $stmt->fetch(PDO::FETCH_ASSOC)) {
 
                 echo '<article class="noticia-card">';

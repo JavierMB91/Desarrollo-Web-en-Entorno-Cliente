@@ -39,21 +39,24 @@ formulariocontenido.addEventListener('submit', (e) => {
     // VALIDACIÓN FECHA
     // =========================
     if (!fecha) {
-        fechaError.innerText = "Selecciona una fecha";
+    fechaError.innerText = "Selecciona una fecha";
+    hasError = true;
+} else {
+    const [año, mes, dia] = fecha.split('-').map(Number);
+
+    // Crear fecha local sin desfase
+    const fechaIngresada = new Date(año, mes - 1, dia, 0, 0, 0);
+
+    const hoy = new Date();
+    hoy.setHours(0, 0, 0, 0);
+
+    // Permitir fecha de HOY o futura
+    if (fechaIngresada < hoy) {
+        fechaError.innerText = "La fecha no puede ser pasada.";
         hasError = true;
-    } else {
-        const [año, mes, dia] = fecha.split('-');
-        const fechaIngresada = new Date(año, mes - 1, dia);
-        const hoy = new Date();
-
-        hoy.setHours(0, 0, 0, 0);
-        fechaIngresada.setHours(0, 0, 0, 0);
-
-        if (fechaIngresada <= hoy) {
-            fechaError.innerText = "Debe ser una fecha futura.";
-            hasError = true;
-        }
     }
+}
+
 
     // =========================
     // VALIDACIÓN IMAGEN
