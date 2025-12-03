@@ -1,4 +1,4 @@
-/* ===== ESTILOS GLOBALES ===== */
+/* ===== IMPORTACIONES Y VARIABLES GLOBALES ===== */
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Merriweather:wght@300;400&family=Roboto+Slab:wght@300;400&family=Crimson+Text:ital,wght@0,400;1,400&display=swap');
 
 :root {
@@ -11,8 +11,10 @@
     --verde-libro: #2E7D32;
     --error: #8B0000;
     --sombra-ebano: rgba(26, 26, 26, 0.7);
+    --transicion-rapida: all 0.3s ease;
 }
 
+/* ===== ESTILOS BASE Y RESET ===== */
 * {
     margin: 0;
     padding: 0;
@@ -24,7 +26,6 @@ html, body {
     height: 100%;
     margin: 0;
     padding: 0;
-
 }
 
 body {
@@ -35,25 +36,21 @@ body {
     flex-direction: column;
 }
 
-/* El contenedor debe ocupar el espacio */
+/* ===== ESTRUCTURA DE LAYOUT ===== */
 .container {
     flex: 1;
     display: flex;
     flex-direction: column;
 }
 
-/* El main dentro del container debe estirarse */
-.container main {
-    flex: 1;
-}
-
-main {
+.container main, main {
     flex: 1;
     max-width: 1200px;
     margin: 2rem auto;
     padding: 0 1rem;
 }
 
+/* ===== CABECERA ===== */
 header {
     background: linear-gradient(135deg, var(--ebano-oscuro), var(--ebano-medio));
     padding: 2rem 1rem;
@@ -68,19 +65,8 @@ header {
     color: var(--papel-antiguo);
     text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
     letter-spacing: 2px;
-    margin-bottom: 1rem;
     text-transform: uppercase;
 }
-
-.noticias-grid-3 {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
-    margin-top: 2rem;
-}
-
-
-
 
 /* ===== NAVEGACIÓN ===== */
 .navegador {
@@ -105,7 +91,7 @@ header {
     font-family: 'Roboto Slab', serif;
     border: 2px solid transparent;
     border-radius: 5px;
-    transition: all 0.3s ease;
+    transition: var(--transicion-rapida);
 }
 
 .menu li a:hover {
@@ -114,7 +100,7 @@ header {
     color: var(--dorado-brillante);
 }
 
-/* ===== CONTENIDO ===== */
+/* ===== CONTENIDO GENERAL ===== */
 section {
     background: linear-gradient(135deg, var(--papel-antiguo), #E6D7C3);
     padding: 2rem;
@@ -131,36 +117,12 @@ section p {
     font-style: italic;
 }
 
-/* ===== SECCIÓN CONTACTO ===== */
-.contacto {
-    text-align: center;
-    max-width: 600px;
-    margin: 0 auto;
-}
-
-.contacto h2 {
-    text-align: center;
-    margin-bottom: 1.5rem;
-    font-family: 'Playfair Display', serif;
-    color: var(--ebano-oscuro);
-    font-size: 1.8rem;
-}
-
-.contacto form {
-    text-align: left;
-}
-
-.contacto .contenedor-botones {
-    margin-top: 2rem;
-    justify-content: center;
-}
-
 /* ===== FORMULARIOS ===== */
-form {
-    max-width: 600px;
+form, main form {
+    max-width: 750px;
     margin: 2rem auto;
     background: linear-gradient(135deg, var(--papel-antiguo), #E6D7C3);
-    padding: 2rem;
+    padding: 2.5rem;
     border-radius: 10px;
     box-shadow: 0 5px 15px var(--sombra-ebano);
 }
@@ -169,40 +131,100 @@ form {
     margin-bottom: 1.5rem;
 }
 
-.bloque-form label {
+.bloque-form label, main form label {
     display: block;
     margin-bottom: 0.5rem;
     color: var(--madera-ebano);
     font-weight: 700;
     font-family: 'Roboto Slab', serif;
+    font-size: 1.2rem;
 }
 
-.bloque-form input,
-.bloque-form select,
-.bloque-form textarea {
+.bloque-form input, 
+.bloque-form select, 
+.bloque-form textarea,
+main form input,
+main form select,
+main form textarea {
     width: 100%;
-    padding: 0.8rem;
+    padding: 1rem;
     border-radius: 5px;
     border: 1px solid var(--madera-ebano);
     font-family: 'Crimson Text', serif;
+    font-size: 1.15rem;
     background: rgba(255, 255, 255, 0.8);
     resize: none;
+    transition: var(--transicion-rapida);
 }
 
 .bloque-form input:focus,
 .bloque-form select:focus,
-.bloque-form textarea:focus {
+.bloque-form textarea:focus,
+main form input:focus,
+main form select:focus,
+main form textarea:focus {
     outline: none;
     border-color: var(--dorado-viejo);
     box-shadow: 0 0 5px var(--dorado-viejo);
 }
 
+/* ===== BOTONES ===== */
+button[type="submit"],
+.btn,
+.btn-atras,
+.boton-principal,
+main form button,
+main form .btn,
+main form .btn-atras {
+    background: linear-gradient(135deg, var(--ebano-oscuro), var(--ebano-medio));
+    color: var(--papel-antiguo);
+    padding: 0.8rem 1.5rem;
+    border: 2px solid var(--dorado-viejo);
+    border-radius: 5px;
+    margin-top: 3rem;
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: var(--transicion-rapida);
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+button[type="submit"]:hover,
+.btn:hover,
+.btn-atras:hover,
+.boton-principal:hover,
+main form button:hover,
+main form .btn:hover,
+main form .btn-atras:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 10px var(--sombra-ebano);
+    color: var(--dorado-brillante);
+    border-color: var(--dorado-brillante);
+}
+
+.contenedor-botones {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin: 2rem 0;
+}
+
 /* ===== NOTICIAS ===== */
-.noticias-grid {
+.noticias-grid, .noticias-grid-3 {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
     gap: 1.5rem;
     margin-top: 2rem;
+}
+
+.noticias-grid {
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.noticias-grid-3 {
+    grid-template-columns: repeat(3, 1fr);
 }
 
 .noticia-card {
@@ -213,10 +235,9 @@ form {
     display: flex;
     flex-direction: column;
     gap: 0.75rem;
-    height: 100%;
-    align-items: flex-start; /* Mantiene el resto del contenido a la izquierda */
-    height: 450px; /* Ajusta este valor segun tu diseño */
+    height: 450px;
     overflow: hidden;
+    align-items: flex-start;
 }
 
 .noticia-card .imagen-noticia {
@@ -239,56 +260,19 @@ form {
     display: -webkit-box;
     line-clamp: 3;
     -webkit-box-orient: vertical;
-    flex-grow: 1; /* El párrafo ocupa el espacio libre */
+    flex-grow: 1;
 }
 
-/* ===== BOTONES ===== */
-button[type="submit"],
-.btn,
-.btn-atras {
-    background: linear-gradient(135deg, var(--ebano-oscuro), var(--ebano-medio));
-    color: var(--papel-antiguo);
-    padding: 0.8rem 1.5rem;
-    border: 2px solid var(--dorado-viejo);
-    border-radius: 5px;
-    font-family: 'Playfair Display', serif;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    text-decoration: none;
-    display: inline-block;
-    text-align: center;
-    text-transform: uppercase;
+.fecha-noticia {
+    font-size: 0.9rem;
+    color: var(--ebano-oscuro);
+    font-weight: 500;
+    margin-bottom: 0.5rem;
 }
 
-button[type="submit"]:hover,
-.btn:hover,
-.btn-atras:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 10px var(--sombra-ebano);
-}
-
-/* ESTA ES LA REGLA CLAVE PARA ALINEAR ABAJO Y CENTRADO */
 .noticia-card .btn {
-    margin-top: auto;     /* Empuja el botón hacia abajo */
-    align-self: center;   /* <-- CAMBIO AQUÍ: Centra el botón horizontalmente */
-}
-
-.contenedor-botones {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    margin-bottom: 3rem;
-}
-
-/* ===== FOOTER ===== */
-footer {
-    background: linear-gradient(135deg, var(--ebano-oscuro), var(--ebano-medio));
-    color: var(--papel-antiguo);
-    text-align: center;
-    padding: 2rem;
     margin-top: auto;
-    border-top: 2px solid var(--dorado-viejo);
+    align-self: center;
 }
 
 /* ===== DETALLE NOTICIA ===== */
@@ -316,8 +300,40 @@ footer {
     text-align: justify;
 }
 
+.contenido-noticia p {
+    font-family: 'Crimson Text', serif;
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: var(--madera-ebano);
+    text-align: justify;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    overflow: hidden;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+/* ===== SECCIÓN CONTACTO ===== */
+.contacto {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.contacto h2 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    font-family: 'Playfair Display', serif;
+    color: var(--ebano-oscuro);
+    font-size: 1.8rem;
+}
+
+.contacto form {
+    text-align: left;
+}
+
 /* ===== SOCIOS ===== */
-.socios-lista{
+.socios-lista {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
@@ -326,80 +342,154 @@ footer {
 }
 
 .socio-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
     width: 100%;
     max-width: 350px;
+    min-height: 450px;
     background: linear-gradient(135deg, var(--papel-antiguo), #E6D7C3);
     padding: 1.5rem;
     border-radius: 8px;
     box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.socio-card img {
+    width: 100%;
+    height: auto;
+    max-height: 250px;
+    object-fit: contain;
+    border-radius: 6px;
+    flex-shrink: 0;
+    margin-bottom: 1rem;
+    background: #f0f0f0;
+}
+
+.socio-card h3 {
+    margin: 0.5rem 0;
+    color: var(--ebano-oscuro);
+    font-size: 1.2rem;
     text-align: center;
 }
 
-/* ==== Servicios ==== */
-/* ==== Servicios (IGUALES QUE SOCIOS) ==== */
+.socio-card p {
+    font-size: 1rem;
+    color: var(--madera-ebano);
+    flex-grow: 1;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    word-break: break-word;
+}
+
+.socio-card .btn-atras {
+    margin-top: auto;
+    align-self: center;
+}
+
+/* ===== SERVICIOS ===== */
 .servicios-lista {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
     justify-content: center;
     margin: 2rem auto;
-    max-width: 1400px; /* Ajustamos para permitir 4 tarjetas */
+    max-width: 1400px;
 }
-
 
 .servicio-card {
     width: 100%;
-    max-width: 350px; /* MISMA MEDIDA QUE socio-card */
+    max-width: 350px;
     background: linear-gradient(135deg, var(--papel-antiguo), #E6D7C3);
     padding: 1.5rem;
     border-radius: 8px;
     box-shadow: 0 5px 15px rgba(0,0,0,0.1);
     text-align: center;
-    flex: 0 0 calc(25% - 20px); /* EXACTAMENTE 4 por fila */
-    max-width: 350px;
+    flex: 0 0 calc(25% - 20px);
 }
 
-/* ===== ERRORES ===== */
-.error {
-    color: var(--error);
-    font-size: 0.9rem;
-    display: block;
-    margin-top: 0.3rem;
+/* ===== TESTIMONIOS ===== */
+.testimonios-lista {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 25px;
+    justify-content: center;
+    margin: 2rem auto;
+    max-width: 1500px;
 }
 
-/* ===== AUMENTAR TAMAÑO DE FORMULARIOS DENTRO DE MAIN ===== */
-main form {
-    max-width: 750px;        /* Más ancho */
-    padding: 2.5rem;         /* Más grande por dentro */
-    font-size: 1.15rem;      /* Aumenta tamaño del texto interno */
+.tarjeta-testimonio {
+    width: 100%;
+    max-width: 500px;
+    background: linear-gradient(135deg, var(--papel-antiguo), #E6D7C3);
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 7px 18px rgba(0,0,0,0.15);
+    color: var(--ebano-oscuro);
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    flex: 0 0 calc(50% - 25px);
+    font-size: 1.15rem;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-/* Inputs, selects y textarea más grandes */
-main form input,
-main form select,
-main form textarea {
-    font-size: 1.15rem;      /* Aumenta tamaño de texto */
-    padding: 1rem;           /* Más cómodos */
+.tarjeta-testimonio:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 22px rgba(0,0,0,0.2);
 }
 
-/* Labels más grandes */
-main form label {
-    font-size: 1.2rem;
-    margin-bottom: 0.6rem;
+.tarjeta-testimonio p {
+    flex-grow: 1;
+    min-height: 0;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    word-break: break-word;
+    overflow-wrap: break-word;
 }
 
-/* Botones más grandes dentro de main */
-main form button,
-main form .btn,
-main form .btn-atras {
-    font-size: 1.1rem;
-    padding: 1rem 2rem;
+.tarjeta-testimonio .comentario {
+    font-style: italic;
 }
 
+.tarjeta-testimonio .fecha {
+    margin-top: 0.7rem;
+    font-size: 1.15rem;
+    color: var(--ebano-medio);
+}
 
-/* ===== ESTILOS ESPECÍFICOS PARA EL BUSCADOR DE SOCIOS ===== */
+/* ===== PAGINACIÓN ===== */
+.paginacion-contenedor {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    margin: 2rem 0;
+}
 
-/* 1. Estilo para el formulario del buscador */
+.paginacion {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    font-family: 'Playfair Display', serif;
+    color: var(--papel-antiguo);
+}
+
+.paginacion span {
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.paginacion .btn {
+    padding: 0.6rem 1.2rem;
+    font-size: 1rem;
+}
+
+/* ===== FORMULARIOS ESPECÍFICOS ===== */
 form[action="socios.php"],
 form[action="servicios.php"] {
     max-width: 600px;
@@ -411,7 +501,6 @@ form[action="servicios.php"] {
     text-align: center;
 }
 
-/* 2. Estilo para el input dentro del formulario */
 form[action="socios.php"] input[type="text"],
 form[action="servicios.php"] input[type="text"] {
     width: 100%;
@@ -425,7 +514,6 @@ form[action="servicios.php"] input[type="text"] {
     margin-bottom: 1.5rem;
 }
 
-/* 3. Contenedor de botones dentro del formulario */
 form[action="socios.php"] .contenedor-botones,
 form[action="servicios.php"] .contenedor-botones {
     margin-top: 0;
@@ -433,60 +521,31 @@ form[action="servicios.php"] .contenedor-botones {
     justify-content: center;
 }
 
-
-.fecha-noticia {
+/* ===== ESTADOS DE ERROR ===== */
+.error {
+    color: var(--error);
     font-size: 0.9rem;
-    color: var(--ebano-oscuro);;
-    font-weight: 500;
-    margin-bottom: 0.5rem;
+    display: block;
+    margin-top: 0.3rem;
 }
 
-/* ===== TESTIMONIOS ===== */
-
-.testimonios-lista {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 25px;
-    justify-content: center;
-    margin: 2rem auto;
-    max-width: 1500px;
-}
-
-/* Tarjetas más anchas y visuales */
-.tarjeta-testimonio {
-    width: 100%;
-    max-width: 500px; /* Más ancho para que queden bonitas en 2 columnas */
-    background: linear-gradient(135deg, var(--papel-antiguo), #E6D7C3);
+/* ===== FOOTER ===== */
+footer {
+    background: linear-gradient(135deg, var(--ebano-oscuro), var(--ebano-medio));
+    color: var(--papel-antiguo);
+    text-align: center;
     padding: 2rem;
-    border-radius: 12px;
-    box-shadow: 0 7px 18px rgba(0,0,0,0.15);
-    color: var(--ebano-oscuro);
-    display: flex;
-    flex-direction: column;
-    gap: 0.8rem;
-    flex: 0 0 calc(50% - 25px); /* ✅ Solo 2 por fila */
-    font-size: 1.15rem;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    margin-top: auto;
+    border-top: 2px solid var(--dorado-viejo);
 }
 
-.tarjeta-testimonio:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 22px rgba(0,0,0,0.2);
+/* ===== MEDIA QUERIES PARA RESPONSIVE DESIGN ===== */
+@media (max-width: 1024px) {
+    .servicio-card {
+        flex: 0 0 calc((100% / 2) - 10px);
+    }
 }
 
-.tarjeta-testimonio .comentario {
-    font-style: italic;
-}
-
-.tarjeta-testimonio .fecha {
-    margin-top: 0.7rem;
-    font-size: 1.15rem;
-    color: var(--ebano-medio);
-}
-
-
-
-/* ===== RESPONSIVE ===== */
 @media (max-width: 992px) {
     .noticias-grid {
         grid-template-columns: repeat(2, 1fr);
@@ -506,6 +565,15 @@ form[action="servicios.php"] .contenedor-botones {
     .noticias-grid {
         grid-template-columns: 1fr;
     }
+    
+    .servicio-card {
+        flex: 0 0 100%;
+    }
+    
+    .tarjeta-testimonio {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
 }
 
 @media (max-width: 480px) {
@@ -515,29 +583,5 @@ form[action="servicios.php"] .contenedor-botones {
     
     section, form {
         padding: 1rem;
-    }
-}
-
-/* Tablets - 2 tarjetas por fila */
-@media (max-width: 1024px) {
-    .servicio-card {
-        flex: 0 0 calc((100% / 2) - 10px);
-    }
-}
-
-/* Móviles - 1 tarjeta por fila */
-@media (max-width: 768px) {
-    .servicio-card {
-        flex: 0 0 100%;
-    }
-}
-
-/* ===== RESPONSIVE ===== */
-
-/* Móviles: 1 por fila */
-@media (max-width: 768px) {
-    .tarjeta-testimonio {
-        flex: 0 0 100%;
-        max-width: 100%;
     }
 }

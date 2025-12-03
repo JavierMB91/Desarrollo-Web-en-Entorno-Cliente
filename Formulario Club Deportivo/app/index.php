@@ -52,7 +52,7 @@ require_once 'conexion.php';
                 // 👉 Mostrar fecha formateada
                 echo '<p class="fecha-noticia">' . date("d/m/Y", strtotime($n["fecha_publicacion"])) . '</p>';
 
-                echo '<p>' . substr(htmlspecialchars($n["contenido"]), 0, 120) . '...</p>';
+            
                 
                 echo '<a class="btn" href="verNoticia.php?id=' . $n["id"] . '">Leer más</a>';
                 echo '</article>';

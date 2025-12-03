@@ -40,16 +40,15 @@ $testimonios = $stmt->fetchAll(PDO::FETCH_ASSOC);
     </header>
 
     <main>
-
+    <h2 class="titulo-club">Todos los comentarios</h2>
         <!-- BOTONES -->
         <div class="contenedor-botones">
             <a class="btn" href="testimonio.php"><span>Nuevo Comentario</span></a>
         </div>
 
-        <hr>
 
         <!-- LISTA DE TESTIMONIOS -->
-        <h2 class="titulo-club">Todos los comentarios</h2>
+
 
         <?php if (empty($testimonios)): ?>
             <p>No hay comentarios todavía.</p>

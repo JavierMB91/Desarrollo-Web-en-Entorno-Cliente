@@ -37,10 +37,13 @@ require_once 'conexion.php';
         ?>
     </div>
 
+     
+
     <!-- ======================== -->
     <!-- BUSCADOR + BOTONES -->
     <!-- ======================== -->
     <main>
+        <h2 class="titulo-club">Listado de socios</h2>
         <form method="get" action="socios.php">
             <input type="text" name="q" 
                    placeholder="Buscar por nombre o teléfono"
@@ -57,8 +60,6 @@ require_once 'conexion.php';
     <!-- ======================== -->
     <!-- LISTADO DE SOCIOS -->
     <!-- ======================== -->
-
-    <h2 class="titulo-club">Listado de socios</h2>
 
     <div class="socios-lista">
         <?php

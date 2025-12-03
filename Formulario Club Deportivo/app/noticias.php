@@ -50,6 +50,7 @@ $noticias = $stmt->fetchAll(PDO::FETCH_ASSOC);
 </header>
 
 <main>
+    <h2 class="titulo-club">Ultimas noticias</h2>
 
 <!-- Botón para crear noticia -->
 <div class="contenedor-botones">
@@ -57,7 +58,6 @@ $noticias = $stmt->fetchAll(PDO::FETCH_ASSOC);
 </div>
 
 <section class="lista-noticias">
-    <h2>Últimas noticias</h2>
 
     <?php if (!empty($noticias)): ?>
         <div class="noticias-grid">
@@ -73,8 +73,7 @@ $noticias = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <!-- Título -->
                 <h3><?= htmlspecialchars($n['titulo']) ?></h3>
 
-                <!-- Contenido resumido -->
-                <p><?= substr(htmlspecialchars($n['contenido']), 0, 120) ?>...</p>
+                
 
                 <!-- Fecha -->
                 <small>Publicado: <?= date("d/m/Y", strtotime($n["fecha_publicacion"])) ?></small>
@@ -100,11 +99,14 @@ $noticias = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     <span>Página <?= $pagina ?> de <?= $totalPaginas ?></span>
 
-    <?php if ($pagina < $totalPaginas): ?>
-        <a class="btn" href="?pagina=<?= $pagina + 1 ?>">Siguiente</a>
-    <?php endif; ?>
+    
 
 </div>
+    <div class="contenedor-botones">
+        <?php if ($pagina < $totalPaginas): ?>
+            <a class="btn" href="?pagina=<?= $pagina + 1 ?>">Siguiente</a>
+        <?php endif; ?>
+    </div>
 
 </main>
 

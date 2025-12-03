@@ -47,6 +47,7 @@ require_once 'conexion.php';
         <!-- BUSCADOR + BOTONES -->
         <!-- ======================== -->
         <main>
+            <h2 class="titulo-club">Listado de Servicios</h2>
             <form method="get" action="servicios.php">
                 <input type="text" name="q" 
                        placeholder="Buscar por nombre de actividad"
@@ -60,7 +61,7 @@ require_once 'conexion.php';
             </form>
         </main>
 
-        <h2 class="titulo-club">Listado de Servicios</h2>
+        
 
         <!-- ======================== -->
         <!-- LISTADO DE SERVICIOS -->
