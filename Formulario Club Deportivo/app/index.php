@@ -15,7 +15,7 @@ require_once 'conexion.php';
 <div class="container">
 
 <header>
-    <h1 class="titulo-club">Bienvenido</h1>
+    <h1 class="titulo-club">Libreria</h1>
     <div id="nav"></div>
 </header>
 
