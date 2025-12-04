@@ -219,6 +219,7 @@ main form .btn-atras:hover {
     justify-content: center;
     gap: 1rem;
     margin: 2rem 0;
+    margin-bottom: 1rem;
 }
 
 /* ===== NOTICIAS ===== */
@@ -489,16 +490,18 @@ main form .btn-atras:hover {
 
 .paginacion {
     display: flex;
-    justify-content: center;
+    justify-content: center; /* centra todo */
     align-items: center;
-    gap: 1rem;
-    font-family: 'Playfair Display', serif;
-    color: var(--papel-antiguo);
+    gap: 1rem; /* espacio entre botones y texto */
+    margin: 2rem 0;
+    flex-wrap: wrap; /* opcional para pantallas pequeñas */
 }
 
+
 .paginacion span {
-    font-size: 1rem;
-    font-weight: 500;
+    font-size: 1.5rem;
+    color: var(--papel-antiguo);
+    margin: 0;
 }
 
 .paginacion .btn {
@@ -537,6 +540,171 @@ form[action="servicios.php"] .contenedor-botones {
     margin-bottom: 0;
     justify-content: center;
 }
+
+/* ===== CALENDARIO ===== */
+.contenedor-botones h2 {
+    font-size: 1.5rem;
+    color: var(--papel-antiguo);
+    margin: 0;
+    margin-top: 2rem;
+}
+
+/* ===== CELDAS DEL CALENDARIO ===== */
+.calendario td.clickable {
+    cursor: pointer;
+    vertical-align: top;
+    transition: var(--transicion-rapida);
+}
+
+.calendario td.clickable:hover {
+    background: var(--dorado-viejo);
+    color: var(--papel-antiguo);
+}
+
+
+.calendario {
+    display: flex;
+    justify-content: center;
+    margin: 2rem 0;
+}
+
+.calendario table {
+    border-collapse: collapse;
+    width: 100%;
+    max-width: 800px;
+    background: linear-gradient(135deg, var(--papel-antiguo), #E6D7C3);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px var(--sombra-ebano);
+}
+
+.calendario th, .calendario td {
+    text-align: center;
+    padding: 1rem 0.5rem;
+    border: 1px solid var(--madera-ebano);
+    font-family: 'Crimson Text', serif;
+    cursor: default;
+    transition: var(--transicion-rapida);
+}
+
+.calendario td {
+    vertical-align: top;
+    height: 100px;
+    position: relative;
+}
+
+.calendario td:hover {
+    background: var(--papel-antiguo);
+}
+
+.calendario .dia-numero {
+    font-weight: bold;
+    font-size: 1rem;
+    margin-bottom: 0.3rem;
+    display: block;
+}
+
+.calendario .citas-count {
+    font-size: 0.85rem;
+    color: var(--verde-libro);
+    margin-top: 0.2rem;
+}
+
+/* Celda clicable del calendario */
+.calendario td.clickable {
+    cursor: pointer;
+}
+
+.calendario td.clickable:hover {
+    background: var(--dorado-viejo);
+    color: var(--papel-antiguo);
+}
+
+.btn-mes {
+    background: linear-gradient(135deg, var(--ebano-oscuro), var(--ebano-medio));
+    color: var(--papel-antiguo);
+    padding: 0.2rem 0.5rem;          /* padding horizontal y vertical */
+    border: 2px solid var(--dorado-viejo);
+    border-radius: 5px;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    line-height: 1.5rem;            /* altura de línea igual al tamaño del texto */
+    display: inline-flex;            /* para centrar vertical y horizontal */
+    justify-content: center;         /* centrado horizontal */
+    align-items: center;             /* centrado vertical */
+    cursor: pointer;
+    transition: var(--transicion-rapida);
+    text-decoration: none;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+
+.btn-mes:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 10px var(--sombra-ebano);
+    color: var(--dorado-brillante);
+    border-color: var(--dorado-brillante);
+}
+
+/* ===== CITAS DEL DÍA ===== */
+.citas-dia {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin: 2rem 0;
+}
+
+.cita-card {
+    background: linear-gradient(135deg, var(--papel-antiguo), #E6D7C3);
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    font-family: 'Crimson Text', serif;
+    color: var(--madera-ebano);
+    max-width: 300px;
+}
+
+.cita-card a {
+    align-self: flex-start;
+    margin-top: 0.5rem;
+    background: linear-gradient(135deg, var(--ebano-oscuro), var(--ebano-medio));
+    color: var(--papel-antiguo);
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    border: 2px solid var(--dorado-viejo);
+    font-family: 'Playfair Display', serif;
+    text-decoration: none;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    transition: var(--transicion-rapida);
+}
+
+.cita-card a:hover {
+    color: var(--dorado-brillante);
+    border-color: var(--dorado-brillante);
+    box-shadow: 0 5px 10px var(--sombra-ebano);
+    transform: translateY(-2px);
+}
+
+/* ===== RESULTADOS DE BÚSQUEDA ===== */
+.resultados-busqueda {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin: 2rem 0;
+}
+
+.resultados-busqueda p {
+    text-align: center;
+    font-family: 'Crimson Text', serif;
+    color: var(--papel-antiguo);
+    font-size: 1.1rem;
+}
+
 
 /* ===== ESTADOS DE ERROR ===== */
 .error {

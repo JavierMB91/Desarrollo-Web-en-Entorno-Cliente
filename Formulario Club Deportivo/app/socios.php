@@ -12,10 +12,10 @@ require_once 'conexion.php';
 </head>
 
 <body class="socios-body">
-
+<header>
 <h1 class="titulo-club">Sección Socios</h1>
-
 <div id="nav"></div>
+</header>
 
 <div class="container">
 

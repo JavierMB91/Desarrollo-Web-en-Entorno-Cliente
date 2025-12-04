@@ -92,21 +92,17 @@ $noticias = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 <!-- PAGINACIÓN -->
 <div class="paginacion">
-
     <?php if ($pagina > 1): ?>
         <a class="btn" href="?pagina=<?= $pagina - 1 ?>">Anterior</a>
     <?php endif; ?>
 
     <span>Página <?= $pagina ?> de <?= $totalPaginas ?></span>
 
-    
-
+    <?php if ($pagina < $totalPaginas): ?>
+        <a class="btn" href="?pagina=<?= $pagina + 1 ?>">Siguiente</a>
+    <?php endif; ?>
 </div>
-    <div class="contenedor-botones">
-        <?php if ($pagina < $totalPaginas): ?>
-            <a class="btn" href="?pagina=<?= $pagina + 1 ?>">Siguiente</a>
-        <?php endif; ?>
-    </div>
+
 
 </main>
 
