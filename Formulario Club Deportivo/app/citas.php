@@ -130,29 +130,63 @@ function h($s) { return htmlspecialchars($s, ENT_QUOTES, 'UTF-8'); }
     </main>
 
     <!-- ======================== -->
-    <!-- RESULTADOS DE BÚSQUEDA -->
-    <!-- ======================== -->
-    <?php if ($busqueda !== ''): ?>
-        <h2 class="titulo-club">Resultados de búsqueda para "<?= h($busqueda) ?>"</h2>
-        <div class="resultados-busqueda">
-            <?php
-            if (empty($resultadosBusqueda)) {
-                echo "<p>No se encontraron citas.</p>";
-            } else {
-                foreach ($resultadosBusqueda as $r) {
-                    echo '<div class="socio-card, cita-card">';
-                    echo h($r['fecha']) . ' ' . h($r['hora']) . ' - ' . h($r['socio']) . ' (' . h($r['telefono']) . ') - ' . h($r['servicio']);
-                    if ($r['fecha'] > date('Y-m-d')) {
-                        echo ' <a href="citas.php?borrar=' . intval($r['id']) . '&mes=' . $mes . '&anio=' . $anio . '" onclick="return confirm(\'¿Cancelar esta cita?\');" class="btn-atras">[Cancelar]</a>';
-                    } else {
-                        echo ' <small>(no se puede cancelar)</small>';
-                    }
-                    echo '</div>';
+<!-- RESULTADOS DE BÚSQUEDA -->
+<!-- ======================== -->
+<?php if ($busqueda !== ''): ?>
+    <h2 class="titulo-club">Resultados de búsqueda para "<?= h($busqueda) ?>"</h2>
+    <div class="resultados-busqueda">
+        <?php if (!empty($resultadosBusqueda)): ?>
+            <?php foreach ($resultadosBusqueda as $c): ?>
+                <div class="socio-card cita-card">
+                    <p><?= h($c['fecha']) ?> <?= h($c['hora']) ?> - <?= h($c['socio']) ?> (<?= h($c['telefono']) ?>) - <?= h($c['servicio']) ?></p>
+
+                    <?php if ($c['fecha'] > date('Y-m-d')): ?>
+                        <button type="button" class="btn-atras btn-cancelar" 
+                                data-url="citas.php?borrar=<?= intval($c['id']) ?>&mes=<?= $mes ?>&anio=<?= $anio ?>">
+                            Cancelar
+                        </button>
+                    <?php else: ?>
+                        <p>(no se puede cancelar)</p>
+                    <?php endif; ?>
+                </div>
+            <?php endforeach; ?>
+        <?php else: ?>
+            <p>No se encontraron citas.</p>
+        <?php endif; ?>
+    </div>
+<?php endif; ?>
+
+
+    
+<!-- ======================== -->
+<!-- CITAS DEL DÍA SELECCIONADO -->
+<!-- ======================== -->
+<?php if ($diaSeleccionado): ?>
+    <h2 class="titulo-club">Citas del día <?= h($diaSeleccionado) ?>/<?= h($mes) ?>/<?= h($anio) ?></h2>
+    <div class="citas-dia">
+        <?php
+        if (!empty($citasPorDia[$diaSeleccionado])) {
+            foreach ($citasPorDia[$diaSeleccionado] as $c) {
+                echo '<div class="socio-card cita-card">';
+                echo '<p>' . h($c['hora']) . ' - ' . h($c['socio']) . ' (' . h($c['telefono']) . ') - ' . h($c['servicio']) . '</p>';
+                
+                // Botón cancelar solo para citas futuras (no incluir hoy)
+                if ($c['fecha'] > date('Y-m-d')) {
+                    echo ' <button type="button" class="btn-atras btn-cancelar" 
+                           data-url="citas.php?borrar=' . intval($c['id']) . '&mes=' . $mes . '&anio=' . $anio . '">
+                           Cancelar</button>';
+                } else {
+                    echo ' <p>(no se puede cancelar)</p>';
                 }
+
+                echo '</div>';
             }
-            ?>
-        </div>
-    <?php endif; ?>
+        } else {
+            echo '<p>No hay citas ese día.</p>';
+        }
+        ?>
+    </div>
+<?php endif; ?>
 
     <!-- ======================== -->
     <!-- NAVEGACIÓN DE MESES -->
@@ -193,31 +227,6 @@ function h($s) { return htmlspecialchars($s, ENT_QUOTES, 'UTF-8'); }
         </table>
     </div>
 
-    <!-- ======================== -->
-    <!-- CITAS DEL DÍA SELECCIONADO -->
-    <!-- ======================== -->
-    <?php if ($diaSeleccionado): ?>
-        <h2 class="titulo-club">Citas del día <?= h($diaSeleccionado) ?>/<?= h($mes) ?>/<?= h($anio) ?></h2>
-        <div class="citas-dia">
-        <?php
-        if (!empty($citasPorDia[$diaSeleccionado])) {
-            foreach ($citasPorDia[$diaSeleccionado] as $c) {
-                echo '<div class="socio-card, cita-card">';
-                echo h($c['hora']) . ' - ' . h($c['socio']) . ' (' . h($c['telefono']) . ') - ' . h($c['servicio']);
-                if ($c['fecha'] > date('Y-m-d')) {
-                    echo ' <a href="citas.php?borrar=' . intval($c['id']) . '&mes=' . $mes . '&anio=' . $anio . '" onclick="return confirm(\'¿Cancelar esta cita?\');" class="btn-atras">[Cancelar]</a>';
-                } else {
-                    echo ' <small>(no se puede cancelar)</small>';
-                }
-                echo '</div>';
-            }
-        } else {
-            echo '<p>No hay citas ese día.</p>';
-        }
-        ?>
-        </div>
-    <?php endif; ?>
-
     <div class="contenedor-botones">
         <a href="index.php" class="btn-atras"><span>Atrás</span></a>
     </div>
@@ -226,9 +235,18 @@ function h($s) { return htmlspecialchars($s, ENT_QUOTES, 'UTF-8'); }
 
 <div id="footer"></div>
 
+<div id="modalCancelar" class="modal">
+    <div class="modal-content">
+        <p>¿Deseas cancelar esta cita?</p>
+        <button id="confirmarCancelar" class="btn-atras btn-modal">Sí, cancelar</button>
+        <button id="cerrarModal" class="btn-atras btn-modal">No, mantener</button>
+    </div>
+</div>
+
 <script src="js/nav.js"></script>
 <script src="js/footer.js"></script>
 <script src="js/transiciones.js"></script>
+<script src="js/modal.js"></script>
 
 </body>
 </html>

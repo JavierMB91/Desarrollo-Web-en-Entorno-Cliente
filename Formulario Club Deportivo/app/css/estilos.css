@@ -342,7 +342,6 @@ main form .btn-atras:hover {
     text-align: left;
 }
 
-/* ===== SOCIOS ===== */
 .socios-lista {
     display: flex;
     flex-wrap: wrap;
@@ -351,30 +350,35 @@ main form .btn-atras:hover {
     margin: 2rem 0;
 }
 
+/* Tarjetas */
 .socio-card {
+    flex: 0 1 calc(20% - 20px); /* Ahora ocupan menos ancho, 5 por fila aprox. si quieres */
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    width: 100%;
-    max-width: 350px;
-    min-height: 450px;
     background: linear-gradient(135deg, var(--papel-antiguo), #E6D7C3);
-    padding: 1.5rem;
+    padding: 1rem; /* menos padding */
     border-radius: 8px;
     box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    min-height: 350px; /* altura menor */
+    max-width: 250px;  /* límite ancho menor */
 }
 
+
+/* Imagen */
 .socio-card img {
     width: 100%;
     height: auto;
-    max-height: 250px;
+    max-height: 180px;
     object-fit: contain;
     border-radius: 6px;
     flex-shrink: 0;
-    margin-bottom: 1rem;
+    margin-bottom: 0.8rem;
     background: #f0f0f0;
 }
 
+/* Título y texto */
 .socio-card h3 {
     margin: 0.5rem 0;
     color: var(--ebano-oscuro);
@@ -393,6 +397,7 @@ main form .btn-atras:hover {
     word-break: break-word;
 }
 
+/* Botón */
 .socio-card .btn-atras {
     margin-top: auto;
     align-self: center;
@@ -648,12 +653,12 @@ form[action="servicios.php"] .contenedor-botones {
 }
 
 /* ===== CITAS DEL DÍA ===== */
-.citas-dia {
+/* .citas-dia {
     display: flex;
     flex-direction: column;
     gap: 1rem;
     margin: 2rem 0;
-}
+} */
 
 .cita-card {
     background: linear-gradient(135deg, var(--papel-antiguo), #E6D7C3);
@@ -666,6 +671,7 @@ form[action="servicios.php"] .contenedor-botones {
     font-family: 'Crimson Text', serif;
     color: var(--madera-ebano);
     max-width: 300px;
+    min-height: 200px;
 }
 
 .cita-card a {
@@ -691,18 +697,79 @@ form[action="servicios.php"] .contenedor-botones {
 }
 
 /* ===== RESULTADOS DE BÚSQUEDA ===== */
-.resultados-busqueda {
+/* .resultados-busqueda {
     display: flex;
     flex-direction: column;
     gap: 1rem;
     margin: 2rem 0;
-}
+} */
 
 .resultados-busqueda p {
     text-align: center;
     font-family: 'Crimson Text', serif;
     color: var(--papel-antiguo);
     font-size: 1.1rem;
+}
+
+.cita-card p {
+    font-size: 1rem;
+    color: var(--madera-ebano);
+    line-height: 1.5;            /* Para que el texto respire */
+    margin-bottom: 0.5rem;       /* Espacio entre líneas o párrafos */
+    word-break: break-word;       /* Evita que palabras largas rompan el diseño */
+    overflow-wrap: break-word;    /* Similar a lo anterior, soporte extra */
+    text-align: left;             /* Alineación consistente */
+    display: -webkit-box;
+    line-clamp: 3;       /* Máximo de líneas visibles */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+
+/* ===== MODAL ===== */
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background: var(--papel-antiguo);
+    padding: 2rem;
+    border-radius: 10px;
+    text-align: center;
+    max-width: 400px;
+    box-shadow: 0 5px 15px var(--sombra-ebano);
+    font-size: 20px;
+}
+
+.btn-modal {
+    font-size: 1rem;       /* tamaño del texto */
+    padding: 0.3rem 0.6rem; /* vertical | horizontal */
+}
+
+.resultados-busqueda,
+.citas-dia {
+    display: flex;
+    flex-wrap: wrap;       /* Permite que las tarjetas pasen a otra fila si no caben */
+    justify-content: center; /* Centra las tarjetas si hay pocas */
+    gap: 20px;             /* Espacio entre tarjetas */
+    margin-top: 2rem;
+}
+
+.cita-card {
+    flex: 0 0 300px;       /* Tamaño fijo de la tarjeta */
+    display: flex;
+    flex-direction: column;
+    align-items: center;   /* Centra el contenido dentro de la tarjeta */
 }
 
 

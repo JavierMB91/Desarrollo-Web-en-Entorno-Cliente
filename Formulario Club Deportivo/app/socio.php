@@ -1,3 +1,60 @@
+<?php
+require 'conexion.php';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+    $nombre = $_POST['nombre'] ?? '';
+    $edad = $_POST['edad'] ?? '';
+    $clave = $_POST['password'] ?? '';
+    $telefono = $_POST['telefono'] ?? '';
+
+    // Validación básica
+    if (!$nombre || !$edad || !$clave) {
+        echo '<p class="error">Todos los campos obligatorios deben completarse.</p>';
+        exit;
+    }
+
+    // Hashear la contraseña
+    $claveHash = password_hash($clave, PASSWORD_DEFAULT);
+
+    $rol = 'socio'; // ahora coincide con tu ENUM
+
+
+    // Subida de foto
+    $fotoNombre = null;
+    if (isset($_FILES['imagen']) && $_FILES['imagen']['error'] === UPLOAD_ERR_OK) {
+        $ext = pathinfo($_FILES['imagen']['name'], PATHINFO_EXTENSION);
+        $fotoNombre = uniqid('usuario_') . '.' . $ext;
+        $destino = __DIR__ . '/uploads/usuarios/' . $fotoNombre;
+
+        if (!move_uploaded_file($_FILES['imagen']['tmp_name'], $destino)) {
+            echo '<p class="error">Error al subir la imagen.</p>';
+            exit;
+        }
+    }
+
+    // Insertar en la base de datos
+    try {
+        $stmt = $pdo->prepare("INSERT INTO usuarios (nombre, edad, clave, rol, telefono, foto, fecha_registro) 
+                       VALUES (:nombre, :edad, :clave, :rol, :telefono, :foto, NOW())");
+        $stmt->execute([
+            ':nombre' => $nombre,
+            ':edad' => $edad,
+            ':clave' => $claveHash,
+            ':rol' => $rol,
+            ':telefono' => $telefono,
+            ':foto' => $fotoNombre
+        ]);
+
+        echo '<p>✅ Usuario registrado correctamente.</p>';
+
+    } catch (PDOException $e) {
+        echo '<p class="error">Error al registrar el usuario: ' . $e->getMessage() . '</p>';
+    }
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="es">
 <head>

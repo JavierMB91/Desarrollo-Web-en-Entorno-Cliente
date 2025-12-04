@@ -1,10 +1,11 @@
-const formularioCita = document.getElementById('formularioCita')
+const formularioCita = document.getElementById('formularioCita');
 
 formularioCita.addEventListener('submit', (e) => {
     e.preventDefault();
 
     let errores = false;
 
+    // Limpiar errores anteriores
     let spanErrors = document.querySelectorAll('.error');
     spanErrors.forEach(span => {
         span.innerText = "";
@@ -15,17 +16,15 @@ formularioCita.addEventListener('submit', (e) => {
     const dia = document.getElementById('dia').value;
     const hora = document.getElementById('hora').value;
 
-    const soloLetras = /^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/;
-
-    // VALIDACIÓN NOMBRE
-    if (cliente.trim().length < 3 || !soloLetras.test(cliente.trim())) {
-        document.getElementById('clienteError').innerText = "Introduce un nombre válido.";
+    // VALIDACIÓN CLIENTE
+    if (!cliente) {
+        document.getElementById('clienteError').innerText = "Selecciona un participante.";
         errores = true;
     }
 
     // VALIDACIÓN SERVICIO
-    if (servicio.trim().length < 3) {
-        document.getElementById('servicioError').innerText = "Selecciona una actividad válida.";
+    if (!servicio) {
+        document.getElementById('servicioError').innerText = "Selecciona un libro o actividad.";
         errores = true;
     }
 
@@ -34,16 +33,16 @@ formularioCita.addEventListener('submit', (e) => {
         document.getElementById('diaError').innerText = "Selecciona una fecha.";
         errores = true;
     } else {
-        const fechaIngresada = new Date(dia);
+        const fechaIngresada = new Date(dia + "T00:00:00"); // asegurar formato ISO
         const hoy = new Date();
         hoy.setHours(0, 0, 0, 0);
-        fechaIngresada.setHours(0, 0, 0, 0);
 
-        if (fechaIngresada <= hoy) {
-            document.getElementById('diaError').innerText = "La fecha debe ser posterior a hoy.";
+        if (fechaIngresada < hoy) { // < hoy en lugar de <= hoy
+            document.getElementById('diaError').innerText = "La fecha debe ser hoy o posterior.";
             errores = true;
         }
     }
+
 
     // VALIDACIÓN HORA
     if (!hora) {
@@ -51,11 +50,9 @@ formularioCita.addEventListener('submit', (e) => {
         errores = true;
     }
 
-    // SI HAY ERRORES → BLOQUEA
-    if (errores) {
-        return;
-    }
+    // Si hay errores, no enviar
+    if (errores) return;
 
-    // SI TODO ESTÁ BIEN → ENVÍA FORMULARIO
+    // Si todo está bien, enviar formulario
     formularioCita.submit();
 });

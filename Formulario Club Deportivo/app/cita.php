@@ -1,3 +1,53 @@
+<?php
+require_once 'conexion.php'; // tu conexión PDO
+
+$msg = '';
+
+// ==========================
+// 1. Procesar el formulario
+// ==========================
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $cliente = intval($_POST['cliente']);
+    $servicio = intval($_POST['servicio']);
+    $dia = $_POST['dia'];
+    $hora = $_POST['hora'];
+
+    // Validaciones simples
+    if (!$cliente || !$servicio || !$dia || !$hora) {
+        $msg = "Todos los campos son obligatorios.";
+    } else {
+        // Comprobar si ya existe una cita para ese socio en la misma fecha y hora
+        $stmtCheck = $pdo->prepare("SELECT COUNT(*) FROM cita WHERE socio_id = ? AND fecha = ? AND hora = ?");
+        $stmtCheck->execute([$cliente, $dia, $hora]);
+        $existe = $stmtCheck->fetchColumn();
+
+        if ($existe) {
+            $msg = "Este participante ya tiene una cita a esa hora.";
+        } else {
+            // Insertar la cita
+            $stmt = $pdo->prepare("INSERT INTO cita (socio_id, servicio_id, fecha, hora) VALUES (?, ?, ?, ?)");
+            $stmt->execute([$cliente, $servicio, $dia, $hora]);
+            $msg = "Cita agendada correctamente.";
+        }
+    }
+}
+
+// ==========================
+// 2. Traer participantes y servicios
+// ==========================
+$stmtClientes = $pdo->query("SELECT id, nombre FROM usuarios WHERE rol='socio' ORDER BY nombre");
+$clientes = $stmtClientes->fetchAll(PDO::FETCH_ASSOC);
+
+$stmtServicios = $pdo->query("SELECT id, nombre FROM servicio ORDER BY nombre");
+$servicios = $stmtServicios->fetchAll(PDO::FETCH_ASSOC);
+
+// ==========================
+// 3. Helper seguro
+// ==========================
+function h($s) {
+    return htmlspecialchars($s, ENT_QUOTES, 'UTF-8');
+}
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -8,53 +58,62 @@
 </head>
 <body class="cita-body">
   <div class="container">
-  <header>
-    <h1 class="titulo-club">Agendar Lectura Guiada</h1>
-    <div id="nav"></div>
-  </header>
-  <main>
-  <form action="" method="post" enctype="multipart/form-data" id="formularioCita">
-    <div class="bloque-form">
-      <label for="cliente">Participante</label>
-      <select id="cliente" name="cliente">
-        <option value="">Seleccionar participante</option>
-      </select>
-      <span id="clienteError" class="error"></span>
-    </div>
+    <header>
+      <h1 class="titulo-club">Agendar Lectura Guiada</h1>
+      <div id="nav"></div>
+    </header>
+    <main>
+      <h2 class="titulo-club">Nueva Cita</h2>
 
-    <div class="bloque-form">
-      <label for="servicio">Libro / Actividad</label>
-      <select id="servicio" name="servicio">
-        <option value="">Seleccionar libro o actividad</option>
-      </select>
-      <span id="servicioError" class="error"></span>
-    </div>
+      <form action="" method="post" enctype="multipart/form-data" id="formularioCita">
 
-    <div class="bloque-form">
-      <label for="dia">Día</label>
-      <input type="date" id="dia" name="dia">
-      <span id="diaError" class="error"></span>
-    </div>
+        <div class="bloque-form">
+          <label for="cliente">Participante</label>
+          <select id="cliente" name="cliente">
+            <option value="">Seleccionar participante</option>
+            <?php foreach ($clientes as $c): ?>
+              <option value="<?= $c['id'] ?>"><?= h($c['nombre']) ?></option>
+            <?php endforeach; ?>
+          </select>
+          <span id="clienteError" class="error"></span>
+        </div>
 
-    <div class="bloque-form">
-      <label for="hora">Hora</label>
-      <input type="time" id="hora" name="hora">
-      <span id="horaError" class="error"></span>
-    </div>
+        <div class="bloque-form">
+          <label for="servicio">Libro / Actividad</label>
+          <select id="servicio" name="servicio">
+            <option value="">Seleccionar libro o actividad</option>
+            <?php foreach ($servicios as $s): ?>
+              <option value="<?= $s['id'] ?>"><?= h($s['nombre']) ?></option>
+            <?php endforeach; ?>
+          </select>
+          <span id="servicioError" class="error"></span>
+        </div>
 
-    <!-- Contenedor para los botones -->
-    <div class="contenedor-botones">
-        <button type="submit"><span>Agendar</span></button>
-        <a href="index.php" class="btn-atras"><span>Atrás</span></a>
-    </div>
-  </form>
-</main>
-  <div id="footer"></div>
+        <div class="bloque-form">
+          <label for="dia">Día</label>
+          <input type="date" id="dia" name="dia">
+          <span id="diaError" class="error"></span>
+        </div>
+
+        <div class="bloque-form">
+          <label for="hora">Hora</label>
+          <input type="time" id="hora" name="hora">
+          <span id="horaError" class="error"></span>
+        </div>
+
+        <div class="contenedor-botones">
+          <button type="submit"><span>Agendar</span></button>
+          <a href="citas.php" class="btn-atras"><span>Atrás</span></a>
+        </div>
+
+      </form>
+    </main>
+    <div id="footer"></div>
+  </div>
 
   <script src="js/funcionesCita.js"></script>
   <script src="js/nav.js"></script>
   <script src="js/footer.js"></script>
   <script src="js/transiciones.js"></script>
-  </div>
 </body>
 </html>
