@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 require_once 'conexion.php';
 
 // ========================
@@ -109,8 +111,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmtUpdate = $pdo->prepare($sqlUpdate);
     $stmtUpdate->execute($params);
 
-    header("Location: socios.php?edit_ok=1");
+    $_SESSION['mensaje'] = "Socio editado con éxito.";
+    header("Location: socios.php");
     exit;
+
 }
 ?>
 
@@ -135,25 +139,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <div class="bloque-form">
         <label>Nombre:</label>
-        <input type="text" name="nombre" value="<?= htmlspecialchars($socio['nombre']) ?>">
+        <input id="nombre" type="text" name="nombre" value="<?= htmlspecialchars($socio['nombre']) ?>">
         <span class="error" id="nombreError"></span>
     </div>
 
     <div class="bloque-form">
         <label>Edad:</label>
-        <input type="number" name="edad" value="<?= htmlspecialchars($socio['edad']) ?>">
+        <input id="edad" type="number" name="edad" value="<?= htmlspecialchars($socio['edad']) ?>">
         <span class="error" id="edadError"></span>
     </div>
 
     <div class="bloque-form">
         <label>Teléfono:</label>
-        <input type="text" name="telefono" value="<?= htmlspecialchars($socio['telefono']) ?>">
+        <input id="telefono" type="tel" name="telefono" value="<?= htmlspecialchars($socio['telefono']) ?>">
         <span class="error" id="telefonoError"></span>
     </div>
 
     <div class="bloque-form">
         <label>Contraseña (dejar vacío para no cambiar):</label>
-        <input type="password" name="password" placeholder="Nueva contraseña">
+        <input id="password" type="password" name="password" placeholder="Nueva contraseña">
         <span class="error" id="passwordError"></span>
     </div>
 
@@ -165,7 +169,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <div class="bloque-form">
         <label>Nueva foto (JPG):</label>
-        <input type="file" name="foto" accept=".jpg,.jpeg">
+        <input id="foto" type="file" name="foto" accept=".jpg,.jpeg">
         <span class="error" id="fotoError"></span>
     </div>
 

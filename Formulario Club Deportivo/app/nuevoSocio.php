@@ -1,26 +1,5 @@
 <?php
-require_once 'conexion.php';
-?>
-<!DOCTYPE html>
-<html lang="es">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Agregar nuevo socio</title>
-    <link rel="stylesheet" href="css/estilos.css">
-</head>
-
-<body>
-
-<header>
-    <h1 class="titulo-club">Nuevo Socio</h1>
-    <div id="nav"></div>
-</header>
-
-<div class="container">
-
-<?php
+session_start();
 require_once 'conexion.php';
 
 // =====================
@@ -44,26 +23,33 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Manejo de imagen
     // ==========================
     $fotoNombre = null;
+
     if (isset($_FILES['foto']) && $_FILES['foto']['error'] === UPLOAD_ERR_OK) {
 
         $ext = strtolower(pathinfo($_FILES['foto']['name'], PATHINFO_EXTENSION));
         $fotoTmp = $_FILES['foto']['tmp_name'];
 
-        if (!in_array($ext, ['jpg', 'jpeg'])) {
-            echo '<p class="error">Formato de imagen no permitido.</p>';
+        if (!in_array($ext, ['jpg', 'jpeg', 'png'])) {
+            $_SESSION['mensaje_error'] = "❌ Formato de imagen no permitido";
+            header("Location: nuevoSocio.php");
             exit;
         }
 
         $telefonoLimpio = preg_replace('/\D/', '', $telefono);
         $fotoNombre = $telefonoLimpio . "." . $ext;
+
         $rutaDestino = __DIR__ . "/uploads/usuarios/" . $fotoNombre;
 
         if (!move_uploaded_file($fotoTmp, $rutaDestino)) {
-            echo '<p class="error">❌ Error al subir la imagen.</p>';
+            $_SESSION['mensaje_error'] = "❌ Error al subir la imagen";
+            header("Location: nuevoSocio.php");
             exit;
         }
     }
 
+    // ==========================
+    // INSERTAR EN BD
+    // ==========================
     try {
         $sql = "INSERT INTO usuarios (nombre, edad, telefono, foto, password)
                 VALUES (:nombre, :edad, :telefono, :foto, :password)";
@@ -74,17 +60,57 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             ':edad'     => $edad,
             ':telefono' => $telefono,
             ':foto'     => $fotoNombre,
-            ':password' => $passwordHash // <--- Guardar hash, no texto plano
+            ':password' => $passwordHash
         ]);
 
-        echo '<p class="success">✅ Socio agregado correctamente</p>';
+        $_SESSION['mensaje_exito'] = "✅ Socio agregado correctamente";
+        header("Location: nuevoSocio.php");
+        exit;
 
     } catch (PDOException $e) {
-        echo '<p class="error">❌ Error al insertar: ' . $e->getMessage() . '</p>';
+        $_SESSION['mensaje_error'] = "❌ Error al insertar: " . $e->getMessage();
+        header("Location: nuevoSocio.php");
+        exit;
     }
 }
 ?>
 
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agregar nuevo socio</title>
+    <link rel="stylesheet" href="css/estilos.css">
+</head>
+
+<body>
+
+<!-- =======================
+     MENSAJES DE SESIÓN
+======================== -->
+<?php if (isset($_SESSION['mensaje_exito'])): ?>
+    <div class="mensaje-exito">
+        <?= $_SESSION['mensaje_exito']; ?>
+    </div>
+    <?php unset($_SESSION['mensaje_exito']); ?>
+<?php endif; ?>
+
+<?php if (isset($_SESSION['mensaje_error'])): ?>
+    <div class="mensaje-error">
+        <?= $_SESSION['mensaje_error']; ?>
+    </div>
+    <?php unset($_SESSION['mensaje_error']); ?>
+<?php endif; ?>
+
+
+<header>
+    <h1 class="titulo-club">Nuevo Socio</h1>
+    <div id="nav"></div>
+</header>
+
+<div class="container">
 
 <h1 class="titulo-club">Agregar nuevo socio</h1>
 
@@ -99,12 +125,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <div class="bloque-form">
     <label for="edad">Edad</label>
-    <input id="number" type="number" name="edad" placeholder="Edad" min="1">
+    <input id="edad" type="number" name="edad" placeholder="Edad" min="1">
     <span id="errorEdad" class="error"></span>
 </div>
 
 <div class="bloque-form">
-    <label for="telefono">Telefono</label>
+    <label for="telefono">Teléfono</label>
     <input id="telefono" type="tel" name="telefono" placeholder="653 48 78 96">
     <span id="errorTelefono" class="error"></span>
 </div>
@@ -116,7 +142,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </div>
 
 <div class="bloque-form">
-    <label for="hora">Foto</label>
+    <label for="foto">Foto</label>
     <input id="foto" type="file" name="foto" accept="image/jpg, image/jpeg, image/png">
     <span id="errorFoto" class="error"></span>
 </div>

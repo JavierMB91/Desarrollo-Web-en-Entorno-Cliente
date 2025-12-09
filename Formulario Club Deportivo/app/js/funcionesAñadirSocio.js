@@ -19,7 +19,7 @@ formularioNuevoSocio.addEventListener('submit', (e) => {
     // Expresiones regulares
     const soloLetras = /^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/;
     const telefonoEspaña = /^\d{9}$/;
-    const soloLetrasNumerosGuiones = /^[A-Za-z0-9_]+$/;
+    const soloLetrasNumerosGuiones = /^[A-Za-zÁÉÍÓÚáéíóúÑñ0-9_]+$/;
 
     // =========================
     // VALIDACIONES

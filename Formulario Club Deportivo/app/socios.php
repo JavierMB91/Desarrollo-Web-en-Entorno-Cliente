@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once 'conexion.php';
 ?>
 <!DOCTYPE html>
@@ -12,6 +13,13 @@ require_once 'conexion.php';
 </head>
 
 <body class="socios-body">
+    <?php if (isset($_SESSION['mensaje'])): ?>
+    <div class="mensaje-exito">
+    <?= $_SESSION['mensaje']; ?>
+    </div>
+    <?php unset($_SESSION['mensaje']); ?>
+    <?php endif; ?>
+
 <header>
 <h1 class="titulo-club">Sección Socios</h1>
 <div id="nav"></div>
