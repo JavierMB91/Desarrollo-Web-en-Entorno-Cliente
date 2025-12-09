@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once 'conexion.php';
 
 // Cantidad de noticias por página
@@ -41,6 +42,20 @@ $noticias = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <title>Noticias</title>
 </head>
 <body class="index-body">
+<!-- =======================
+     MENSAJES DE SESIÓN
+======================= -->
+<?php if (isset($_SESSION['mensaje_exito'])): ?>
+    <div class="mensaje-exito">
+        <?= $_SESSION['mensaje_exito']; unset($_SESSION['mensaje_exito']); ?>
+    </div>
+<?php endif; ?>
+
+<?php if (isset($_SESSION['mensaje_error'])): ?>
+    <div class="mensaje-error">
+        <?= $_SESSION['mensaje_error']; unset($_SESSION['mensaje_error']); ?>
+    </div>
+<?php endif; ?>
 
 <div class="container">
 
@@ -106,7 +121,7 @@ $noticias = $stmt->fetchAll(PDO::FETCH_ASSOC);
 </main>
 
 <div class="contenedor-botones">
-    <a href="index.php" class="btn-atras"><span>Atrás</span></a>
+    <a href="index.php" class="btn-atras"><span>Volver</span></a>
 </div>
 
 <div id="footer"></div>

@@ -101,9 +101,9 @@ require_once 'conexion.php';
             ?>
         </div>
 
-        <!-- BOTÓN ATRÁS -->
+        <!-- BOTÓN Volver -->
         <div class="contenedor-botones">
-            <a href="index.php" class="btn-atras"><span>Atrás</span></a>
+            <a href="index.php" class="btn-atras"><span>Volver</span></a>
         </div>
 
     </div> <!-- CIERRE DEL CONTAINER -->

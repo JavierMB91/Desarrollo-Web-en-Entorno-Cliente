@@ -1,7 +1,6 @@
 <?php
+session_start();
 require_once 'conexion.php'; // tu conexión PDO
-
-$msg = '';
 
 // ==========================
 // 1. Procesar el formulario
@@ -14,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Validaciones simples
     if (!$cliente || !$servicio || !$dia || !$hora) {
-        $msg = "Todos los campos son obligatorios.";
+        $_SESSION['mensaje_error'] = "❌ Todos los campos son obligatorios.";
     } else {
         // Comprobar si ya existe una cita para ese socio en la misma fecha y hora
         $stmtCheck = $pdo->prepare("SELECT COUNT(*) FROM cita WHERE socio_id = ? AND fecha = ? AND hora = ?");
@@ -22,14 +21,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $existe = $stmtCheck->fetchColumn();
 
         if ($existe) {
-            $msg = "Este participante ya tiene una cita a esa hora.";
+            $_SESSION['mensaje_error'] = "❌ Este participante ya tiene una cita a esa hora.";
         } else {
             // Insertar la cita
             $stmt = $pdo->prepare("INSERT INTO cita (socio_id, servicio_id, fecha, hora) VALUES (?, ?, ?, ?)");
             $stmt->execute([$cliente, $servicio, $dia, $hora]);
-            $msg = "Cita agendada correctamente.";
+            $_SESSION['mensaje_exito'] = "✅ Cita agendada correctamente.";
         }
     }
+
+    // Redirigir a citas.php para mostrar el mensaje
+    header("Location: citas.php");
+    exit;
 }
 
 // ==========================
@@ -48,6 +51,7 @@ function h($s) {
     return htmlspecialchars($s, ENT_QUOTES, 'UTF-8');
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -103,7 +107,7 @@ function h($s) {
 
         <div class="contenedor-botones">
           <button type="submit"><span>Agendar</span></button>
-          <a href="citas.php" class="btn-atras"><span>Atrás</span></a>
+          <a href="citas.php" class="btn-atras"><span>Volver</span></a>
         </div>
 
       </form>

@@ -98,7 +98,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <div class="contenedor-botones">
     <button type="submit"><span>Crear Actividad</span></button>
-    <a href="servicios.php" class="btn-atras"><span>Atrás</span></a>
+    <a href="servicios.php" class="btn-atras"><span>Volver</span></a>
 </div>
 
 </form>

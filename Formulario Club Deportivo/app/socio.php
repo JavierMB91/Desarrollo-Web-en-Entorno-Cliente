@@ -118,19 +118,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <div class="bloque-form">
         <label for="nombre">Nombre completo</label>
-        <input type="text" name="nombre" id="nombre">
+        <input type="text" name="nombre" id="nombre" placeholder="Nombre Completo">
         <span id="nombreError" class="error"></span>
     </div>
 
     <div class="bloque-form">
         <label for="edad">Edad</label>
-        <input type="number" name="edad" id="edad">
+        <input type="number" name="edad" id="edad" placeholder="Edad">
         <span id="edadError" class="error"></span>
     </div>
 
     <div class="bloque-form">
         <label for="password">Contraseña</label>
-        <input type="password" name="password" id="password">
+        <input type="password" name="password" id="password" placeholder="Contraseña">
         <span id="passwordError" class="error"></span>
     </div>
 
@@ -148,7 +148,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <div class="contenedor-botones">
         <button type="submit"><span>Registrarse</span></button>
-        <a href="index.php" class="btn-atras"><span>Atrás</span></a>
+        <a href="index.php" class="btn-atras"><span>Volver</span></a>
     </div>
 
 </form>

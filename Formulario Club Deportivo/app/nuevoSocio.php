@@ -149,7 +149,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <div class="contenedor-botones">
     <button type="submit"><span>Agregar socio</span></button>
-    <a href="socios.php" class="btn-atras"><span>Atrás</span></a>
+    <a href="socios.php" class="btn-atras"><span>Volver</span></a>
 </div>
 
 </form>

@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once 'conexion.php';
 
 // ---------- Parámetros ----------
@@ -97,6 +98,19 @@ function h($s) { return htmlspecialchars($s, ENT_QUOTES, 'UTF-8'); }
 
 <body class="socios-body">
 
+<?php if (isset($_SESSION['mensaje_exito'])): ?>
+    <div class="mensaje-exito">
+        <?= $_SESSION['mensaje_exito']; unset($_SESSION['mensaje_exito']); ?>
+    </div>
+<?php endif; ?>
+
+<?php if (isset($_SESSION['mensaje_error'])): ?>
+    <div class="mensaje-error">
+        <?= $_SESSION['mensaje_error']; unset($_SESSION['mensaje_error']); ?>
+    </div>
+<?php endif; ?>
+
+
 <header>
     <h1 class="titulo-club">Sección Citas</h1>
     <div id="nav"></div>
@@ -124,7 +138,7 @@ function h($s) { return htmlspecialchars($s, ENT_QUOTES, 'UTF-8'); }
             <div class="contenedor-botones">
                 <button type="submit"><span>Buscar</span></button>
                 <a href="cita.php" class="btn-atras"><span>Nueva cita</span></a>
-                <a href="citas.php" class="btn-atras"><span>Atrás</span></a>
+                <a href="citas.php" class="btn-atras"><span>Volver</span></a>
             </div>
         </form>
     </main>
@@ -228,7 +242,7 @@ function h($s) { return htmlspecialchars($s, ENT_QUOTES, 'UTF-8'); }
     </div>
 
     <div class="contenedor-botones">
-        <a href="index.php" class="btn-atras"><span>Atrás</span></a>
+        <a href="index.php" class="btn-atras"><span>Volver</span></a>
     </div>
 
 </div>

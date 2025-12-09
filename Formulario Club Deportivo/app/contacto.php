@@ -34,7 +34,7 @@
 
         <div class="contenedor-botones">
             <button type="submit"><span>Enviar</span></button>
-            <a href="index.php" class="btn-atras"><span>Atrás</span></a>
+            <a href="index.php" class="btn-atras"><span>Volver</span></a>
         </div>
     </form>
     </main>

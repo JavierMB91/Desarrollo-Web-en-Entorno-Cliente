@@ -91,7 +91,7 @@ $usuarios = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     <div class="contenedor-botones">
         <button type="submit"><span>Enviar</span></button>
-        <a href="comentario.php" class="btn-atras"><span>Ver Comentarios</span></a>
+        <a href="comentario.php" class="btn-atras"><span>Volver</span></a>
     </div>
 
 </form>

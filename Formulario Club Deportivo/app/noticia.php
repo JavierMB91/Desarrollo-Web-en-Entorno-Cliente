@@ -1,57 +1,67 @@
 <?php
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
+session_start();
+require_once 'conexion.php';
 
-    require_once 'conexion.php';
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     $titulo = $_POST["titulo"] ?? '';
     $contenido = $_POST["contenido"] ?? '';
     $fecha = $_POST["fecha"] ?? date('Y-m-d');
 
     if (!$titulo || !$contenido) {
-        echo '<p class="error">Título y contenido son obligatorios.</p>';
+        $_SESSION['mensaje_error'] = "❌ Título y contenido son obligatorios.";
+        header("Location: noticias.php");
         exit;
     }
 
-    // 1️⃣ Insertar noticia sin imagen
-    $sql = "INSERT INTO noticias (titulo, contenido, fecha_publicacion)
-            VALUES (?, ?, ?)";
+    try {
+        // 1️⃣ Insertar noticia sin imagen
+        $sql = "INSERT INTO noticias (titulo, contenido, fecha_publicacion)
+                VALUES (?, ?, ?)";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([$titulo, $contenido, $fecha]);
 
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute([$titulo, $contenido, $fecha]);
+        // 2️⃣ Obtener ID generado
+        $idNoticia = $pdo->lastInsertId();
+        $nombreImagen = null;
 
-    // 2️⃣ Obtener ID generado
-    $idNoticia = $pdo->lastInsertId();
-    $nombreImagen = null;
+        // 3️⃣ Procesar imagen si existe
+        if (isset($_FILES["imagen"]) && $_FILES["imagen"]["error"] === UPLOAD_ERR_OK) {
+            $ext = strtolower(pathinfo($_FILES["imagen"]["name"], PATHINFO_EXTENSION));
+            $extPermitidas = ['jpg','jpeg','png','webp'];
+            if (!in_array($ext, $extPermitidas)) {
+                $_SESSION['mensaje_error'] = "❌ Formato de imagen no permitido.";
+                header("Location: noticias.php");
+                exit;
+            }
 
-    // 3️⃣ Procesar imagen si existe
-    if (isset($_FILES["imagen"]) && $_FILES["imagen"]["error"] === UPLOAD_ERR_OK) {
-        $ext = strtolower(pathinfo($_FILES["imagen"]["name"], PATHINFO_EXTENSION));
+            $nombreImagen = $idNoticia . '.' . $ext;
+            $rutaDestino = __DIR__ . '/uploads/noticias/' . $nombreImagen;
 
-        // Validar extensión
-        $extPermitidas = ['jpg','jpeg','png','webp'];
-        if (!in_array($ext, $extPermitidas)) {
-            echo '<p class="error">Formato de imagen no permitido.</p>';
-            exit;
+            if (!move_uploaded_file($_FILES['imagen']['tmp_name'], $rutaDestino)) {
+                $_SESSION['mensaje_error'] = "❌ Error al subir la imagen.";
+                header("Location: noticias.php");
+                exit;
+            }
+
+            // 4️⃣ Actualizar noticia con la imagen
+            $sqlUpdate = "UPDATE noticias SET imagen = ? WHERE id = ?";
+            $stmtUpdate = $pdo->prepare($sqlUpdate);
+            $stmtUpdate->execute([$nombreImagen, $idNoticia]);
         }
 
-        $nombreImagen = $idNoticia . '.' . $ext;
-        $rutaDestino = __DIR__ . '/uploads/noticias/' . $nombreImagen;
+        $_SESSION['mensaje_exito'] = "✅ Noticia publicada correctamente.";
+        header("Location: noticias.php");
+        exit;
 
-        if (!move_uploaded_file($_FILES['imagen']['tmp_name'], $rutaDestino)) {
-            echo '<p class="error">Error al subir la imagen.</p>';
-            exit;
-        }
-
-        // 4️⃣ Actualizar noticia con la imagen
-        $sqlUpdate = "UPDATE noticias SET imagen = ? WHERE id = ?";
-        $stmtUpdate = $pdo->prepare($sqlUpdate);
-        $stmtUpdate->execute([$nombreImagen, $idNoticia]);
+    } catch (PDOException $e) {
+        $_SESSION['mensaje_error'] = "❌ Error al registrar la noticia.";
+        header("Location: noticias.php");
+        exit;
     }
-
-    header("Location: noticias.php");
-    exit;
 }
 ?>
+
 
 
 <!DOCTYPE html>
@@ -97,7 +107,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     <div class="contenedor-botones">
         <button type="submit"><span>Publicar</span></button>
-        <a href="noticias.php" class="btn-atras"><span>Atrás</span></a>
+        <a href="noticias.php" class="btn-atras"><span>Volver</span></a>
     </div>
 </form>
 </main>

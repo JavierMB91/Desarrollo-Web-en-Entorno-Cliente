@@ -74,7 +74,7 @@ $testimonios = $stmt->fetchAll(PDO::FETCH_ASSOC);
 </div>
 
 <div class="contenedor-botones">
-    <a href="index.php" class="btn-atras"><span>Atrás</span></a>
+    <a href="index.php" class="btn-atras"><span>Volver</span></a>
 </div>
 
 </main>
