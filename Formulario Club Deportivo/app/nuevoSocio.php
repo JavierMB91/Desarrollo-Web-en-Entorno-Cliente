@@ -21,45 +21,43 @@ require_once 'conexion.php';
 <div class="container">
 
 <?php
+require_once 'conexion.php';
+
 // =====================
 // PROCESAR FORMULARIO
 // =====================
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-    // Recibir datos
-    $nombre   = $_POST['nombre']   ?? '';
-    $edad     = $_POST['edad']     ?? '';
+    $nombre   = $_POST['nombre'] ?? '';
+    $edad     = $_POST['edad'] ?? '';
     $telefono = $_POST['telefono'] ?? '';
-    $password    = $_POST['password']    ?? '';
+    $password = $_POST['password'] ?? '';
 
-    // Tratar edad: si viene vacía → NULL
     $edad = ($edad === '') ? null : $edad;
 
-    // Manejo de imagen
-    $fotoNombre = null;
+    // ==========================
+    // Hashear contraseña
+    // ==========================
+    $passwordHash = password_hash($password, PASSWORD_DEFAULT);
 
+    // ==========================
+    // Manejo de imagen
+    // ==========================
+    $fotoNombre = null;
     if (isset($_FILES['foto']) && $_FILES['foto']['error'] === UPLOAD_ERR_OK) {
 
         $ext = strtolower(pathinfo($_FILES['foto']['name'], PATHINFO_EXTENSION));
         $fotoTmp = $_FILES['foto']['tmp_name'];
 
-        // Extensiones válidas
-        $extValidas = ['jpg', 'jpeg'];
-        if (!in_array($ext, $extValidas)) {
+        if (!in_array($ext, ['jpg', 'jpeg'])) {
             echo '<p class="error">Formato de imagen no permitido.</p>';
             exit;
         }
 
-        // Limpiar teléfono
         $telefonoLimpio = preg_replace('/\D/', '', $telefono);
-
-        // Nombre de archivo = teléfono
         $fotoNombre = $telefonoLimpio . "." . $ext;
-
-        // Ruta destino
         $rutaDestino = __DIR__ . "/uploads/usuarios/" . $fotoNombre;
 
-        // Subir imagen
         if (!move_uploaded_file($fotoTmp, $rutaDestino)) {
             echo '<p class="error">❌ Error al subir la imagen.</p>';
             exit;
@@ -67,18 +65,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     try {
-        // INSERT de socio
         $sql = "INSERT INTO usuarios (nombre, edad, telefono, foto, password)
                 VALUES (:nombre, :edad, :telefono, :foto, :password)";
 
         $stmt = $pdo->prepare($sql);
-
         $stmt->execute([
             ':nombre'   => $nombre,
             ':edad'     => $edad,
             ':telefono' => $telefono,
             ':foto'     => $fotoNombre,
-            ':password'    => $password
+            ':password' => $passwordHash // <--- Guardar hash, no texto plano
         ]);
 
         echo '<p class="success">✅ Socio agregado correctamente</p>';
@@ -88,6 +84,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 ?>
+
 
 <h1 class="titulo-club">Agregar nuevo socio</h1>
 

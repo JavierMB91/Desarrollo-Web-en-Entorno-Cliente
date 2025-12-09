@@ -34,21 +34,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $telefono = $_POST['telefono'];
     $telefonoLimpio = preg_replace('/\D/', '', $telefono);
 
-    // Foto actual (nombre del archivo)
+    // Foto actual
     $fotoActual = $socio['foto'];
+    $fotoFinal = $fotoActual;
 
-    // Si el usuario sube una nueva foto
+    // ==========================
+    // Manejo de foto
+    // ==========================
     if (!empty($_FILES['foto']['name']) && $_FILES['foto']['error'] === UPLOAD_ERR_OK) {
-
         $ext = strtolower(pathinfo($_FILES['foto']['name'], PATHINFO_EXTENSION));
-
-        // Validación de extensión
         if (!in_array($ext, ['jpg', 'jpeg'])) {
             echo '<p class="error">Formato de imagen no permitido.</p>';
             exit;
         }
 
-        // Nombre final: teléfono.ext
         $nuevoNombreFoto = $telefonoLimpio . "." . $ext;
         $rutaDestino = __DIR__ . "/uploads/usuarios/" . $nuevoNombreFoto;
 
@@ -57,7 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             unlink(__DIR__ . "/uploads/usuarios/" . $fotoActual);
         }
 
-        // Subir nueva imagen
+        // Subir nueva foto
         if (!move_uploaded_file($_FILES['foto']['tmp_name'], $rutaDestino)) {
             echo '<p class="error">Error subiendo la imagen.</p>';
             exit;
@@ -65,45 +64,50 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $fotoFinal = $nuevoNombreFoto;
 
-    } else {
-    // Si no sube nueva foto → pero cambia el teléfono
-    $fotoFinal = $fotoActual;
+    } elseif ($fotoActual) {
+        // Si no sube nueva foto pero cambia el teléfono → renombrar archivo
+        $extActual = strtolower(pathinfo($fotoActual, PATHINFO_EXTENSION));
+        $nuevoNombreFoto = $telefonoLimpio . "." . $extActual;
 
-    $extActual = strtolower(pathinfo($fotoActual, PATHINFO_EXTENSION));
+        if ($fotoActual !== $nuevoNombreFoto) {
+            $rutaAnterior = __DIR__ . "/uploads/usuarios/" . $fotoActual;
+            $rutaNueva = __DIR__ . "/uploads/usuarios/" . $nuevoNombreFoto;
 
-    // Nombre esperado según el nuevo teléfono
-    $nuevoNombreFoto = $telefonoLimpio . "." . $extActual;
-
-    // Solo renombramos si el nombre es diferente
-    if ($fotoActual && $fotoActual !== $nuevoNombreFoto) {
-        $rutaAnterior = __DIR__ . "/uploads/usuarios/" . $fotoActual;
-        $rutaNueva    = __DIR__ . "/uploads/usuarios/" . $nuevoNombreFoto;
-
-        // Renombrar archivo si existe
-        if (file_exists($rutaAnterior)) {
-            rename($rutaAnterior, $rutaNueva);
-            $fotoFinal = $nuevoNombreFoto;
+            if (file_exists($rutaAnterior)) {
+                rename($rutaAnterior, $rutaNueva);
+                $fotoFinal = $nuevoNombreFoto;
+            }
         }
     }
-}
 
-
-    // Update en la base de datos
-    $sqlUpdate = "UPDATE usuarios SET 
-                    nombre = :nombre,
-                    edad = :edad,
-                    telefono = :telefono,
-                    foto = :foto
-                  WHERE id = :id";
-
-    $stmtUpdate = $pdo->prepare($sqlUpdate);
-    $stmtUpdate->execute([
+    // ==========================
+    // Manejo de contraseña
+    // ==========================
+    $password = $_POST['password'] ?? '';
+    $params = [
         'nombre' => $nombre,
         'edad' => $edad,
         'telefono' => $telefono,
         'foto' => $fotoFinal,
         'id' => $id
-    ]);
+    ];
+
+    $sqlUpdate = "UPDATE usuarios SET 
+                    nombre = :nombre,
+                    edad = :edad,
+                    telefono = :telefono,
+                    foto = :foto";
+
+    if (!empty($password)) {
+        $passwordHash = password_hash($password, PASSWORD_DEFAULT);
+        $sqlUpdate .= ", password = :password";
+        $params['password'] = $passwordHash;
+    }
+
+    $sqlUpdate .= " WHERE id = :id";
+
+    $stmtUpdate = $pdo->prepare($sqlUpdate);
+    $stmtUpdate->execute($params);
 
     header("Location: socios.php?edit_ok=1");
     exit;
@@ -121,56 +125,54 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body class="socios-body">
 
 <h1 class="titulo-club">Editar socio</h1>
-
 <div id="nav"></div>
 
 <main class="editar-formulario">
 
 <form method="post" enctype="multipart/form-data">
 
-    <div class="bloque-form">
     <input type="hidden" name="foto_actual" value="<?= htmlspecialchars($socio['foto']) ?>">
+
+    <div class="bloque-form">
+        <label>Nombre:</label>
+        <input type="text" name="nombre" value="<?= htmlspecialchars($socio['nombre']) ?>">
+        <span class="error" id="nombreError"></span>
     </div>
 
-    Nombre:<br>
-<div class="bloque-form">
-    <input type="text" id="nombre" name="nombre" value="<?= htmlspecialchars($socio['nombre']) ?>">
-    <span class="error" id="nombreError"></span>
-    <br><br>
-</div>
+    <div class="bloque-form">
+        <label>Edad:</label>
+        <input type="number" name="edad" value="<?= htmlspecialchars($socio['edad']) ?>">
+        <span class="error" id="edadError"></span>
+    </div>
 
-Edad:<br>
-<div class="bloque-form">
-    <input type="number" id="edad" name="edad" value="<?= htmlspecialchars($socio['edad']) ?>">
-    <span class="error" id="edadError"></span>
-    <br><br>
-</div>
+    <div class="bloque-form">
+        <label>Teléfono:</label>
+        <input type="text" name="telefono" value="<?= htmlspecialchars($socio['telefono']) ?>">
+        <span class="error" id="telefonoError"></span>
+    </div>
 
-Teléfono:<br>
-<div class="bloque-form">
-    <input type="text" id="telefono" name="telefono" value="<?= htmlspecialchars($socio['telefono']) ?>">
-    <span class="error" id="telefonoError"></span>
-    <br><br>
-</div>
+    <div class="bloque-form">
+        <label>Contraseña (dejar vacío para no cambiar):</label>
+        <input type="password" name="password" placeholder="Nueva contraseña">
+        <span class="error" id="passwordError"></span>
+    </div>
 
-Foto actual:<br>
-<div class="bloque-form">
-    <?php
-        $fotoPath = $socio['foto'] ? 'uploads/usuarios/' . $socio['foto'] : 'uploads/usuarios/default.jpg';
-    ?>
-    <img src="<?= htmlspecialchars($fotoPath) ?>?v=<?= file_exists($fotoPath) ? filemtime($fotoPath) : time() ?>" width="80" alt="Foto socio"><br><br>
-</div>
+    <div class="bloque-form">
+        <label>Foto actual:</label><br>
+        <?php $fotoPath = $socio['foto'] ? 'uploads/usuarios/' . $socio['foto'] : 'uploads/usuarios/default.jpg'; ?>
+        <img src="<?= htmlspecialchars($fotoPath) ?>?v=<?= file_exists($fotoPath) ? filemtime($fotoPath) : time() ?>" width="80" alt="Foto socio">
+    </div>
 
-Nueva foto (obligatoria JPG):<br>
-<div class="bloque-form">
-    <input type="file" id="foto" name="foto" accept=".jpg,.jpeg">
-    <span class="error" id="fotoError"></span>
-    <br><br>
-</div>
+    <div class="bloque-form">
+        <label>Nueva foto (JPG):</label>
+        <input type="file" name="foto" accept=".jpg,.jpeg">
+        <span class="error" id="fotoError"></span>
+    </div>
 
-    <button type="submit">Guardar cambios</button>
-    <a href="socios.php" class="btn-atras">Cancelar</a>
-
+    <div class="contenedor-botones">
+        <button type="submit">Guardar cambios</button>
+        <a href="socios.php" class="btn-atras">Cancelar</a>
+    </div>
 </form>
 
 </main>

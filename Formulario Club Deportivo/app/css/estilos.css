@@ -188,6 +188,7 @@ main form textarea:focus {
 .bloque-form img {
     display: block;
     margin-top: 1rem;
+    margin-bottom: 1.2rem;
     width: 40%; /* se adapta al ancho del contenedor */
     max-width: 500px; /* opcional, para no exceder */
     border-radius: 10px;
