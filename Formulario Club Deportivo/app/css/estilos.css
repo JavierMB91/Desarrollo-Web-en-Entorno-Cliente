@@ -46,6 +46,7 @@ body {
 .container main, main {
     flex: 1;
     max-width: 1200px;
+    width: 100%;
     margin: 2rem auto;
     padding: 0 1rem;
 }
@@ -109,6 +110,17 @@ section {
     margin-bottom: 2rem;
 }
 
+section.testimonio {
+    margin: 0 auto 2rem auto;
+    background: linear-gradient(135deg, var(--papel-antiguo), #E6D7C3);
+    padding: 2rem;
+    width: 80%;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px var(--sombra-ebano);
+    margin-bottom: 2rem;
+}
+
+
 section p {
     font-size: 1.2rem;
     margin-bottom: 1rem;
@@ -134,10 +146,6 @@ form, main form {
     padding: 2.5rem;
     border-radius: 10px;
     box-shadow: 0 5px 15px var(--sombra-ebano);
-}
-
-.bloque-form {
-    margin-bottom: 1.5rem;
 }
 
 .bloque-form label, main form label {
@@ -176,6 +184,17 @@ main form textarea:focus {
     border-color: var(--dorado-viejo);
     box-shadow: 0 0 5px var(--dorado-viejo);
 }
+
+.bloque-form img {
+    display: block;
+    margin-top: 1rem;
+    width: 40%; /* se adapta al ancho del contenedor */
+    max-width: 500px; /* opcional, para no exceder */
+    border-radius: 10px;
+    box-shadow: 0 5px 20px var(--sombra-ebano);
+}
+
+
 
 /* ===== BOTONES ===== */
 button[type="submit"],
@@ -255,6 +274,7 @@ main form .btn-atras:hover {
     height: 200px;
     object-fit: cover;
     border-radius: 6px;
+    box-shadow: 0 5px 20px var(--sombra-ebano);
 }
 
 .noticia-card h3 {
@@ -323,6 +343,8 @@ main form .btn-atras:hover {
     box-sizing: border-box;
 }
 
+
+
 /* ===== SECCIÓN CONTACTO ===== */
 .contacto {
     text-align: center;
@@ -345,57 +367,93 @@ main form .btn-atras:hover {
 .socios-lista {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center; /* Centra las filas */
     gap: 20px;
-    justify-content: center;
     margin: 2rem 0;
 }
 
 /* Tarjetas */
 .socio-card {
-    flex: 0 1 calc(20% - 20px); /* Ahora ocupan menos ancho, 5 por fila aprox. si quieres */
+    flex: 1 1 200px; /* crece, se encoge, base 200px */
+    min-width: 180px; /* mínimo ancho */
+    max-width: 250px; /* máximo ancho */
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     background: linear-gradient(135deg, var(--papel-antiguo), #E6D7C3);
-    padding: 1rem; /* menos padding */
+    padding: 1rem;
     border-radius: 8px;
     box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    min-height: 350px; /* altura menor */
-    max-width: 250px;  /* límite ancho menor */
+    min-height: 350px;
 }
 
+
+
+/* Card del socio */
+.socio-card {
+    background-color: #fff; /* Fondo claro */
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.15); /* sombra más suave */
+    padding: 1rem;
+    max-width: 350px;
+    text-align: center;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.socio-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+}
 
 /* Imagen */
 .socio-card img {
-    width: 100%;
-    height: auto;
-    max-height: 180px;
-    object-fit: contain;
-    border-radius: 6px;
-    flex-shrink: 0;
-    margin-bottom: 0.8rem;
-    background: #f0f0f0;
+    display: block;
+    margin: 0 auto 1rem; /* centrada y margen abajo */
+    width: 150px; /* tamaño fijo para uniformidad */
+    height: 150px; /* altura fija */
+    object-fit: cover; /* recorta la imagen si es necesario */
+    border-radius: 50%; /* foto redonda */
+    box-shadow: 0 5px 20px rgba(0,0,0,0.2);
 }
 
-/* Título y texto */
+/* Nombre */
 .socio-card h3 {
-    margin: 0.5rem 0;
+    margin: 0.5rem 0 0.3rem 0;
     color: var(--ebano-oscuro);
-    font-size: 1.2rem;
-    text-align: center;
+    font-size: 1.3rem;
+    font-weight: 600;
 }
 
+/* Datos (edad, teléfono, etc.) */
 .socio-card p {
     font-size: 1rem;
     color: var(--madera-ebano);
-    flex-grow: 1;
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
+    margin: 0.2rem 0;
     word-break: break-word;
 }
+
+/* Botones dentro de la card */
+.socio-card .contenedor-botones {
+    margin-top: 0.8rem;
+}
+
+.socio-card .contenedor-botones a {
+    display: inline-block;
+    padding: 0.4rem 0.8rem;
+    margin: 0 0.2rem;
+    background-color: var(--ebano-oscuro);
+    color: #fff;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: background-color 0.2s;
+}
+
+.socio-card .contenedor-botones a:hover {
+    background-color: var(--ebano-claro);
+}
+
 
 /* Botón */
 .socio-card .btn-atras {
@@ -422,7 +480,14 @@ main form .btn-atras:hover {
     box-shadow: 0 5px 15px rgba(0,0,0,0.1);
     text-align: center;
     flex: 0 0 calc(25% - 20px);
+    transition: transform 0.2s ease, box-shadow 0.2s ease; /* transición suave */
 }
+
+.servicio-card:hover {
+    transform: translateY(-5px); /* se levanta */
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2); /* sombra más intensa */
+}
+
 
 /* ===== TESTIMONIOS ===== */
 .testimonios-lista {
@@ -671,7 +736,7 @@ form[action="servicios.php"] .contenedor-botones {
     font-family: 'Crimson Text', serif;
     color: var(--madera-ebano);
     max-width: 300px;
-    min-height: 200px;
+    min-height: 180px;
 }
 
 .cita-card a {

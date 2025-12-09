@@ -30,25 +30,46 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nombre   = $_POST['nombre']   ?? '';
     $edad     = $_POST['edad']     ?? '';
     $telefono = $_POST['telefono'] ?? '';
-    $clave    = $_POST['clave']    ?? '';
+    $password    = $_POST['password']    ?? '';
 
-    // Tratar edad: si viene vacía → NULL (evita error SQL)
+    // Tratar edad: si viene vacía → NULL
     $edad = ($edad === '') ? null : $edad;
 
     // Manejo de imagen
-    $fotoNombre = $_FILES['foto']['name'] ?? '';
-    $fotoTmp    = $_FILES['foto']['tmp_name'] ?? '';
-    $rutaGuardada = 'uploads/usuarios/';
+    $fotoNombre = null;
 
-    if (!empty($fotoNombre)) {
-        $rutaGuardada = "uploads/usuarios/" . time() . "_" . $fotoNombre;
-        move_uploaded_file($fotoTmp, $rutaGuardada);
+    if (isset($_FILES['foto']) && $_FILES['foto']['error'] === UPLOAD_ERR_OK) {
+
+        $ext = strtolower(pathinfo($_FILES['foto']['name'], PATHINFO_EXTENSION));
+        $fotoTmp = $_FILES['foto']['tmp_name'];
+
+        // Extensiones válidas
+        $extValidas = ['jpg', 'jpeg'];
+        if (!in_array($ext, $extValidas)) {
+            echo '<p class="error">Formato de imagen no permitido.</p>';
+            exit;
+        }
+
+        // Limpiar teléfono
+        $telefonoLimpio = preg_replace('/\D/', '', $telefono);
+
+        // Nombre de archivo = teléfono
+        $fotoNombre = $telefonoLimpio . "." . $ext;
+
+        // Ruta destino
+        $rutaDestino = __DIR__ . "/uploads/usuarios/" . $fotoNombre;
+
+        // Subir imagen
+        if (!move_uploaded_file($fotoTmp, $rutaDestino)) {
+            echo '<p class="error">❌ Error al subir la imagen.</p>';
+            exit;
+        }
     }
 
     try {
         // INSERT de socio
-        $sql = "INSERT INTO usuarios (nombre, edad, telefono, foto, clave)
-                VALUES (:nombre, :edad, :telefono, :foto, :clave)";
+        $sql = "INSERT INTO usuarios (nombre, edad, telefono, foto, password)
+                VALUES (:nombre, :edad, :telefono, :foto, :password)";
 
         $stmt = $pdo->prepare($sql);
 
@@ -56,8 +77,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             ':nombre'   => $nombre,
             ':edad'     => $edad,
             ':telefono' => $telefono,
-            ':foto'     => $rutaGuardada,
-            ':clave'    => $clave
+            ':foto'     => $fotoNombre,
+            ':password'    => $password
         ]);
 
         echo '<p class="success">✅ Socio agregado correctamente</p>';
@@ -74,35 +95,39 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <form action="" method="post" enctype="multipart/form-data" id="formularioNuevoSocio">
 
 <div class="bloque-form">
-    <input type="text" name="nombre" placeholder="Nombre">
+    <label for="nombre">Nombre Completo</label>
+    <input id="nombre" type="text" name="nombre" placeholder="Nombre Completo">
     <span id="errorNombre" class="error"></span>
 </div>
 
 <div class="bloque-form">
-    <input type="number" name="edad" placeholder="Edad" min="1">
+    <label for="edad">Edad</label>
+    <input id="number" type="number" name="edad" placeholder="Edad" min="1">
     <span id="errorEdad" class="error"></span>
 </div>
 
 <div class="bloque-form">
-    <input type="text" name="telefono" placeholder="612 - 345 - 678">
+    <label for="telefono">Telefono</label>
+    <input id="telefono" type="tel" name="telefono" placeholder="653 48 78 96">
     <span id="errorTelefono" class="error"></span>
 </div>
 
 <div class="bloque-form">
-    <input type="text" name="clave" placeholder="Clave del socio">
-    <span id="errorClave" class="error"></span>
+    <label for="password">Contraseña</label>
+    <input id="password" type="password" name="password" placeholder="Contraseña">
+    <span id="passwordError" class="error"></span>
 </div>
 
 <div class="bloque-form">
-    <input type="file" name="foto" accept="image/jpg, image/jpeg, image/png">
+    <label for="hora">Foto</label>
+    <input id="foto" type="file" name="foto" accept="image/jpg, image/jpeg, image/png">
     <span id="errorFoto" class="error"></span>
 </div>
 
-
-    <div class="contenedor-botones">
-        <button type="submit"><span>Agregar socio</span></button>
-        <a href="socios.php" class="btn-atras"><span>Atrás</span></a>
-    </div>
+<div class="contenedor-botones">
+    <button type="submit"><span>Agregar socio</span></button>
+    <a href="socios.php" class="btn-atras"><span>Atrás</span></a>
+</div>
 
 </form>
 </main>

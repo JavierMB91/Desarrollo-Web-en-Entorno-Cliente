@@ -9,7 +9,7 @@ const soloJPG = /\.(jpg|jpeg)$/i;
 formularioSocio.addEventListener("submit", (e) => {
     e.preventDefault();
 
-    let hasError = false;
+    let hayError = false;
 
     // Limpiar errores previos
     document.querySelectorAll(".error").forEach(span => span.innerText = "");
@@ -26,7 +26,7 @@ formularioSocio.addEventListener("submit", (e) => {
     if (!soloLetras.test(nombre)) {
         document.getElementById("nombreError").innerText = 
             "Introduce un nombre válido (solo letras, 3-50 caracteres).";
-        hasError = true;
+        hayError = true;
     }
 
     // ====================
@@ -35,7 +35,7 @@ formularioSocio.addEventListener("submit", (e) => {
     if (!soloEdad.test(edad) || Number(edad) < 1 || Number(edad) > 100) {
         document.getElementById("edadError").innerText =
             "Introduce una edad válida entre 1 y 100.";
-        hasError = true;
+        hayError = true;
     }
 
     // ====================
@@ -44,7 +44,7 @@ formularioSocio.addEventListener("submit", (e) => {
     if (!soloTelefono.test(telefono)) {
         document.getElementById("telefonoError").innerText =
             "Introduce un teléfono válido de 9 dígitos.";
-        hasError = true;
+        hayError = true;
     }
 
     // ====================
@@ -58,21 +58,21 @@ formularioSocio.addEventListener("submit", (e) => {
         if (!soloJPG.test(archivo.name)) {
             document.getElementById("fotoError").innerText =
                 "La foto debe estar en formato JPG o JPEG.";
-            hasError = true;
+            hayError = true;
         }
 
         // Validar tamaño máximo (5 MB)
         if (archivo.size > 5 * 1024 * 1024) {
             document.getElementById("fotoError").innerText =
                 "La imagen es demasiado grande (máx. 5MB).";
-            hasError = true;
+            hayError = true;
         }
     }
 
     // ====================
     // ENVIAR FORMULARIO
     // ====================
-    if (!hasError) {
+    if (!hayError) {
         formularioSocio.submit();
     }
 });

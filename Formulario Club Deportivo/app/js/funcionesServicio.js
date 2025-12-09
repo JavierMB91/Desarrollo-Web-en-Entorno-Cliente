@@ -9,7 +9,7 @@ const contador = document.getElementById('contador');
 formularioServicio.addEventListener('submit', (e) => {
     e.preventDefault();
 
-    let hasError = false; // <-- CONTROL DE ERRORES
+    let hayError = false; // <-- CONTROL DE ERRORES
 
     // Limpiar errores previos
     let spanErrors = document.querySelectorAll('.error');
@@ -33,7 +33,7 @@ formularioServicio.addEventListener('submit', (e) => {
     // ============================
     if (nombre.trim().length < 3 || nombre.trim().length > 50 || !soloLetras.test(nombre.trim())) {
         document.getElementById('nombreError').innerText = "Nombre no válido";
-        hasError = true;
+        hayError = true;
     }
 
     // ============================
@@ -41,7 +41,7 @@ formularioServicio.addEventListener('submit', (e) => {
     // ============================
     if (descripcion.trim().length < 3) {
         document.getElementById('descripcionError').innerText = "Escribe un contenido válido.";
-        hasError = true;
+        hayError = true;
     }
 
     // ============================
@@ -49,7 +49,7 @@ formularioServicio.addEventListener('submit', (e) => {
     // ============================
     if (!soloMinutos.test(duracion.trim()) || Number(duracion.trim()) < 15) {
         document.getElementById('duracionError').innerText = "Duración mínima 15 min";
-        hasError = true;
+        hayError = true;
     }
 
     // ============================
@@ -57,7 +57,7 @@ formularioServicio.addEventListener('submit', (e) => {
     // ============================
     if (!soloNumeros.test(precio.trim()) || Number(precio.trim()) <= 0) {
         document.getElementById('precioError').innerText = "Introduce un precio válido";
-        hasError = true;
+        hayError = true;
     }
 
     // ============================
@@ -65,13 +65,13 @@ formularioServicio.addEventListener('submit', (e) => {
     // ============================
     if (!formatoHora.test(hora.trim())) {
         document.getElementById('horaError').innerText = "Formato hora inválido (HH:MM)";
-        hasError = true;
+        hayError = true;
     }
 
     // ============================
     // ENVIAR FORMULARIO
     // ============================
-    if (!hasError) {
+    if (!hayError) {
         formularioServicio.submit();
     }
 });

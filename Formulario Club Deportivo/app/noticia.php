@@ -3,25 +3,56 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     require_once 'conexion.php';
 
-    $titulo = $_POST["titulo"];
-    $contenido = $_POST["contenido"];
-    $fecha = $_POST["fecha"];
+    $titulo = $_POST["titulo"] ?? '';
+    $contenido = $_POST["contenido"] ?? '';
+    $fecha = $_POST["fecha"] ?? date('Y-m-d');
 
-    /* Procesar imagen */
-    $nombreImagen = time() . "_" . $_FILES["imagen"]["name"];
-    move_uploaded_file($_FILES["imagen"]["tmp_name"], "uploads/noticias/" . $nombreImagen);
+    if (!$titulo || !$contenido) {
+        echo '<p class="error">Título y contenido son obligatorios.</p>';
+        exit;
+    }
 
-    /* Insertar noticia */
-    $sql = "INSERT INTO noticias (titulo, contenido, imagen, fecha_publicacion)
-            VALUES (?, ?, ?, ?)";
+    // 1️⃣ Insertar noticia sin imagen
+    $sql = "INSERT INTO noticias (titulo, contenido, fecha_publicacion)
+            VALUES (?, ?, ?)";
 
     $stmt = $pdo->prepare($sql);
-    $stmt->execute([$titulo, $contenido, $nombreImagen, $fecha]);
+    $stmt->execute([$titulo, $contenido, $fecha]);
+
+    // 2️⃣ Obtener ID generado
+    $idNoticia = $pdo->lastInsertId();
+    $nombreImagen = null;
+
+    // 3️⃣ Procesar imagen si existe
+    if (isset($_FILES["imagen"]) && $_FILES["imagen"]["error"] === UPLOAD_ERR_OK) {
+        $ext = strtolower(pathinfo($_FILES["imagen"]["name"], PATHINFO_EXTENSION));
+
+        // Validar extensión
+        $extPermitidas = ['jpg','jpeg','png','webp'];
+        if (!in_array($ext, $extPermitidas)) {
+            echo '<p class="error">Formato de imagen no permitido.</p>';
+            exit;
+        }
+
+        $nombreImagen = $idNoticia . '.' . $ext;
+        $rutaDestino = __DIR__ . '/uploads/noticias/' . $nombreImagen;
+
+        if (!move_uploaded_file($_FILES['imagen']['tmp_name'], $rutaDestino)) {
+            echo '<p class="error">Error al subir la imagen.</p>';
+            exit;
+        }
+
+        // 4️⃣ Actualizar noticia con la imagen
+        $sqlUpdate = "UPDATE noticias SET imagen = ? WHERE id = ?";
+        $stmtUpdate = $pdo->prepare($sqlUpdate);
+        $stmtUpdate->execute([$nombreImagen, $idNoticia]);
+    }
 
     header("Location: noticias.php");
     exit;
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="es">

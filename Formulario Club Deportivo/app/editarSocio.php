@@ -32,17 +32,63 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nombre = $_POST['nombre'];
     $edad = $_POST['edad'];
     $telefono = $_POST['telefono'];
-    $foto = $_POST['foto_actual'];
+    $telefonoLimpio = preg_replace('/\D/', '', $telefono);
 
-    if (!empty($_FILES['foto']['name'])) {
-    $nombreArchivo = time() . '_' . $_FILES['foto']['name'];
-    $rutaFinal = "uploads/usuarios/" . $nombreArchivo;
+    // Foto actual (nombre del archivo)
+    $fotoActual = $socio['foto'];
 
-    if (move_uploaded_file($_FILES['foto']['tmp_name'], $rutaFinal)) {
-        $foto = $rutaFinal; // ESTA RUTA SE GUARDA
+    // Si el usuario sube una nueva foto
+    if (!empty($_FILES['foto']['name']) && $_FILES['foto']['error'] === UPLOAD_ERR_OK) {
+
+        $ext = strtolower(pathinfo($_FILES['foto']['name'], PATHINFO_EXTENSION));
+
+        // Validación de extensión
+        if (!in_array($ext, ['jpg', 'jpeg'])) {
+            echo '<p class="error">Formato de imagen no permitido.</p>';
+            exit;
+        }
+
+        // Nombre final: teléfono.ext
+        $nuevoNombreFoto = $telefonoLimpio . "." . $ext;
+        $rutaDestino = __DIR__ . "/uploads/usuarios/" . $nuevoNombreFoto;
+
+        // Borrar foto anterior si existe
+        if ($fotoActual && file_exists(__DIR__ . "/uploads/usuarios/" . $fotoActual)) {
+            unlink(__DIR__ . "/uploads/usuarios/" . $fotoActual);
+        }
+
+        // Subir nueva imagen
+        if (!move_uploaded_file($_FILES['foto']['tmp_name'], $rutaDestino)) {
+            echo '<p class="error">Error subiendo la imagen.</p>';
+            exit;
+        }
+
+        $fotoFinal = $nuevoNombreFoto;
+
+    } else {
+    // Si no sube nueva foto → pero cambia el teléfono
+    $fotoFinal = $fotoActual;
+
+    $extActual = strtolower(pathinfo($fotoActual, PATHINFO_EXTENSION));
+
+    // Nombre esperado según el nuevo teléfono
+    $nuevoNombreFoto = $telefonoLimpio . "." . $extActual;
+
+    // Solo renombramos si el nombre es diferente
+    if ($fotoActual && $fotoActual !== $nuevoNombreFoto) {
+        $rutaAnterior = __DIR__ . "/uploads/usuarios/" . $fotoActual;
+        $rutaNueva    = __DIR__ . "/uploads/usuarios/" . $nuevoNombreFoto;
+
+        // Renombrar archivo si existe
+        if (file_exists($rutaAnterior)) {
+            rename($rutaAnterior, $rutaNueva);
+            $fotoFinal = $nuevoNombreFoto;
+        }
     }
 }
 
+
+    // Update en la base de datos
     $sqlUpdate = "UPDATE usuarios SET 
                     nombre = :nombre,
                     edad = :edad,
@@ -55,7 +101,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'nombre' => $nombre,
         'edad' => $edad,
         'telefono' => $telefono,
-        'foto' => $foto,
+        'foto' => $fotoFinal,
         'id' => $id
     ]);
 
@@ -63,6 +109,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     exit;
 }
 ?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -108,9 +155,10 @@ Teléfono:<br>
 
 Foto actual:<br>
 <div class="bloque-form">
-    <?php if ($socio['foto']): ?>
-        <img src="<?= htmlspecialchars($socio['foto']) ?>" width="80"><br><br>
-    <?php endif; ?>
+    <?php
+        $fotoPath = $socio['foto'] ? 'uploads/usuarios/' . $socio['foto'] : 'uploads/usuarios/default.jpg';
+    ?>
+    <img src="<?= htmlspecialchars($fotoPath) ?>?v=<?= file_exists($fotoPath) ? filemtime($fotoPath) : time() ?>" width="80" alt="Foto socio"><br><br>
 </div>
 
 Nueva foto (obligatoria JPG):<br>
@@ -119,7 +167,6 @@ Nueva foto (obligatoria JPG):<br>
     <span class="error" id="fotoError"></span>
     <br><br>
 </div>
-
 
     <button type="submit">Guardar cambios</button>
     <a href="socios.php" class="btn-atras">Cancelar</a>

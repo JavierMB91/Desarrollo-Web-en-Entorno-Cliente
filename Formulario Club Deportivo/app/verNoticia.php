@@ -27,9 +27,8 @@ $noticia = $stmt->fetch(PDO::FETCH_ASSOC);
 
 <main class="ver-noticia">
     <article class="noticia-detalle">
-        <img src="<?= htmlspecialchars($noticia["imagen"]) ?>" 
-     alt="<?= htmlspecialchars($noticia["titulo"]) ?>" 
-     class="imagen-noticia">
+        <img src="uploads/noticias/<?= htmlspecialchars($noticia['imagen']) ?>" alt="<?= htmlspecialchars($noticia['titulo']) ?>" class="imagen-noticia">
+
 
         <div class="contenido-noticia">
             <!-- Convertimos saltos de línea en <br> pero el contenedor aplica formato legible -->

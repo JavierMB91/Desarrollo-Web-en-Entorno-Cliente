@@ -14,11 +14,11 @@ formularioSocio.addEventListener('submit', (e) => {
     const edad = document.getElementById('edad').value.trim();
     const password = document.getElementById('password').value.trim();
     const telefono = document.getElementById('telefono').value.trim();
-    const imagen = document.getElementById('imagen');
+    const foto = document.getElementById('foto');
 
     const soloLetras = /^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/;
     const sinCaracteresEspeciales = /^[A-Za-zÁÉÍÓÚáéíóúÑñ0-9\s]+$/;
-    const soloLetrasNumerosGuiones = /^[A-Za-z][A-Za-z0-9_]*$/;
+    const soloLetrasNumerosGuiones = /^[A-Za-z0-9_]+$/;
     const telefonoEspaña = /^\d{9}$/;
 
     // Validaciones
@@ -47,14 +47,14 @@ formularioSocio.addEventListener('submit', (e) => {
         hayErrores = true;
     }
 
-    // Validación imagen
-    let imagenError = comprobarImagen(imagen);
-    if (imagenError.length > 0) {
+    // Validación foto
+    let fotoError = comprobarfoto(foto);
+    if (fotoError.length > 0) {
         hayErrores = true;
-        let imagenErrorBox = document.getElementById('imagenError');
-        imagenErrorBox.innerHTML = "";
-        imagenError.forEach(error => {
-            imagenErrorBox.innerHTML += `<p>${error}</p>`;
+        let fotoErrorBox = document.getElementById('fotoError');
+        fotoErrorBox.innerHTML = "";
+        fotoError.forEach(error => {
+            fotoErrorBox.innerHTML += `<p>${error}</p>`;
         });
     }
 
@@ -65,21 +65,21 @@ formularioSocio.addEventListener('submit', (e) => {
     formularioSocio.submit();
 });
 
-function comprobarImagen(imagen) {
-    let imagenError = [];
+function comprobarfoto(foto) {
+    let fotoError = [];
 
-    if (imagen.files.length === 0) {
-        imagenError.push("No has seleccionado ninguna imagen");
-        return imagenError;
+    if (foto.files.length === 0) {
+        fotoError.push("No hay seleccionado ninguna foto");
+        return fotoError;
     }
 
-    if (imagen.files[0].type !== 'image/jpeg') {
-        imagenError.push("La imagen debe ser un JPEG");
+    if (foto.files[0].type !== 'image/jpeg') {
+        fotoError.push("La foto debe ser un JPEG");
     }
 
-    if (imagen.files[0].size > 5 * 1024 * 1024) {
-        imagenError.push("La imagen es demasiado grande");
+    if (foto.files[0].size > 5 * 1024 * 1024) {
+        fotoError.push("La foto es demasiado grande");
     }
 
-    return imagenError;
+    return fotoError;
 }

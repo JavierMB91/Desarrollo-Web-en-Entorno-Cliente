@@ -20,6 +20,7 @@ require_once 'conexion.php';
 </header>
 
 <main>
+    <div class="principal">
 
     <!-- ============================ -->
     <!--          NOTICIAS            -->
@@ -45,7 +46,8 @@ require_once 'conexion.php';
 
                 echo '<article class="noticia-card">';
                 
-                echo '<img src="' . htmlspecialchars($n["imagen"]) . '" class="imagen-noticia" alt="' . htmlspecialchars($n["titulo"]) . '">';
+                echo '<img src="uploads/noticias/' . htmlspecialchars($n["imagen"]) . '" class="imagen-noticia" alt="' . htmlspecialchars($n["titulo"]) . '">';
+
                 
                 echo '<h3>' . htmlspecialchars($n["titulo"]) . '</h3>';
 
@@ -106,7 +108,7 @@ require_once 'conexion.php';
         <p>Si desas contactar con nosotros, usa el siguiente formulario:</p>
         <a href="contacto.php" class="btn-atras">Contacto</a>
     </section>
-
+</div>
 </main>
 
 <div id="footer"></div>

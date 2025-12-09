@@ -6,7 +6,7 @@ const contador = document.getElementById('contador');
 formulariocontenido.addEventListener('submit', (e) => {
     e.preventDefault();
 
-    let hasError = false; // <-- CONTROL REAL DE ERRORES
+    let hayError = false; // <-- CONTROL REAL DE ERRORES
 
     // Limpiar errores previos
     let spanErrors = document.querySelectorAll('.error');
@@ -24,7 +24,7 @@ formulariocontenido.addEventListener('submit', (e) => {
     // =========================
     if (titulo.trim().length < 3) {
         document.getElementById('tituloError').innerText = "Título demasiado corto.";
-        hasError = true;
+        hayError = true;
     }
 
     // =========================
@@ -32,7 +32,7 @@ formulariocontenido.addEventListener('submit', (e) => {
     // =========================
     if (contenido.trim().length < 3) {
         document.getElementById('noticiaError').innerText = "Escribe un contenido válido.";
-        hasError = true;
+        hayError = true;
     }
 
     // =========================
@@ -40,7 +40,7 @@ formulariocontenido.addEventListener('submit', (e) => {
     // =========================
     if (!fecha) {
     fechaError.innerText = "Selecciona una fecha";
-    hasError = true;
+    hayError = true;
 } else {
     const [año, mes, dia] = fecha.split('-').map(Number);
 
@@ -53,7 +53,7 @@ formulariocontenido.addEventListener('submit', (e) => {
     // Permitir fecha de HOY o futura
     if (fechaIngresada < hoy) {
         fechaError.innerText = "La fecha no puede ser pasada.";
-        hasError = true;
+        hayError = true;
     }
 }
 
@@ -65,13 +65,13 @@ formulariocontenido.addEventListener('submit', (e) => {
 
     imagenError.forEach(error => {
         document.getElementById('imagenError').innerHTML += `<p>${error}</p>`;
-        hasError = true;
+        hayError = true;
     });
 
     // =========================
     // ENVIAR FORMULARIO
     // =========================
-    if (!hasError) {
+    if (!hayError) {
         formulariocontenido.submit();
     }
 });

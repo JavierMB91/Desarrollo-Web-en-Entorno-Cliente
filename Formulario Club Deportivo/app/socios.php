@@ -70,7 +70,7 @@ require_once 'conexion.php';
                 echo '<div class="socio-card">';
 
                 // FOTO
-                echo '<img src="' . htmlspecialchars($socio['foto']) . '" width="100" alt="Foto socio">';
+                echo '<img src="uploads/usuarios/' . htmlspecialchars($socio['foto']) . '?v=' . filemtime('uploads/usuarios/' . $socio['foto']) . '" width="100" alt="Foto socio">';
 
                 // DATOS
                 echo '<p><strong>Nombre:</strong> ' . htmlspecialchars($socio['nombre']) . '</p>';

@@ -3,55 +3,62 @@ const formularioNuevoSocio = document.getElementById('formularioNuevoSocio');
 formularioNuevoSocio.addEventListener('submit', (e) => {
     e.preventDefault();
 
-    let hasError = false; // <-- CONTROL REAL DE ERRORES
+    let hayError = false; // <-- CONTROL REAL DE ERRORES
 
     // Limpiar errores anteriores
     let spanErrors = document.querySelectorAll('.error');
     spanErrors.forEach(span => span.innerText = "");
 
     // Valores del formulario
-    const nombre = document.querySelector('input[name="nombre"]').value;
-    const edad = document.querySelector('input[name="edad"]').value;
-    const telefono = document.querySelector('input[name="telefono"]').value;
+    const nombre = document.querySelector('input[name="nombre"]').value.trim();
+    const edad = document.querySelector('input[name="edad"]').value.trim();
+    const telefono = document.querySelector('input[name="telefono"]').value.trim();
+    const password = document.getElementById('password').value.trim();
     const foto = document.querySelector('input[name="foto"]');
 
     // Expresiones regulares
     const soloLetras = /^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/;
     const telefonoEspaña = /^\d{9}$/;
+    const soloLetrasNumerosGuiones = /^[A-Za-z0-9_]+$/;
 
     // =========================
     // VALIDACIONES
     // =========================
 
     // Validación nombre
-    if (nombre.trim().length < 4 || nombre.trim().length > 50 || !soloLetras.test(nombre.trim())) {
+    if (nombre.length < 4 || nombre.length > 50 || !soloLetras.test(nombre)) {
         mostrarError('nombre', 'Nombre no válido');
-        hasError = true;
+        hayError = true;
     }
 
     // Validación edad
-    if (!edad.trim() || Number(edad.trim()) < 18) {
+    if (!edad || Number(edad) < 18) {
         mostrarError('edad', 'Debes ser mayor de edad');
-        hasError = true;
+        hayError = true;
     }
 
     // Validación teléfono
-    if (!telefonoEspaña.test(telefono.trim())) {
+    if (!telefonoEspaña.test(telefono)) {
         mostrarError('telefono', 'Teléfono no válido (9 dígitos)');
-        hasError = true;
+        hayError = true;
+    }
+
+    if (password.length < 8 || password.length > 20 || !soloLetrasNumerosGuiones.test(password)) {
+        document.getElementById('passwordError').innerText = "Contraseña no válida";
+        hayError = true;
     }
 
     // Validación foto
     let fotoErrores = comprobarImagen(foto);
     if (fotoErrores.length > 0) {
         fotoErrores.forEach(error => mostrarError('foto', error));
-        hasError = true;
+        hayError = true;
     }
 
     // =========================
     // ENVIAR FORMULARIO SI TODO ESTÁ CORRECTO
     // =========================
-    if (!hasError) {
+    if (!hayError) {
         formularioNuevoSocio.submit();
     }
 });
@@ -81,7 +88,7 @@ function comprobarImagen(imagen) {
     let errores = [];
 
     if (imagen.files.length === 0) {
-        errores.push("No has seleccionado ninguna imagen");
+        errores.push("No hay seleccionado ninguna imagen");
         return errores;
     }
 

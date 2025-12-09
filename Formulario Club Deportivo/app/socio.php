@@ -1,30 +1,44 @@
 <?php
-require 'conexion.php';
+require_once 'conexion.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $nombre = $_POST['nombre'] ?? '';
     $edad = $_POST['edad'] ?? '';
-    $clave = $_POST['password'] ?? '';
+    $password = $_POST['password'] ?? '';
     $telefono = $_POST['telefono'] ?? '';
 
     // Validación básica
-    if (!$nombre || !$edad || !$clave) {
+    if (!$nombre || !$edad || !$password) {
         echo '<p class="error">Todos los campos obligatorios deben completarse.</p>';
         exit;
     }
 
     // Hashear la contraseña
-    $claveHash = password_hash($clave, PASSWORD_DEFAULT);
+    $passwordHash = password_hash($password, PASSWORD_DEFAULT);
 
-    $rol = 'socio'; // ahora coincide con tu ENUM
-
+    $rol = 'socio';
 
     // Subida de foto
     $fotoNombre = null;
     if (isset($_FILES['imagen']) && $_FILES['imagen']['error'] === UPLOAD_ERR_OK) {
-        $ext = pathinfo($_FILES['imagen']['name'], PATHINFO_EXTENSION);
-        $fotoNombre = uniqid('usuario_') . '.' . $ext;
+
+        $ext = strtolower(pathinfo($_FILES['imagen']['name'], PATHINFO_EXTENSION));
+
+        // Extensiones permitidas
+        $extensionesPermitidas = ['jpg', 'jpeg'];
+        if (!in_array($ext, $extensionesPermitidas)) {
+            echo '<p class="error">Formato de imagen no permitido.</p>';
+            exit;
+        }
+
+        // Eliminar espacios o caracteres no numéricos del teléfono
+        $telefonoLimpio = preg_replace('/\D/', '', $telefono);
+
+        // Nombre del archivo = número de teléfono
+        $fotoNombre = $telefonoLimpio . '.' . $ext;
+
+        // Carpeta destino
         $destino = __DIR__ . '/uploads/usuarios/' . $fotoNombre;
 
         if (!move_uploaded_file($_FILES['imagen']['tmp_name'], $destino)) {
@@ -35,12 +49,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Insertar en la base de datos
     try {
-        $stmt = $pdo->prepare("INSERT INTO usuarios (nombre, edad, clave, rol, telefono, foto, fecha_registro) 
-                       VALUES (:nombre, :edad, :clave, :rol, :telefono, :foto, NOW())");
+        $stmt = $pdo->prepare("INSERT INTO usuarios (nombre, edad, password, rol, telefono, foto, fecha_registro) 
+                       VALUES (:nombre, :edad, :password, :rol, :telefono, :foto, NOW())");
         $stmt->execute([
             ':nombre' => $nombre,
             ':edad' => $edad,
-            ':clave' => $claveHash,
+            ':password' => $passwordHash,
             ':rol' => $rol,
             ':telefono' => $telefono,
             ':foto' => $fotoNombre
@@ -104,9 +118,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
 
         <div class="bloque-form">
-            <label for="imagen">Foto del miembro</label>
-            <input type="file" name="imagen" id="imagen">
-            <span id="imagenError" class="error"></span>
+            <label for="foto">Foto del miembro</label>
+            <input type="file" name="foto" id="foto">
+            <span id="fotoError" class="error"></span>
         </div>
 
         <!-- Contenedor para los botones -->
