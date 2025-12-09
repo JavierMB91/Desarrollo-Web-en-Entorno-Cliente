@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $ext = strtolower(pathinfo($_FILES['foto']['name'], PATHINFO_EXTENSION));
 
         // Validar extensión
-        $extPermitidas = ['jpg','jpeg','png','webp'];
+        $extPermitidas = ['jpg','jpeg'];
         if (!in_array($ext, $extPermitidas)) {
             echo '<p class="error">Formato de imagen no permitido.</p>';
             exit;

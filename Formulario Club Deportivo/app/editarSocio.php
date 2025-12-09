@@ -1,6 +1,5 @@
 <?php
 session_start();
-
 require_once 'conexion.php';
 
 // ========================
@@ -27,12 +26,12 @@ if (!$socio) {
 }
 
 // ========================
-// 3. Procesar formulario POST
+// 3. Procesar formulario (POST)
 // ========================
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-    $nombre = $_POST['nombre'];
-    $edad = $_POST['edad'];
+    $nombre   = $_POST['nombre'];
+    $edad     = $_POST['edad'];
     $telefono = $_POST['telefono'];
     $telefonoLimpio = preg_replace('/\D/', '', $telefono);
 
@@ -44,9 +43,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Manejo de foto
     // ==========================
     if (!empty($_FILES['foto']['name']) && $_FILES['foto']['error'] === UPLOAD_ERR_OK) {
+
         $ext = strtolower(pathinfo($_FILES['foto']['name'], PATHINFO_EXTENSION));
+
         if (!in_array($ext, ['jpg', 'jpeg'])) {
-            echo '<p class="error">Formato de imagen no permitido.</p>';
+            $_SESSION['mensaje_error'] = "❌ Formato de imagen no permitido.";
+            header("Location: editarSocio.php?id=$id");
             exit;
         }
 
@@ -60,24 +62,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // Subir nueva foto
         if (!move_uploaded_file($_FILES['foto']['tmp_name'], $rutaDestino)) {
-            echo '<p class="error">Error subiendo la imagen.</p>';
+            $_SESSION['mensaje_error'] = "❌ Error al subir la imagen.";
+            header("Location: editarSocio.php?id=$id");
             exit;
         }
 
         $fotoFinal = $nuevoNombreFoto;
 
-    } elseif ($fotoActual) {
-        // Si no sube nueva foto pero cambia el teléfono → renombrar archivo
-        $extActual = strtolower(pathinfo($fotoActual, PATHINFO_EXTENSION));
-        $nuevoNombreFoto = $telefonoLimpio . "." . $extActual;
+    } else {
 
-        if ($fotoActual !== $nuevoNombreFoto) {
-            $rutaAnterior = __DIR__ . "/uploads/usuarios/" . $fotoActual;
-            $rutaNueva = __DIR__ . "/uploads/usuarios/" . $nuevoNombreFoto;
+        // Si no sube nueva foto, pero cambia el teléfono → renombrar
+        if ($fotoActual) {
+            $extActual = strtolower(pathinfo($fotoActual, PATHINFO_EXTENSION));
+            $nuevoNombreFoto = $telefonoLimpio . "." . $extActual;
 
-            if (file_exists($rutaAnterior)) {
-                rename($rutaAnterior, $rutaNueva);
-                $fotoFinal = $nuevoNombreFoto;
+            if ($fotoActual !== $nuevoNombreFoto) {
+                $rutaAnterior = __DIR__ . "/uploads/usuarios/" . $fotoActual;
+                $rutaNueva = __DIR__ . "/uploads/usuarios/" . $nuevoNombreFoto;
+
+                if (file_exists($rutaAnterior)) {
+                    rename($rutaAnterior, $rutaNueva);
+                    $fotoFinal = $nuevoNombreFoto;
+                }
             }
         }
     }
@@ -87,11 +93,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // ==========================
     $password = $_POST['password'] ?? '';
     $params = [
-        'nombre' => $nombre,
-        'edad' => $edad,
+        'nombre'   => $nombre,
+        'edad'     => $edad,
         'telefono' => $telefono,
-        'foto' => $fotoFinal,
-        'id' => $id
+        'foto'     => $fotoFinal,
+        'id'       => $id
     ];
 
     $sqlUpdate = "UPDATE usuarios SET 
@@ -102,7 +108,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (!empty($password)) {
         $passwordHash = password_hash($password, PASSWORD_DEFAULT);
-        $sqlUpdate .= ", password = :password";
+        $sqlUpdate   .= ", password = :password";
         $params['password'] = $passwordHash;
     }
 
@@ -111,22 +117,40 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmtUpdate = $pdo->prepare($sqlUpdate);
     $stmtUpdate->execute($params);
 
-    $_SESSION['mensaje'] = "Socio editado con éxito.";
+    $_SESSION['mensaje_exito'] = "✅ Socio editado con éxito.";
     header("Location: socios.php");
     exit;
-
 }
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editar socio</title>
     <link rel="stylesheet" href="css/estilos.css">
 </head>
+
 <body class="socios-body">
+
+<!-- =======================
+     MENSAJES DE SESIÓN
+======================= -->
+<?php if (isset($_SESSION['mensaje_exito'])): ?>
+    <div class="mensaje-exito">
+        <?= $_SESSION['mensaje_exito']; ?>
+    </div>
+    <?php unset($_SESSION['mensaje_exito']); ?>
+<?php endif; ?>
+
+<?php if (isset($_SESSION['mensaje_error'])): ?>
+    <div class="mensaje-error">
+        <?= $_SESSION['mensaje_error']; ?>
+    </div>
+    <?php unset($_SESSION['mensaje_error']); ?>
+<?php endif; ?>
+
 
 <h1 class="titulo-club">Editar socio</h1>
 <div id="nav"></div>
@@ -134,8 +158,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <main class="editar-formulario">
 
 <form method="post" enctype="multipart/form-data">
-
-    <input type="hidden" name="foto_actual" value="<?= htmlspecialchars($socio['foto']) ?>">
 
     <div class="bloque-form">
         <label>Nombre:</label>
@@ -163,8 +185,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <div class="bloque-form">
         <label>Foto actual:</label><br>
-        <?php $fotoPath = $socio['foto'] ? 'uploads/usuarios/' . $socio['foto'] : 'uploads/usuarios/default.jpg'; ?>
-        <img src="<?= htmlspecialchars($fotoPath) ?>?v=<?= file_exists($fotoPath) ? filemtime($fotoPath) : time() ?>" width="80" alt="Foto socio">
+        <?php 
+            $fotoPath = $socio['foto'] ? 'uploads/usuarios/' . $socio['foto'] : 'uploads/usuarios/default.jpg';
+        ?>
+        <img src="<?= htmlspecialchars($fotoPath) ?>?v=<?= file_exists($fotoPath) ? filemtime($fotoPath) : time() ?>"
+             width="80" alt="Foto socio">
     </div>
 
     <div class="bloque-form">
@@ -182,9 +207,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </main>
 
 <div id="footer"></div>
+
 <script src="js/nav.js"></script>
 <script src="js/funcionesEditarSocio.js"></script>
 <script src="js/footer.js"></script>
 <script src="js/transiciones.js"></script>
+
 </body>
 </html>

@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once 'conexion.php';
 
 // ==========================
@@ -34,31 +35,47 @@ $testimonios = $stmt->fetchAll(PDO::FETCH_ASSOC);
 </header>
 
 <main>
-    <div class="contenedor-botones">
-        <a class="btn-atras" href="testimonio.php"><span>Nuevo Comentario</span></a>
-    </div>
 
-    <h2 class="titulo-club">Todos los comentarios</h2>
-
-    <div class="testimonios-lista">
-        <?php if (empty($testimonios)): ?>
-            <p>No hay comentarios todavía.</p>
-        <?php else: ?>
-            <?php foreach ($testimonios as $t): ?>
-                <div class="tarjeta-testimonio">
-                    <p><strong>ID:</strong> <?= $t["testimonio_id"] ?></p>
-                    <p><strong>Autor:</strong> <?= htmlspecialchars($t["autor"]) ?></p>
-                    <p class="comentario"><strong>Comentario:</strong> <?= nl2br(htmlspecialchars($t["contenido"])) ?></p>
-                    <p class="fecha"><strong>Fecha:</strong> <?= date('d/m/Y', strtotime($t["fecha"])) ?></p>
-                    <p class="hora"><strong>Hora:</strong> <?= date('H:i', strtotime($t["fecha"])) ?></p>
-                </div>
-            <?php endforeach; ?>
-        <?php endif; ?>
+<!-- =======================
+     MENSAJES DE SESIÓN
+======================= -->
+<?php if (isset($_SESSION['mensaje_exito'])): ?>
+    <div class="mensaje-exito">
+        <?= $_SESSION['mensaje_exito']; unset($_SESSION['mensaje_exito']); ?>
     </div>
+<?php endif; ?>
 
-    <div class="contenedor-botones">
-        <a href="index.php" class="btn-atras"><span>Atrás</span></a>
+<?php if (isset($_SESSION['mensaje_error'])): ?>
+    <div class="mensaje-error">
+        <?= $_SESSION['mensaje_error']; unset($_SESSION['mensaje_error']); ?>
     </div>
+<?php endif; ?>
+
+<div class="contenedor-botones">
+    <a class="btn-atras" href="testimonio.php"><span>Nuevo Comentario</span></a>
+</div>
+
+<h2 class="titulo-club">Todos los comentarios</h2>
+
+<div class="testimonios-lista">
+    <?php if (empty($testimonios)): ?>
+        <p>No hay comentarios todavía.</p>
+    <?php else: ?>
+        <?php foreach ($testimonios as $t): ?>
+            <div class="tarjeta-testimonio">
+                <p><strong>ID:</strong> <?= $t["testimonio_id"] ?></p>
+                <p><strong>Autor:</strong> <?= htmlspecialchars($t["autor"]) ?></p>
+                <p class="comentario"><strong>Comentario:</strong> <?= nl2br(htmlspecialchars($t["contenido"])) ?></p>
+                <p class="fecha"><strong>Fecha:</strong> <?= date('d/m/Y', strtotime($t["fecha"])) ?></p>
+                <p class="hora"><strong>Hora:</strong> <?= date('H:i', strtotime($t["fecha"])) ?></p>
+            </div>
+        <?php endforeach; ?>
+    <?php endif; ?>
+</div>
+
+<div class="contenedor-botones">
+    <a href="index.php" class="btn-atras"><span>Atrás</span></a>
+</div>
 
 </main>
 

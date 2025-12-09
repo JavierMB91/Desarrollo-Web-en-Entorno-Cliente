@@ -1,6 +1,42 @@
 <?php
+session_start();
 require_once 'conexion.php';
 
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+    $autor_id = $_POST['autor_id'] ?? '';
+    $contenido = trim($_POST['contenido'] ?? '');
+
+    if (!$autor_id || !$contenido) {
+        $_SESSION['mensaje_error'] = "Debes completar todos los campos.";
+        header("Location: testimonio.php");
+        exit;
+    }
+
+    try {
+        // Insertar comentario con fecha actual
+        $sql = "INSERT INTO testimonios (autor_id, contenido, fecha)
+                VALUES (:autor_id, :contenido, NOW())";
+
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([
+            'autor_id' => $autor_id,
+            'contenido' => $contenido,
+        ]);
+
+        // Mensaje de éxito
+        $_SESSION['mensaje_exito'] = "✅ Comentario agregado correctamente.";
+
+        // Redirigir a comentario.php para mostrar todos los comentarios
+        header("Location: comentario.php");
+        exit;
+
+    } catch (PDOException $e) {
+        $_SESSION['mensaje_error'] = "❌ Error al registrar el comentario.";
+        header("Location: testimonio.php");
+        exit;
+    }
+}
 // Obtener todos los usuarios para el select
 $stmt = $pdo->query("SELECT id, nombre FROM usuarios ORDER BY nombre");
 $usuarios = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -12,16 +48,30 @@ $usuarios = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/estilos.css">
-    <title>Comentario</title>
+    <title>Nuevo Comentario</title>
 </head>
+
 <body class="testimonio-body">
-    <div class="container">
-    <header>
-        <h1 class="titulo-club">Nuevo Comentario</h1>
-        <div id="nav"></div>
-    </header>
+<div class="container">
+
+<header>
+    <h1 class="titulo-club">Nuevo Comentario</h1>
+    <div id="nav"></div>
+</header>
+
 <main>
-        <form action="insertarComentario.php" method="post" id="formularioTestimonio">
+
+<!-- =======================
+     MENSAJES DE SESIÓN
+======================= -->
+<?php if (isset($_SESSION['mensaje_error'])): ?>
+    <div class="mensaje-error">
+        <?= $_SESSION['mensaje_error']; unset($_SESSION['mensaje_error']); ?>
+    </div>
+<?php endif; ?>
+
+<form action="" method="post" id="formularioTestimonio">
+
     <div class="bloque-form">
         <label for="autor_id">Autor del comentario</label>
         <select name="autor_id" id="autor_id">
@@ -41,18 +91,20 @@ $usuarios = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     <div class="contenedor-botones">
         <button type="submit"><span>Enviar</span></button>
-        <a href="comentario.php" class="btn-atras"><span>Atrás</span></a>
+        <a href="comentario.php" class="btn-atras"><span>Ver Comentarios</span></a>
     </div>
+
 </form>
 
 </main>
 
-    <div id="footer"></div>
+<div id="footer"></div>
 
-    <script src="js/funcionesTestimonio.js"></script>
-    <script src="js/nav.js"></script>
-    <script src="js/footer.js"></script>
-    <script src="js/transiciones.js"></script>
-    </div>
+<script src="js/funcionesTestimonio.js"></script>
+<script src="js/nav.js"></script>
+<script src="js/footer.js"></script>
+<script src="js/transiciones.js"></script>
+
+</div>
 </body>
 </html>

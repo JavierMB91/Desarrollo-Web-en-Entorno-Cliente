@@ -10,7 +10,6 @@ formularioSocio.addEventListener('submit', (e) => {
     let hayErrores = false;
 
     const nombre = document.getElementById('nombre').value.trim();
-    const usuario = document.getElementById('usuario').value.trim();
     const edad = document.getElementById('edad').value.trim();
     const password = document.getElementById('password').value.trim();
     const telefono = document.getElementById('telefono').value.trim();
@@ -24,11 +23,6 @@ formularioSocio.addEventListener('submit', (e) => {
     // Validaciones
     if (nombre.length < 4 || nombre.length > 50 || !soloLetras.test(nombre)) {
         document.getElementById('nombreError').innerText = "Nombre no válido";
-        hayErrores = true;
-    }
-
-    if (usuario.length < 5 || usuario.length > 20 || !sinCaracteresEspeciales.test(usuario)) {
-        document.getElementById('usuarioError').innerText = "Usuario no válido";
         hayErrores = true;
     }
 
