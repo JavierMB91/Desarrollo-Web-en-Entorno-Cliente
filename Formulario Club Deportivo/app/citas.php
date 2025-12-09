@@ -138,7 +138,7 @@ function h($s) { return htmlspecialchars($s, ENT_QUOTES, 'UTF-8'); }
             <div class="contenedor-botones">
                 <button type="submit"><span>Buscar</span></button>
                 <a href="cita.php" class="btn-atras"><span>Nueva cita</span></a>
-                <a href="citas.php" class="btn-atras"><span>Volver</span></a>
+                <a href="citas.php" class="btn-atras"><span>Mostrar Calendario</span></a>
             </div>
         </form>
     </main>
@@ -242,7 +242,7 @@ function h($s) { return htmlspecialchars($s, ENT_QUOTES, 'UTF-8'); }
     </div>
 
     <div class="contenedor-botones">
-        <a href="index.php" class="btn-atras"><span>Volver</span></a>
+        <a href="index.php" class="btn-atras"><span>Volver</span></a>   
     </div>
 
 </div>

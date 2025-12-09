@@ -198,28 +198,32 @@ main form textarea:focus {
 
 
 /* ===== BOTONES ===== */
-button[type="submit"],
-.btn,
-.btn-atras,
-.boton-principal,
-main form button,
-main form .btn,
+button[type="submit"], 
+.btn, 
+.btn-atras, 
+.boton-principal, 
+main form button, 
+main form .btn, 
 main form .btn-atras {
     background: linear-gradient(135deg, var(--ebano-oscuro), var(--ebano-medio));
     color: var(--papel-antiguo);
     padding: 0.8rem 1.5rem;
     border: 2px solid var(--dorado-viejo);
     border-radius: 5px;
-    
     font-family: 'Playfair Display', serif;
     font-size: 1rem;
     cursor: pointer;
     transition: var(--transicion-rapida);
     text-decoration: none;
-    display: inline-block;
+    
+    /* Cambios para centrar el texto */
+    display: inline-flex;       /* Flex para alinear contenido */
+    align-items: center;        /* Centrado vertical */
+    justify-content: center;    /* Centrado horizontal */
     text-align: center;
     text-transform: uppercase;
 }
+
 
 button[type="submit"]:hover,
 .btn:hover,
@@ -246,7 +250,7 @@ main form .btn-atras:hover {
 .noticias-grid, .noticias-grid-3 {
     display: grid;
     gap: 1.5rem;
-    margin-top: 2rem;
+    margin-top: 0rem;
 }
 
 .noticias-grid {
