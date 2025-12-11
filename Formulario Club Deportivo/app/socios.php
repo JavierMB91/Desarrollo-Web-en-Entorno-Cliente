@@ -17,11 +17,11 @@ require_once 'conexion.php';
 </head>
 
 <body class="socios-body">
-    <?php if (isset($_SESSION['mensaje'])): ?>
+    <?php if (isset($_SESSION['mensaje_exito'])): ?>
     <div class="mensaje-exito">
-    <?= $_SESSION['mensaje']; ?>
+    <?= $_SESSION['mensaje_exito']; ?>
     </div>
-    <?php unset($_SESSION['mensaje']); ?>
+    <?php unset($_SESSION['mensaje_exito']); ?>
     <?php endif; ?>
 
 <header>
