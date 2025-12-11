@@ -5,9 +5,9 @@
     /* Paleta de colores modernizada manteniendo esencia */
     --ebano-oscuro: #121212;
     --ebano-medio: #1e1e1e;
-    --madera-ebano: #3d2817;
-    --papel-antiguo: #f5f0e6;
-    --papel-claro: #faf8f3;
+    --madera-ebano: #3d2817; /* Mantener este color, ya que es un tono oscuro de madera */
+    --papel-antiguo: #c9c2b8; /* Menos brillante, más oscuro */
+    --papel-claro: #d9d3c9; /* Menos brillante, más oscuro */
     --dorado-viejo: #b8860b;
     --dorado-medio: #c9971d;
     --dorado-brillante: #e6c35c;
@@ -231,7 +231,7 @@ form:hover {
     border: 1px solid var(--madera-ebano);
     font-family: 'Lora', serif;
     font-size: 1.15rem;
-    background: rgba(255, 255, 255, 0.9);
+    background: var(--papel-claro);
     resize: none;
     transition: var(--transicion-suave);
 }
@@ -242,7 +242,7 @@ form:hover {
     outline: none;
     border-color: var(--dorado-viejo);
     box-shadow: 0 0 0 3px rgba(184, 134, 11, 0.2);
-    background: rgba(255, 255, 255, 1);
+    background: var(--papel-antiguo);
 }
 
 .bloque-form img {
@@ -340,7 +340,7 @@ button[type="submit"]:hover,
 }
 
 .noticia-card {
-    background: rgba(255,255,255,0.95);
+    background: var(--papel-claro);
     padding: 1.5rem;
     border-radius: 12px;
     box-shadow: 0 8px 20px var(--sombra-media);
@@ -435,17 +435,17 @@ button[type="submit"]:hover,
     font-size: 1.1rem;
     line-height: 1.6;
     text-align: justify;
+    margin-top: 2rem;
 }
 
-.contenido-noticia p {
+.contenido-noticia .texto-noticia {
     font-family: 'Lora', serif;
-    font-size: 1.1rem;
-    line-height: 1.7;
-    color: var(--madera-ebano);
-    text-align: justify;
+    font-size: 1.2rem;
+    line-height: 1.8;
+    color: var(--ebano-oscuro);
+    text-align: left;
     overflow-wrap: break-word;
     word-break: break-word;
-    overflow: hidden;
     max-width: 100%;
     box-sizing: border-box;
 }
@@ -494,7 +494,7 @@ button[type="submit"]:hover,
 }
 
 .socio-card {
-    background-color: #fff;
+    background: var(--papel-claro);
     border-radius: 15px;
     box-shadow: 0 8px 20px var(--sombra-media);
     padding: 1.5rem;
@@ -557,7 +557,7 @@ button[type="submit"]:hover,
     padding: 0.4rem 0.8rem;
     margin: 0 0.2rem;
     background-color: var(--ebano-oscuro);
-    color: #fff;
+    color: var(--papel-claro);
     border-radius: 20px;
     text-decoration: none;
     font-size: 1rem;
