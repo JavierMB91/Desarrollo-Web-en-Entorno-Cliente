@@ -1,5 +1,5 @@
 /* ===== IMPORTACIONES Y VARIABLES GLOBALES ===== */
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Merriweather:wght@300;400&family=Roboto+Slab:wght@300;400&family=Crimson+Text:ital,wght@0,400;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400&family=Playfair+Display:wght@400;700&family=Roboto+Slab:wght@300;400&display=swap');
 
 :root {
     --ebano-oscuro: #0D0D0D;
@@ -24,12 +24,10 @@
 html, body {
     scroll-behavior: smooth;
     height: 100%;
-    margin: 0;
-    padding: 0;
 }
 
 body {
-    font-family: 'Crimson Text', serif;
+    font-family: 'Lora', serif;
     background: linear-gradient(135deg, var(--madera-ebano), var(--ebano-medio));
     min-height: 100vh;
     display: flex;
@@ -43,7 +41,7 @@ body {
     flex-direction: column;
 }
 
-.container main, main {
+main {
     flex: 1;
     max-width: 1200px;
     width: 100%;
@@ -111,13 +109,9 @@ section {
 }
 
 section.testimonio {
-    margin: 0 auto 2rem auto;
-    background: linear-gradient(135deg, var(--papel-antiguo), #E6D7C3);
-    padding: 2rem;
+    /* Hereda la mayoría de los estilos de 'section' */
     width: 80%;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px var(--sombra-ebano);
-    margin-bottom: 2rem;
+    margin: 0 auto 2rem; /* Simplificado */
 }
 
 
@@ -139,7 +133,7 @@ section p {
 }
 
 /* ===== FORMULARIOS ===== */
-form, main form {
+form {
     max-width: 750px;
     margin: 2rem auto;
     background: linear-gradient(135deg, var(--papel-antiguo), #E6D7C3);
@@ -148,7 +142,7 @@ form, main form {
     box-shadow: 0 5px 15px var(--sombra-ebano);
 }
 
-.bloque-form label, main form label {
+.bloque-form label {
     display: block;
     margin-bottom: 0.5rem;
     color: var(--madera-ebano);
@@ -159,15 +153,12 @@ form, main form {
 
 .bloque-form input, 
 .bloque-form select, 
-.bloque-form textarea,
-main form input,
-main form select,
-main form textarea {
+.bloque-form textarea {
     width: 100%;
     padding: 1rem;
     border-radius: 5px;
     border: 1px solid var(--madera-ebano);
-    font-family: 'Crimson Text', serif;
+    font-family: 'Lora', serif;
     font-size: 1.15rem;
     background: rgba(255, 255, 255, 0.8);
     resize: none;
@@ -176,10 +167,7 @@ main form textarea {
 
 .bloque-form input:focus,
 .bloque-form select:focus,
-.bloque-form textarea:focus,
-main form input:focus,
-main form select:focus,
-main form textarea:focus {
+.bloque-form textarea:focus {
     outline: none;
     border-color: var(--dorado-viejo);
     box-shadow: 0 0 5px var(--dorado-viejo);
@@ -201,10 +189,7 @@ main form textarea:focus {
 button[type="submit"], 
 .btn, 
 .btn-atras, 
-.boton-principal, 
-main form button, 
-main form .btn, 
-main form .btn-atras {
+.boton-principal {
     background: linear-gradient(135deg, var(--ebano-oscuro), var(--ebano-medio));
     color: var(--papel-antiguo);
     padding: 0.8rem 1.5rem;
@@ -227,11 +212,7 @@ main form .btn-atras {
 
 button[type="submit"]:hover,
 .btn:hover,
-.btn-atras:hover,
-.boton-principal:hover,
-main form button:hover,
-main form .btn:hover,
-main form .btn-atras:hover {
+.btn-atras:hover, .boton-principal:hover {
     transform: translateY(-2px);
     box-shadow: 0 5px 10px var(--sombra-ebano);
     color: var(--dorado-brillante);
@@ -336,7 +317,7 @@ main form .btn-atras:hover {
 }
 
 .contenido-noticia p {
-    font-family: 'Crimson Text', serif;
+    font-family: 'Lora', serif;
     font-size: 1.1rem;
     line-height: 1.7;
     color: var(--madera-ebano);
@@ -379,22 +360,6 @@ main form .btn-atras:hover {
     max-width: 1100px;
 }
 
-/* Tarjetas */
-.socio-card {
-    flex: 0 1 calc((100% - 60px) / 4); /* 4 tarjetas por fila, gap 20px → 3 gaps = 60px */
-    min-width: 200px;  /* opcional: que no se encojan demasiado en pantallas pequeñas */
-    max-width: 300px;  /* opcional: que no crezcan demasiado */
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    background: linear-gradient(135deg, var(--papel-antiguo), #E6D7C3);
-    padding: 1rem;
-    border-radius: 8px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    min-height: 350px;
-}
-
 
 
 /* Card del socio */
@@ -405,6 +370,7 @@ main form .btn-atras:hover {
     padding: 1rem;
     max-width: 350px;
     text-align: center;
+    min-height: 350px; /* Añadido para consistencia */
     transition: transform 0.2s, box-shadow 0.2s;
 }
 
@@ -458,7 +424,7 @@ main form .btn-atras:hover {
 }
 
 .socio-card .contenedor-botones a:hover {
-    background-color: var(--ebano-claro);
+    background-color: var(--ebano-medio); /* --ebano-claro no estaba definido */
 }
 
 
@@ -587,14 +553,8 @@ main form .btn-atras:hover {
 }
 
 /* ===== FORMULARIOS ESPECÍFICOS ===== */
-form[action="socios.php"],
-form[action="servicios.php"] {
-    max-width: 600px;
-    margin: 2rem auto;
-    padding: 2rem;
-    background: linear-gradient(135deg, var(--papel-antiguo), #E6D7C3);
-    border-radius: 10px;
-    box-shadow: 0 5px 15px var(--sombra-ebano);
+form[action="socios.php"], form[action="servicios.php"] {
+    max-width: 600px; /* Hereda el resto de 'form' y solo cambia el tamaño */
     text-align: center;
 }
 
@@ -604,15 +564,14 @@ form[action="servicios.php"] input[type="text"] {
     padding: 0.8rem 1rem;
     border-radius: 5px;
     border: 1px solid var(--madera-ebano);
-    font-family: 'Crimson Text', serif;
+    font-family: 'Lora', serif;
     font-size: 1rem;
     background: rgba(255, 255, 255, 0.8);
     box-sizing: border-box;
     margin-bottom: 1.5rem;
 }
 
-form[action="socios.php"] .contenedor-botones,
-form[action="servicios.php"] .contenedor-botones {
+form[action="socios.php"] .contenedor-botones, form[action="servicios.php"] .contenedor-botones {
     margin-top: 0;
     margin-bottom: 0;
     justify-content: center;
@@ -659,7 +618,7 @@ form[action="servicios.php"] .contenedor-botones {
     text-align: center;
     padding: 1rem 0.5rem;
     border: 1px solid var(--madera-ebano);
-    font-family: 'Crimson Text', serif;
+    font-family: 'Lora', serif;
     cursor: default;
     transition: var(--transicion-rapida);
 }
@@ -725,13 +684,6 @@ form[action="servicios.php"] .contenedor-botones {
 }
 
 /* ===== CITAS DEL DÍA ===== */
-/* .citas-dia {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    margin: 2rem 0;
-} */
-
 .cita-card {
     background: linear-gradient(135deg, var(--papel-antiguo), #E6D7C3);
     padding: 1rem 1.5rem;
@@ -740,7 +692,7 @@ form[action="servicios.php"] .contenedor-botones {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
-    font-family: 'Crimson Text', serif;
+    font-family: 'Lora', serif;
     color: var(--madera-ebano);
     max-width: 300px;
     min-height: 180px;
@@ -769,16 +721,9 @@ form[action="servicios.php"] .contenedor-botones {
 }
 
 /* ===== RESULTADOS DE BÚSQUEDA ===== */
-/* .resultados-busqueda {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    margin: 2rem 0;
-} */
-
 .resultados-busqueda p {
     text-align: center;
-    font-family: 'Crimson Text', serif;
+    font-family: 'Lora', serif;
     color: var(--papel-antiguo);
     font-size: 1.1rem;
 }
@@ -903,42 +848,153 @@ footer {
     }
 }
 
-@media (max-width: 992px) {
+/* ============================================================
+   MEDIA QUERIES — ADAPTACIÓN GLOBAL DEL DISEÑO
+   Añadir al final del archivo sin modificar el CSS existente
+   ============================================================ */
+
+/* ===== 1. Pantallas muy grandes (≥1600px) ===== */
+@media (min-width: 1600px) {
+
+    /* Noticias */
     .noticias-grid {
+        grid-template-columns: repeat(5, 1fr);
+    }
+
+    .noticias-grid-3 {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    /* Más selectores aquí si hacen falta */
+}
+
+
+/* ===== 2. Escritorios estándar (≤1200px) ===== */
+@media (max-width: 1200px) {
+
+    .noticias-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .noticias-grid-3 {
         grid-template-columns: repeat(2, 1fr);
+    }
+
+    .servicios-lista {
+        max-width: 1000px;
+    }
+
+    /* Ajustes generales */
+    main, .container main {
+        max-width: 960px; /* Ajuste para el nuevo padding */
+        padding: 0 1rem;
     }
 }
 
-@media (max-width: 768px) {
+
+/* ===== 3. Tablets horizontales (≤992px) ===== */
+@media (max-width: 992px) {
+
+    /* Cabecera */
     .titulo-club {
         font-size: 2rem;
     }
-    
-    .menu {
-        flex-direction: column;
-        align-items: center;
-    }
-    
+
+    /* Noticias */
     .noticias-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, 1fr);
     }
-    
-    .servicio-card {
-        flex: 0 0 100%;
+
+    .noticias-grid-3 {
+        grid-template-columns: repeat(2, 1fr);
     }
-    
+
+    /* Socios */
+    .socios-lista {
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    }
+
+    /* Testimonios */
     .tarjeta-testimonio {
         flex: 0 0 100%;
-        max-width: 100%;
+    }
+
+    /* Servicios */
+    .servicio-card {
+        flex: 0 0 calc(50% - 20px);
     }
 }
 
-@media (max-width: 480px) {
-    .titulo-club {
-        font-size: 1.5rem;
+
+/* ===== 4. Tablets verticales y móviles grandes (≤768px) ===== */
+@media (max-width: 768px) {
+
+    header {
+        padding: 1.5rem 1rem;
     }
-    
-    section, form {
+
+    .menu {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    /* Noticias */
+    .noticias-grid,
+    .noticias-grid-3 {
+        grid-template-columns: 1fr;
+    }
+
+    /* Formularios */
+    form {
+        padding: 1.5rem;
+    }
+
+    .bloque-form label {
+        font-size: 1rem;
+    }
+
+    .bloque-form input,
+    .bloque-form textarea {
+        padding: 0.8rem;
+        font-size: 1rem;
+    }
+
+    /* Servicios */
+    .servicio-card {
+        flex: 0 0 100%;
+    }
+}
+
+
+/* ===== 5. Móviles pequeños (≤576px) ===== */
+@media (max-width: 576px) {
+
+    .titulo-club {
+        font-size: 1.6rem;
+    }
+
+    section {
+        padding: 1.2rem;
+    }
+
+    .noticia-card {
+        height: auto;
+    }
+
+    .noticia-card .imagen-noticia {
+        height: 160px;
+    }
+
+    .tarjeta-testimonio {
+        padding: 1.5rem;
+    }
+
+    .servicio-card {
         padding: 1rem;
+    }
+
+    /* Calendario */
+    .calendario table {
+        font-size: 0.85rem;
     }
 }

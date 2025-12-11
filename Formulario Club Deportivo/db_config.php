@@ -6,5 +6,5 @@ $db_user = $_ENV['DB_USER'] ?? 'developer';
 $db_password = $_ENV['DB_PASSWORD'] ?? 'dev_password';
 
 // Configuración para mostrar errores en desarrollo
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
+// error_reporting(E_ALL);
+// ini_set('display_errors', 1);
