@@ -490,7 +490,8 @@ button[type="submit"]:hover,
     text-decoration: none;
     cursor: pointer;
 }
-.imagen-noticia, .clicable {
+/* La lupa solo aparecerá en la imagen de la página de detalle de la noticia y otros elementos clicables */
+.noticia-detalle .imagen-noticia, .clicable {
     cursor: zoom-in;
 }
 
