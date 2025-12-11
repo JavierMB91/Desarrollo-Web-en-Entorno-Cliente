@@ -2,16 +2,24 @@
 @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400&family=Playfair+Display:wght@400;700&family=Roboto+Slab:wght@300;400&display=swap');
 
 :root {
-    --ebano-oscuro: #0D0D0D;
-    --ebano-medio: #1A1A1A;
-    --madera-ebano: #2A1810;
-    --papel-antiguo: #E8E0D5;
-    --dorado-viejo: #B8860B;
-    --dorado-brillante: #D4AF37;
-    --verde-libro: #2E7D32;
-    --error: #8B0000;
-    --sombra-ebano: rgba(26, 26, 26, 0.7);
-    --transicion-rapida: all 0.3s ease;
+    /* Paleta de colores modernizada manteniendo esencia */
+    --ebano-oscuro: #121212;
+    --ebano-medio: #1e1e1e;
+    --madera-ebano: #3d2817;
+    --papel-antiguo: #f5f0e6;
+    --papel-claro: #faf8f3;
+    --dorado-viejo: #b8860b;
+    --dorado-medio: #c9971d;
+    --dorado-brillante: #e6c35c;
+    --verde-libro: #2e7d32;
+    --verde-suave: #4caf50;
+    --error: #d32f2f;
+    --error-suave: #f8d7da;
+    --sombra-ebano: rgba(26, 26, 26, 0.8);
+    --sombra-suave: rgba(0, 0, 0, 0.1);
+    --sombra-media: rgba(0, 0, 0, 0.15);
+    --transicion-rapida: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transicion-suave: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* ===== ESTILOS BASE Y RESET ===== */
@@ -28,7 +36,7 @@ html, body {
 
 body {
     font-family: 'Lora', serif;
-    background: linear-gradient(135deg, var(--madera-ebano), var(--ebano-medio));
+    background: var(--ebano-medio);
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -53,8 +61,11 @@ main {
 header {
     background: linear-gradient(135deg, var(--ebano-oscuro), var(--ebano-medio));
     padding: 2rem 1rem;
-    box-shadow: 0 4px 10px var(--sombra-ebano);
-    border-bottom: 2px solid var(--dorado-viejo);
+    box-shadow: 0 4px 15px var(--sombra-ebano);
+    border-bottom: 3px solid var(--dorado-viejo);
+    position: sticky;
+    top: 0;
+    z-index: 100;
 }
 
 .titulo-club {
@@ -62,16 +73,34 @@ header {
     font-size: 2.5rem;
     text-align: center;
     color: var(--papel-antiguo);
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
     letter-spacing: 2px;
     text-transform: uppercase;
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
+.titulo-club::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 3px;
+    background: var(--dorado-brillante);
+    border-radius: 2px;
 }
 
 /* ===== NAVEGACIÓN ===== */
 .navegador {
     background: var(--ebano-medio);
     padding: 1rem;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.4);
+    position: sticky;
+    top: 90px;
+    z-index: 90;
 }
 
 .menu {
@@ -89,31 +118,54 @@ header {
     text-decoration: none;
     font-family: 'Roboto Slab', serif;
     border: 2px solid transparent;
-    border-radius: 5px;
-    transition: var(--transicion-rapida);
+    border-radius: 30px;
+    transition: var(--transicion-suave);
+    position: relative;
+    overflow: hidden;
+}
+
+.menu li a::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+    transition: var(--transicion-suave);
+}
+
+.menu li a:hover::before {
+    left: 100%;
 }
 
 .menu li a:hover {
     background: var(--ebano-oscuro);
     border-color: var(--dorado-viejo);
     color: var(--dorado-brillante);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 10px rgba(0,0,0,0.3);
 }
 
 /* ===== CONTENIDO GENERAL ===== */
 section {
-    background: linear-gradient(135deg, var(--papel-antiguo), #E6D7C3);
+    background: linear-gradient(135deg, var(--papel-antiguo), var(--papel-claro));
     padding: 2rem;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px var(--sombra-ebano);
+    border-radius: 15px;
+    box-shadow: 0 8px 20px var(--sombra-media);
     margin-bottom: 2rem;
+    transition: var(--transicion-suave);
+}
+
+section:hover {
+    box-shadow: 0 12px 25px var(--sombra-ebano);
+    transform: translateY(-2px);
 }
 
 section.testimonio {
-    /* Hereda la mayoría de los estilos de 'section' */
     width: 80%;
-    margin: 0 auto 2rem; /* Simplificado */
+    margin: 0 auto 2rem;
 }
-
 
 section p {
     font-size: 1.2rem;
@@ -130,16 +182,35 @@ section p {
     font-family: 'Playfair Display', serif;
     color: var(--ebano-oscuro);
     font-size: 1.8rem;
+    position: relative;
+    padding-bottom: 0.8rem;
+}
+
+.lista-noticias h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background: var(--dorado-viejo);
+    border-radius: 2px;
 }
 
 /* ===== FORMULARIOS ===== */
 form {
     max-width: 750px;
     margin: 2rem auto;
-    background: linear-gradient(135deg, var(--papel-antiguo), #E6D7C3);
+    background: linear-gradient(135deg, var(--papel-antiguo), var(--papel-claro));
     padding: 2.5rem;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px var(--sombra-ebano);
+    border-radius: 15px;
+    box-shadow: 0 8px 20px var(--sombra-media);
+    transition: var(--transicion-suave);
+}
+
+form:hover {
+    box-shadow: 0 12px 25px var(--sombra-ebano);
 }
 
 .bloque-form label {
@@ -156,13 +227,13 @@ form {
 .bloque-form textarea {
     width: 100%;
     padding: 1rem;
-    border-radius: 5px;
+    border-radius: 8px;
     border: 1px solid var(--madera-ebano);
     font-family: 'Lora', serif;
     font-size: 1.15rem;
-    background: rgba(255, 255, 255, 0.8);
+    background: rgba(255, 255, 255, 0.9);
     resize: none;
-    transition: var(--transicion-rapida);
+    transition: var(--transicion-suave);
 }
 
 .bloque-form input:focus,
@@ -170,20 +241,25 @@ form {
 .bloque-form textarea:focus {
     outline: none;
     border-color: var(--dorado-viejo);
-    box-shadow: 0 0 5px var(--dorado-viejo);
+    box-shadow: 0 0 0 3px rgba(184, 134, 11, 0.2);
+    background: rgba(255, 255, 255, 1);
 }
 
 .bloque-form img {
     display: block;
     margin-top: 1rem;
     margin-bottom: 1.2rem;
-    width: 40%; /* se adapta al ancho del contenedor */
-    max-width: 500px; /* opcional, para no exceder */
+    width: 40%;
+    max-width: 500px;
     border-radius: 10px;
-    box-shadow: 0 5px 20px var(--sombra-ebano);
+    box-shadow: 0 8px 20px var(--sombra-media);
+    transition: var(--transicion-suave);
 }
 
-
+.bloque-form img:hover {
+    transform: scale(1.02);
+    box-shadow: 0 12px 25px var(--sombra-ebano);
+}
 
 /* ===== BOTONES ===== */
 button[type="submit"], 
@@ -194,27 +270,48 @@ button[type="submit"],
     color: var(--papel-antiguo);
     padding: 0.8rem 1.5rem;
     border: 2px solid var(--dorado-viejo);
-    border-radius: 5px;
+    border-radius: 30px;
     font-family: 'Playfair Display', serif;
     font-size: 1rem;
     cursor: pointer;
-    transition: var(--transicion-rapida);
+    transition: var(--transicion-suave);
     text-decoration: none;
-    
-    /* Cambios para centrar el texto */
-    display: inline-flex;       /* Flex para alinear contenido */
-    align-items: center;        /* Centrado vertical */
-    justify-content: center;    /* Centrado horizontal */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     text-align: center;
     text-transform: uppercase;
+    position: relative;
+    overflow: hidden;
 }
 
+button[type="submit"]::before, 
+.btn::before, 
+.btn-atras::before, 
+.boton-principal::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: var(--transicion-suave);
+}
+
+button[type="submit"]:hover::before, 
+.btn:hover::before, 
+.btn-atras:hover::before, 
+.boton-principal:hover::before {
+    left: 100%;
+}
 
 button[type="submit"]:hover,
 .btn:hover,
-.btn-atras:hover, .boton-principal:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 10px var(--sombra-ebano);
+.btn-atras:hover, 
+.boton-principal:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 15px var(--sombra-ebano);
     color: var(--dorado-brillante);
     border-color: var(--dorado-brillante);
 }
@@ -243,30 +340,47 @@ button[type="submit"]:hover,
 }
 
 .noticia-card {
-    background: rgba(255,255,255,0.9);
-    padding: 1rem;
-    border-radius: 8px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    background: rgba(255,255,255,0.95);
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px var(--sombra-media);
     display: flex;
     flex-direction: column;
     gap: 0.75rem;
     height: 450px;
     overflow: hidden;
     align-items: flex-start;
+    transition: var(--transicion-suave);
+}
+
+.noticia-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 25px var(--sombra-ebano);
 }
 
 .noticia-card .imagen-noticia {
     width: 100%;
     height: 200px;
     object-fit: cover;
-    border-radius: 6px;
-    box-shadow: 0 5px 20px var(--sombra-ebano);
+    border-radius: 8px;
+    box-shadow: 0 5px 15px var(--sombra-suave);
+    transition: var(--transicion-suave);
+}
+
+.noticia-card:hover .imagen-noticia {
+    transform: scale(1.03);
+    box-shadow: 0 8px 20px var(--sombra-media);
 }
 
 .noticia-card h3 {
     margin: 0;
     font-size: 1.2rem;
     color: var(--ebano-oscuro);
+    transition: var(--transicion-rapida);
+}
+
+.noticia-card:hover h3 {
+    color: var(--dorado-viejo);
 }
 
 .noticia-card p {
@@ -281,7 +395,7 @@ button[type="submit"]:hover,
 
 .fecha-noticia {
     font-size: 0.9rem;
-    color: var(--ebano-oscuro);
+    color: var(--ebano-medio);
     font-weight: 500;
     margin-bottom: 0.5rem;
 }
@@ -295,18 +409,25 @@ button[type="submit"]:hover,
 .noticia-detalle {
     max-width: 900px;
     margin: 0 auto;
-    background: linear-gradient(135deg, var(--papel-antiguo), #E6D7C3);
+    background: linear-gradient(135deg, var(--papel-antiguo), var(--papel-claro));
     padding: 2rem;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px var(--sombra-ebano);
+    border-radius: 15px;
+    box-shadow: 0 8px 20px var(--sombra-media);
 }
 
 .imagen-noticia {
     width: 100%;
     max-height: 400px;
     object-fit: cover;
-    border-radius: 8px;
+    border-radius: 10px;
     margin-bottom: 1.5rem;
+    box-shadow: 0 5px 15px var(--sombra-suave);
+    transition: var(--transicion-suave);
+}
+
+.imagen-noticia:hover {
+    transform: scale(1.01);
+    box-shadow: 0 8px 20px var(--sombra-media);
 }
 
 .contenido-noticia {
@@ -329,8 +450,6 @@ button[type="submit"]:hover,
     box-sizing: border-box;
 }
 
-
-
 /* ===== SECCIÓN CONTACTO ===== */
 .contacto {
     text-align: center;
@@ -344,6 +463,20 @@ button[type="submit"]:hover,
     font-family: 'Playfair Display', serif;
     color: var(--ebano-oscuro);
     font-size: 1.8rem;
+    position: relative;
+    padding-bottom: 0.8rem;
+}
+
+.contacto h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background: var(--dorado-viejo);
+    border-radius: 2px;
 }
 
 .contacto form {
@@ -360,45 +493,54 @@ button[type="submit"]:hover,
     max-width: 1100px;
 }
 
-
-
-/* Card del socio */
 .socio-card {
-    background-color: #fff; /* Fondo claro */
-    border-radius: 12px;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.15); /* sombra más suave */
-    padding: 1rem;
+    background-color: #fff;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px var(--sombra-media);
+    padding: 1.5rem;
     max-width: 350px;
     text-align: center;
-    min-height: 350px; /* Añadido para consistencia */
-    transition: transform 0.2s, box-shadow 0.2s;
+    min-height: 350px;
+    transition: var(--transicion-suave);
+    display: flex;
+    flex-direction: column;
 }
 
 .socio-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+    transform: translateY(-8px);
+    box-shadow: 0 15px 30px var(--sombra-ebano);
 }
 
-/* Imagen */
 .socio-card img {
     display: block;
-    margin: 0 auto 1rem; /* centrada y margen abajo */
-    width: 150px; /* tamaño fijo para uniformidad */
-    height: 150px; /* altura fija */
-    object-fit: cover; /* recorta la imagen si es necesario */
-    border-radius: 50%; /* foto redonda */
-    box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+    margin: 0 auto 1rem;
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 50%;
+    box-shadow: 0 5px 15px var(--sombra-suave);
+    border: 3px solid var(--dorado-viejo);
+    transition: var(--transicion-suave);
 }
 
-/* Nombre */
+.socio-card:hover img {
+    transform: scale(1.05);
+    border-color: var(--dorado-brillante);
+    box-shadow: 0 8px 20px var(--sombra-media);
+}
+
 .socio-card h3 {
     margin: 0.5rem 0 0.3rem 0;
     color: var(--ebano-oscuro);
     font-size: 1.3rem;
     font-weight: 600;
+    transition: var(--transicion-rapida);
 }
 
-/* Datos (edad, teléfono, etc.) */
+.socio-card:hover h3 {
+    color: var(--dorado-viejo);
+}
+
 .socio-card p {
     font-size: 1rem;
     color: var(--madera-ebano);
@@ -406,7 +548,6 @@ button[type="submit"]:hover,
     word-break: break-word;
 }
 
-/* Botones dentro de la card */
 .socio-card .contenedor-botones {
     margin-top: 0.8rem;
 }
@@ -417,18 +558,18 @@ button[type="submit"]:hover,
     margin: 0 0.2rem;
     background-color: var(--ebano-oscuro);
     color: #fff;
-    border-radius: 6px;
+    border-radius: 20px;
     text-decoration: none;
     font-size: 1rem;
-    transition: background-color 0.2s;
+    transition: var(--transicion-suave);
 }
 
 .socio-card .contenedor-botones a:hover {
-    background-color: var(--ebano-medio); /* --ebano-claro no estaba definido */
+    background-color: var(--dorado-viejo);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 10px rgba(0,0,0,0.2);
 }
 
-
-/* Botón */
 .socio-card .btn-atras {
     margin-top: auto;
     align-self: center;
@@ -447,20 +588,31 @@ button[type="submit"]:hover,
 .servicio-card {
     width: 100%;
     max-width: 350px;
-    background: linear-gradient(135deg, var(--papel-antiguo), #E6D7C3);
+    background: linear-gradient(135deg, var(--papel-antiguo), var(--papel-claro));
     padding: 1.5rem;
-    border-radius: 8px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    border-radius: 15px;
+    box-shadow: 0 8px 20px var(--sombra-media);
     text-align: center;
     flex: 0 0 calc(25% - 20px);
-    transition: transform 0.2s ease, box-shadow 0.2s ease; /* transición suave */
+    transition: var(--transicion-suave);
+    position: relative;
+    overflow: hidden;
+}
+
+.servicio-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: linear-gradient(90deg, var(--dorado-viejo), var(--dorado-brillante));
 }
 
 .servicio-card:hover {
-    transform: translateY(-5px); /* se levanta */
-    box-shadow: 0 10px 25px rgba(0,0,0,0.2); /* sombra más intensa */
+    transform: translateY(-8px);
+    box-shadow: 0 15px 30px var(--sombra-ebano);
 }
-
 
 /* ===== TESTIMONIOS ===== */
 .testimonios-lista {
@@ -478,27 +630,53 @@ button[type="submit"]:hover,
     font-family: 'Playfair Display', serif;
     color: var(--ebano-oscuro);
     font-size: 1.8rem;
+    position: relative;
+    padding-bottom: 0.8rem;
+}
+
+.testimonio h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background: var(--dorado-viejo);
+    border-radius: 2px;
 }
 
 .tarjeta-testimonio {
     width: 100%;
     max-width: 500px;
-    background: linear-gradient(135deg, var(--papel-antiguo), #E6D7C3);
+    background: linear-gradient(135deg, var(--papel-antiguo), var(--papel-claro));
     padding: 2rem;
-    border-radius: 12px;
-    box-shadow: 0 7px 18px rgba(0,0,0,0.15);
+    border-radius: 15px;
+    box-shadow: 0 8px 20px var(--sombra-media);
     color: var(--ebano-oscuro);
     display: flex;
     flex-direction: column;
     gap: 0.8rem;
     flex: 0 0 calc(50% - 25px);
     font-size: 1.15rem;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    transition: var(--transicion-suave);
+    position: relative;
+}
+
+.tarjeta-testimonio::before {
+    content: '"';
+    position: absolute;
+    top: 10px;
+    left: 15px;
+    font-size: 4rem;
+    color: var(--dorado-viejo);
+    opacity: 0.3;
+    font-family: 'Playfair Display', serif;
 }
 
 .tarjeta-testimonio:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 22px rgba(0,0,0,0.2);
+    transform: translateY(-8px);
+    box-shadow: 0 15px 30px var(--sombra-ebano);
 }
 
 .tarjeta-testimonio p {
@@ -510,6 +688,8 @@ button[type="submit"]:hover,
     -webkit-box-orient: vertical;
     word-break: break-word;
     overflow-wrap: break-word;
+    position: relative;
+    z-index: 1;
 }
 
 .tarjeta-testimonio .comentario {
@@ -533,18 +713,18 @@ button[type="submit"]:hover,
 
 .paginacion {
     display: flex;
-    justify-content: center; /* centra todo */
+    justify-content: center;
     align-items: center;
-    gap: 1rem; /* espacio entre botones y texto */
+    gap: 1rem;
     margin: 2rem 0;
-    flex-wrap: wrap; /* opcional para pantallas pequeñas */
+    flex-wrap: wrap;
 }
-
 
 .paginacion span {
     font-size: 1.5rem;
     color: var(--papel-antiguo);
     margin: 0;
+    font-weight: 600;
 }
 
 .paginacion .btn {
@@ -554,7 +734,7 @@ button[type="submit"]:hover,
 
 /* ===== FORMULARIOS ESPECÍFICOS ===== */
 form[action="socios.php"], form[action="servicios.php"], form[action="citas.php"] {
-    max-width: 600px; /* Hereda el resto de 'form' y solo cambia el tamaño */
+    max-width: 600px;
     text-align: center;
 }
 
@@ -563,13 +743,23 @@ form[action="servicios.php"] input[type="text"],
 form[action="citas.php"] input[type="text"] {
     width: 100%;
     padding: 0.8rem 1rem;
-    border-radius: 5px;
+    border-radius: 8px;
     border: 1px solid var(--madera-ebano);
     font-family: 'Lora', serif;
     font-size: 1rem;
-    background: rgba(255, 255, 255, 0.8);
+    background: rgba(255, 255, 255, 0.9);
     box-sizing: border-box;
     margin-bottom: 1.5rem;
+    transition: var(--transicion-suave);
+}
+
+form[action="socios.php"] input[type="text"]:focus,
+form[action="servicios.php"] input[type="text"]:focus, 
+form[action="citas.php"] input[type="text"]:focus {
+    outline: none;
+    border-color: var(--dorado-viejo);
+    box-shadow: 0 0 0 3px rgba(184, 134, 11, 0.2);
+    background: rgba(255, 255, 255, 1);
 }
 
 form[action="socios.php"] .contenedor-botones, form[action="servicios.php"] .contenedor-botones {
@@ -584,20 +774,32 @@ form[action="socios.php"] .contenedor-botones, form[action="servicios.php"] .con
     color: var(--papel-antiguo);
     margin: 0;
     margin-top: 2rem;
+    position: relative;
+    padding-bottom: 0.8rem;
 }
 
-/* ===== CELDAS DEL CALENDARIO ===== */
+.contenedor-botones h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background: var(--dorado-viejo);
+    border-radius: 2px;
+}
+
 .calendario td.clickable {
     cursor: pointer;
     vertical-align: top;
-    transition: var(--transicion-rapida);
+    transition: var(--transicion-suave);
 }
 
 .calendario td.clickable:hover {
     background: var(--dorado-viejo);
     color: var(--papel-antiguo);
 }
-
 
 .calendario {
     display: flex;
@@ -609,10 +811,16 @@ form[action="socios.php"] .contenedor-botones, form[action="servicios.php"] .con
     border-collapse: collapse;
     width: 100%;
     max-width: 800px;
-    background: linear-gradient(135deg, var(--papel-antiguo), #E6D7C3);
-    border-radius: 8px;
+    background: linear-gradient(135deg, var(--papel-antiguo), var(--papel-claro));
+    border-radius: 15px;
     overflow: hidden;
-    box-shadow: 0 5px 15px var(--sombra-ebano);
+    box-shadow: 0 8px 20px var(--sombra-media);
+}
+
+.calendario th {
+    background: var(--ebano-oscuro);
+    color: var(--papel-antiguo);
+    font-weight: 600;
 }
 
 .calendario th, .calendario td {
@@ -621,7 +829,7 @@ form[action="socios.php"] .contenedor-botones, form[action="servicios.php"] .con
     border: 1px solid var(--madera-ebano);
     font-family: 'Lora', serif;
     cursor: default;
-    transition: var(--transicion-rapida);
+    transition: var(--transicion-suave);
 }
 
 .calendario td {
@@ -631,7 +839,7 @@ form[action="socios.php"] .contenedor-botones, form[action="servicios.php"] .con
 }
 
 .calendario td:hover {
-    background: var(--papel-antiguo);
+    background: rgba(184, 134, 11, 0.1);
 }
 
 .calendario .dia-numero {
@@ -647,7 +855,6 @@ form[action="socios.php"] .contenedor-botones, form[action="servicios.php"] .con
     margin-top: 0.2rem;
 }
 
-/* Celda clicable del calendario */
 .calendario td.clickable {
     cursor: pointer;
 }
@@ -660,25 +867,23 @@ form[action="socios.php"] .contenedor-botones, form[action="servicios.php"] .con
 .btn-mes {
     background: linear-gradient(135deg, var(--ebano-oscuro), var(--ebano-medio));
     color: var(--papel-antiguo);
-    padding: 0.2rem 0.5rem;          /* padding horizontal y vertical */
+    padding: 0.8rem 1.5rem;
     border: 2px solid var(--dorado-viejo);
-    border-radius: 5px;
+    border-radius: 30px;
     font-family: 'Playfair Display', serif;
-    font-size: 1.5rem;
-    line-height: 1.5rem;            /* altura de línea igual al tamaño del texto */
-    display: inline-flex;            /* para centrar vertical y horizontal */
-    justify-content: center;         /* centrado horizontal */
-    align-items: center;             /* centrado vertical */
+    font-size: 1rem;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
     cursor: pointer;
-    transition: var(--transicion-rapida);
+    transition: var(--transicion-suave);
     text-decoration: none;
     text-align: center;
     text-transform: uppercase;
 }
 
-
 .btn-mes:hover {
-    transform: translateY(-2px);
+    transform: translateY(-3px);
     box-shadow: 0 5px 10px var(--sombra-ebano);
     color: var(--dorado-brillante);
     border-color: var(--dorado-brillante);
@@ -686,10 +891,10 @@ form[action="socios.php"] .contenedor-botones, form[action="servicios.php"] .con
 
 /* ===== CITAS DEL DÍA ===== */
 .cita-card {
-    background: linear-gradient(135deg, var(--papel-antiguo), #E6D7C3);
-    padding: 1rem 1.5rem;
-    border-radius: 8px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    background: linear-gradient(135deg, var(--papel-antiguo), var(--papel-claro));
+    padding: 1.5rem;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px var(--sombra-media);
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
@@ -697,6 +902,12 @@ form[action="socios.php"] .contenedor-botones, form[action="servicios.php"] .con
     color: var(--madera-ebano);
     max-width: 300px;
     min-height: 180px;
+    transition: var(--transicion-suave);
+}
+
+.cita-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 25px var(--sombra-ebano);
 }
 
 .cita-card a {
@@ -705,13 +916,13 @@ form[action="socios.php"] .contenedor-botones, form[action="servicios.php"] .con
     background: linear-gradient(135deg, var(--ebano-oscuro), var(--ebano-medio));
     color: var(--papel-antiguo);
     padding: 0.5rem 1rem;
-    border-radius: 5px;
+    border-radius: 20px;
     border: 2px solid var(--dorado-viejo);
     font-family: 'Playfair Display', serif;
     text-decoration: none;
     font-size: 0.9rem;
     text-transform: uppercase;
-    transition: var(--transicion-rapida);
+    transition: var(--transicion-suave);
 }
 
 .cita-card a:hover {
@@ -732,20 +943,18 @@ form[action="socios.php"] .contenedor-botones, form[action="servicios.php"] .con
 .cita-card p {
     font-size: 1rem;
     color: var(--madera-ebano);
-    line-height: 1.5;            /* Para que el texto respire */
-    margin-bottom: 0.5rem;       /* Espacio entre líneas o párrafos */
-    word-break: break-word;       /* Evita que palabras largas rompan el diseño */
-    overflow-wrap: break-word;    /* Similar a lo anterior, soporte extra */
-    text-align: left;             /* Alineación consistente */
+    line-height: 1.5;
+    margin-bottom: 0.5rem;
+    word-break: break-word;
+    overflow-wrap: break-word;
+    text-align: left;
     display: -webkit-box;
-    line-clamp: 3;       /* Máximo de líneas visibles */
+    line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
 }
 
-
 /* ===== MODAL ===== */
-
 .modal {
     display: none;
     position: fixed;
@@ -754,42 +963,62 @@ form[action="socios.php"] .contenedor-botones, form[action="servicios.php"] .con
     top: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0,0,0,0.6);
+    background: rgba(0,0,0,0.7);
     justify-content: center;
     align-items: center;
+    animation: fadeIn 0.3s ease-out;
 }
 
 .modal-content {
-    background: var(--papel-antiguo);
+    background: linear-gradient(135deg, var(--papel-antiguo), var(--papel-claro));
     padding: 2rem;
-    border-radius: 10px;
+    border-radius: 15px;
     text-align: center;
     max-width: 400px;
-    box-shadow: 0 5px 15px var(--sombra-ebano);
+    box-shadow: 0 8px 20px var(--sombra-ebano);
     font-size: 20px;
+    animation: slideIn 0.3s ease-out;
+    position: relative;
+}
+
+.modal-close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--ebano-oscuro);
+    transition: var(--transicion-rapida);
+}
+
+.modal-close:hover {
+    color: var(--error);
+    transform: scale(1.1);
 }
 
 .btn-modal {
-    font-size: 1rem;       /* tamaño del texto */
-    padding: 0.3rem 0.6rem; /* vertical | horizontal */
+    font-size: 1rem;
+    padding: 0.3rem 0.6rem;
+    margin-top: 1rem;
 }
 
 .resultados-busqueda,
 .citas-dia {
     display: flex;
-    flex-wrap: wrap;       /* Permite que las tarjetas pasen a otra fila si no caben */
-    justify-content: center; /* Centra las tarjetas si hay pocas */
-    gap: 20px;             /* Espacio entre tarjetas */
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
     margin-top: 2rem;
 }
 
 .cita-card {
-    flex: 0 0 300px;       /* Tamaño fijo de la tarjeta */
+    flex: 0 0 300px;
     display: flex;
     flex-direction: column;
-    align-items: center;   /* Centra el contenido dentro de la tarjeta */
+    align-items: center;
 }
-
 
 /* ===== ESTADOS DE ERROR ===== */
 .error {
@@ -804,7 +1033,7 @@ form[action="socios.php"] .contenedor-botones, form[action="servicios.php"] .con
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background: #4CAF50;
+    background: var(--verde-suave);
     color: white;
     padding: 20px 40px;
     border-radius: 10px;
@@ -816,21 +1045,43 @@ form[action="socios.php"] .contenedor-botones, form[action="servicios.php"] .con
 
 .mensaje-error {
     padding: 12px;
-    background: #f8d7da;
-    color: #721c24;
-    border-left: 5px solid #dc3545;
+    background: var(--error-suave);
+    color: var(--error);
+    border-left: 5px solid var(--error);
     margin-bottom: 15px;
     font-weight: bold;
+    border-radius: 5px;
+    animation: shake 0.5s ease-out;
 }
 
+/* ===== ANIMACIONES ===== */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
 
-/* Desaparece lentamente */
+@keyframes slideIn {
+    from { 
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to { 
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+    20%, 40%, 60%, 80% { transform: translateX(5px); }
+}
+
 @keyframes fadeOut {
     0% { opacity: 1; }
     70% { opacity: 1; }
     100% { opacity: 0; }
 }
-
 
 /* ===== FOOTER ===== */
 footer {
@@ -839,7 +1090,7 @@ footer {
     text-align: center;
     padding: 2rem;
     margin-top: auto;
-    border-top: 2px solid var(--dorado-viejo);
+    border-top: 3px solid var(--dorado-viejo);
 }
 
 /* ===== MEDIA QUERIES PARA RESPONSIVE DESIGN ===== */
@@ -851,13 +1102,10 @@ footer {
 
 /* ============================================================
    MEDIA QUERIES — ADAPTACIÓN GLOBAL DEL DISEÑO
-   Añadir al final del archivo sin modificar el CSS existente
    ============================================================ */
 
 /* ===== 1. Pantallas muy grandes (≥1600px) ===== */
 @media (min-width: 1600px) {
-
-    /* Noticias */
     .noticias-grid {
         grid-template-columns: repeat(5, 1fr);
     }
@@ -865,14 +1113,10 @@ footer {
     .noticias-grid-3 {
         grid-template-columns: repeat(4, 1fr);
     }
-
-    /* Más selectores aquí si hacen falta */
 }
-
 
 /* ===== 2. Escritorios estándar (≤1200px) ===== */
 @media (max-width: 1200px) {
-
     .noticias-grid {
         grid-template-columns: repeat(3, 1fr);
     }
@@ -885,23 +1129,18 @@ footer {
         max-width: 1000px;
     }
 
-    /* Ajustes generales */
     main, .container main {
-        max-width: 960px; /* Ajuste para el nuevo padding */
+        max-width: 960px;
         padding: 0 1rem;
     }
 }
 
-
 /* ===== 3. Tablets horizontales (≤992px) ===== */
 @media (max-width: 992px) {
-
-    /* Cabecera */
     .titulo-club {
         font-size: 2rem;
     }
 
-    /* Noticias */
     .noticias-grid {
         grid-template-columns: repeat(2, 1fr);
     }
@@ -910,28 +1149,27 @@ footer {
         grid-template-columns: repeat(2, 1fr);
     }
 
-    /* Socios */
     .socios-lista {
         grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     }
 
-    /* Testimonios */
     .tarjeta-testimonio {
         flex: 0 0 100%;
     }
 
-    /* Servicios */
     .servicio-card {
         flex: 0 0 calc(50% - 20px);
     }
 }
 
-
 /* ===== 4. Tablets verticales y móviles grandes (≤768px) ===== */
 @media (max-width: 768px) {
-
     header {
         padding: 1.5rem 1rem;
+    }
+
+    .navegador {
+        position: static;
     }
 
     .menu {
@@ -939,13 +1177,11 @@ footer {
         gap: 0.5rem;
     }
 
-    /* Noticias */
     .noticias-grid,
     .noticias-grid-3 {
         grid-template-columns: 1fr;
     }
 
-    /* Formularios */
     form {
         padding: 1.5rem;
     }
@@ -960,16 +1196,13 @@ footer {
         font-size: 1rem;
     }
 
-    /* Servicios */
     .servicio-card {
         flex: 0 0 100%;
     }
 }
 
-
 /* ===== 5. Móviles pequeños (≤576px) ===== */
 @media (max-width: 576px) {
-
     .titulo-club {
         font-size: 1.6rem;
     }
@@ -994,7 +1227,6 @@ footer {
         padding: 1rem;
     }
 
-    /* Calendario */
     .calendario table {
         font-size: 0.85rem;
     }
