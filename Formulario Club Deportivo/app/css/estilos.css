@@ -539,7 +539,7 @@ main form .btn-atras:hover {
     min-height: 0;
     overflow: hidden;
     display: -webkit-box;
-    -webkit-line-clamp: 4;
+    line-clamp: 4;
     -webkit-box-orient: vertical;
     word-break: break-word;
     overflow-wrap: break-word;
