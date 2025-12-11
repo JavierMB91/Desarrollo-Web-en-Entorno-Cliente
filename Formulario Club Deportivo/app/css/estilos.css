@@ -377,6 +377,12 @@ main form .btn-atras:hover {
     margin: 2rem 0;
 }
 
+.socios-lista .socio-card {
+    flex: 0 0 calc(25% - 15px); /* 25% del contenedor menos la mitad del gap */
+    box-sizing: border-box;     /* para que padding/border no rompa el ancho */
+}
+
+
 /* Tarjetas */
 .socio-card {
     flex: 1 1 200px; /* crece, se encoge, base 200px */
