@@ -231,7 +231,7 @@ form:hover {
     border: 1px solid var(--madera-ebano);
     font-family: 'Lora', serif;
     font-size: 1.15rem;
-    background: var(--papel-claro);
+    background: #fff;
     resize: none;
     transition: var(--transicion-suave);
 }
@@ -242,7 +242,7 @@ form:hover {
     outline: none;
     border-color: var(--dorado-viejo);
     box-shadow: 0 0 0 3px rgba(184, 134, 11, 0.2);
-    background: var(--papel-antiguo);
+    background: #fff;
 }
 
 .bloque-form img {
