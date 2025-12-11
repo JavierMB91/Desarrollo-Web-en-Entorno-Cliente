@@ -749,7 +749,7 @@ form[action="citas.php"] input[type="text"] {
     font-size: 1rem;
     background: rgba(255, 255, 255, 0.9);
     box-sizing: border-box;
-    margin-bottom: 1.5rem;
+    margin-bottom: 0.5rem;
     transition: var(--transicion-suave);
 }
 
@@ -762,7 +762,7 @@ form[action="citas.php"] input[type="text"]:focus {
     background: rgba(255, 255, 255, 1);
 }
 
-form[action="socios.php"] .contenedor-botones, form[action="servicios.php"] .contenedor-botones {
+form[action="socios.php"] .contenedor-botones, form[action="servicios.php"] .contenedor-botones, form[action="citas.php"] .contenedor-botones {
     margin-top: 0;
     margin-bottom: 0;
     justify-content: center;
