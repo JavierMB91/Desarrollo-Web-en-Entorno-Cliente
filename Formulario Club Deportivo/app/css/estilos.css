@@ -553,13 +553,14 @@ button[type="submit"]:hover,
 }
 
 /* ===== FORMULARIOS ESPECÍFICOS ===== */
-form[action="socios.php"], form[action="servicios.php"] {
+form[action="socios.php"], form[action="servicios.php"], form[action="citas.php"] {
     max-width: 600px; /* Hereda el resto de 'form' y solo cambia el tamaño */
     text-align: center;
 }
 
 form[action="socios.php"] input[type="text"],
-form[action="servicios.php"] input[type="text"] {
+form[action="servicios.php"] input[type="text"], 
+form[action="citas.php"] input[type="text"] {
     width: 100%;
     padding: 0.8rem 1rem;
     border-radius: 5px;
