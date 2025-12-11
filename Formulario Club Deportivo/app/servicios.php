@@ -51,7 +51,7 @@ require_once 'conexion.php';
         <!-- BUSCADOR + BOTONES -->
         <!-- ======================== -->
         <main>
-            <h2 class="titulo-club">Listado de Servicios</h2>
+            <h2 class="titulo-club">Listado de Actividades</h2>
             <form method="get" action="servicios.php">
                 <input type="text" name="q" 
                        placeholder="Buscar por nombre de actividad"
@@ -59,8 +59,8 @@ require_once 'conexion.php';
 
                 <div class="contenedor-botones">
                     <button type="submit"><span>Buscar</span></button>
-                    <a href="servicio.php" class="btn-atras"><span>Agregar nuevo servicio</span></a>
-                    <a href="servicios.php" class="btn-atras"><span>Mostrar todos</span></a>
+                    <a href="servicio.php" class="btn-atras"><span>Agregar nueva Actividad</span></a>
+                    <a href="servicios.php" class="btn-atras"><span>Mostrar todas</span></a>
                 </div>
             </form>
         </main>
