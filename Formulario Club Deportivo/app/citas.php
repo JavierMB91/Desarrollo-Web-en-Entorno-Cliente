@@ -156,8 +156,12 @@ function h($s) { return htmlspecialchars($s, ENT_QUOTES, 'UTF-8'); }
         <?php if (!empty($resultadosBusqueda)): ?>
             <?php foreach ($resultadosBusqueda as $c): ?>
                 <div class="socio-card cita-card">
-                    <p><?= h($c['fecha']) ?> <?= h($c['hora']) ?> - <?= h($c['socio']) ?> (<?= h($c['telefono']) ?>) - <?= h($c['servicio']) ?></p>
-
+                    <p><strong>Fecha:</strong> <?= h(date('d/m/Y', strtotime($c['fecha']))) ?></p>
+                    <p><strong>Hora:</strong> <?= h(date('H:i', strtotime($c['hora']))) ?></p>
+                    <p><strong>Socio:</strong> <?= h($c['socio']) ?></p>
+                    <p><strong>Servicio:</strong> <?= h($c['servicio']) ?></p>
+                    <p><strong>Teléfono:</strong> <?= h($c['telefono']) ?></p>
+                    
                     <?php if ($c['fecha'] > date('Y-m-d')): ?>
                         <button type="button" class="btn-atras btn-cancelar" 
                                 data-url="citas.php?borrar=<?= intval($c['id']) ?>&mes=<?= $mes ?>&anio=<?= $anio ?>">
@@ -185,13 +189,17 @@ function h($s) { return htmlspecialchars($s, ENT_QUOTES, 'UTF-8'); }
         <?php
         if (!empty($citasPorDia[$diaSeleccionado])) {
             foreach ($citasPorDia[$diaSeleccionado] as $c) {
-                echo '<div class="socio-card cita-card">';
-                echo '<p>' . h($c['hora']) . ' - ' . h($c['socio']) . ' (' . h($c['telefono']) . ') - ' . h($c['servicio']) . '</p>';
+                echo '<div class="socio-card cita-card">'; ?>
+                <p><strong>Hora:</strong> <?= h(date('H:i', strtotime($c['hora']))) ?></p>
+                <p><strong>Socio:</strong> <?= h($c['socio']) ?></p>
+                <p><strong>Servicio:</strong> <?= h($c['servicio']) ?></p>
+                <p><strong>Teléfono:</strong> <?= h($c['telefono']) ?></p>
+                <?php
                 
                 // Botón cancelar solo para citas futuras (no incluir hoy)
                 if ($c['fecha'] > date('Y-m-d')) {
                     echo ' <button type="button" class="btn-atras btn-cancelar" 
-                           data-url="citas.php?borrar=' . intval($c['id']) . '&mes=' . $mes . '&anio=' . $anio . '">
+                           data-url="citas.php?borrar=' . intval($c['id']) . '&mes=' . $mes . '&anio=' . $anio . '&dia=' . $diaSeleccionado . '">
                            Cancelar</button>';
                 } else {
                     echo ' <p>(no se puede cancelar)</p>';
