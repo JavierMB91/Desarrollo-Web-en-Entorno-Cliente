@@ -73,7 +73,7 @@ $testimonios = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <p><strong>Autor:</strong> <?= htmlspecialchars($t["autor"]) ?></p>
                 <p class="comentario"><strong>Comentario:</strong> <?= nl2br(htmlspecialchars($t["contenido"])) ?></p>
                 <p class="fecha"><strong>Fecha:</strong> <?= date('d/m/Y', strtotime($t["fecha"])) ?></p>
-                <p class="hora"><strong>Hora:</strong> <?= date('H:i', strtotime($t["fecha"])) ?></p>
+                <p class="hora"><strong>Hora:</strong> <?= date('H:i', strtotime($t["fecha"])) . ' ' . date('a', strtotime($t["fecha"])) ?></p>
             </div>
         <?php endforeach; ?>
     <?php endif; ?>
