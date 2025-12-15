@@ -41,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 $stmtClientes = $pdo->query("SELECT id, nombre FROM usuarios WHERE rol='socio' ORDER BY nombre");
 $clientes = $stmtClientes->fetchAll(PDO::FETCH_ASSOC);
 
-$stmtServicios = $pdo->query("SELECT id, nombre FROM servicio ORDER BY nombre");
+$stmtServicios = $pdo->query("SELECT id, nombre, duracion FROM servicio ORDER BY nombre");
 $servicios = $stmtServicios->fetchAll(PDO::FETCH_ASSOC);
 
 // ==========================
@@ -91,7 +91,7 @@ function h($s) {
           <select id="servicio" name="servicio">
             <option value="">Seleccionar libro o actividad</option>
             <?php foreach ($servicios as $s): ?>
-              <option value="<?= $s['id'] ?>"><?= h($s['nombre']) ?></option>
+              <option value="<?= $s['id'] ?>"><?= h($s['nombre']) ?> (<?= h($s['duracion']) ?> min)</option>
             <?php endforeach; ?>
           </select>
           <span id="servicioError" class="error"></span>

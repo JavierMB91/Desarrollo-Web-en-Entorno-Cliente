@@ -63,7 +63,9 @@ $testimonios = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 <div class="testimonios-lista">
     <?php if (empty($testimonios)): ?>
-        <p>No hay comentarios todavía.</p>
+                <div class="resultados-busqueda">
+                    <p>No se encontraron comentarios</p>
+                 </div>;
     <?php else: ?>
         <?php foreach ($testimonios as $t): ?>
             <div class="tarjeta-testimonio">

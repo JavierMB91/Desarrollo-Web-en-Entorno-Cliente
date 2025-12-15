@@ -14,8 +14,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $precio      = trim($_POST['precio'] ?? '');
     $hora        = trim($_POST['hora'] ?? '');
 
-    // Validación mínima
-    if (!$nombre || !$descripcion || !$duracion || !$precio || !$hora) {
+    // Validación mínima: sólo tratar como vacío las cadenas vacías
+    if ($nombre === '' || $descripcion === '' || $duracion === '' || $precio === '' || $hora === '') {
         $_SESSION['mensaje_error'] = "Debes completar todos los campos obligatorios.";
         header("Location: servicio.php");
         exit;
@@ -112,7 +112,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
 
     <div class="bloque-form">
-        <label for="precio">Costo</label>
+        <label for="precio">Precio</label>
         <input type="number" id="precio" name="precio">
         <span id="precioError" class="error"></span>
     </div>

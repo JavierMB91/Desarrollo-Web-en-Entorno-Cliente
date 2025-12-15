@@ -81,13 +81,19 @@ require_once 'conexion.php';
                     // DATOS
                     echo '<p><strong>Nombre:</strong> ' . htmlspecialchars($servicio['nombre']) . '</p>';
                     echo '<p><strong>Descripción:</strong> ' . htmlspecialchars($servicio['descripcion']) . '</p>';
-                    echo '<p><strong>Duración:</strong> ' . htmlspecialchars($servicio['duracion']) . '</p>';
-                    echo '<p><strong>Precio:</strong> ' . htmlspecialchars($servicio['precio']) . '</p>';
+                    echo '<p><strong>Duración:</strong> ' . htmlspecialchars($servicio['duracion']) . ' min</p>';
+
+                    // Formatear precio: mostrar 'Gratuito' si es 0, o formato con 2 decimales y símbolo €
+                    if (floatval($servicio['precio']) == 0) {
+                        $precioMostrar = 'Gratuito';
+                    } else {
+                        $precioMostrar = number_format(floatval($servicio['precio']), 2, ',', '.') . ' €';
+                    }
+                    echo '<p><strong>Precio:</strong> ' . htmlspecialchars($precioMostrar) . '</p>';
+
 
                     // 🔥 NUEVO: MOSTRAR HORA
-                    if (!empty($servicio['hora'])) {
-                        echo '<p><strong>Hora:</strong> ' . htmlspecialchars($servicio['hora']) . '</p>';
-                    }
+                    // No mostrar la hora en el listado (el usuario solicitó eliminarla)
 
                     // BOTÓN EDITAR
                     echo '<div class="contenedor-botones">
@@ -100,7 +106,9 @@ require_once 'conexion.php';
                 }
 
             } else {
-                echo "<p>No se encontraron servicios.</p>";
+                echo '<div class="resultados-busqueda">
+                    <p>No se encontraron Actividades</p>
+                 </div>';
             }
             ?>
         </div>

@@ -417,14 +417,15 @@ button[type="submit"]:hover,
 }
 
 .imagen-noticia {
-    width: 100%;
+    display: block;
+    margin: 0 auto 1.5rem auto; /* centra horizontalmente */
     max-height: 400px;
     object-fit: cover;
     border-radius: 10px;
-    margin-bottom: 1.5rem;
     box-shadow: 0 5px 15px var(--sombra-suave);
     transition: var(--transicion-suave);
 }
+
 
 .imagen-noticia:hover {
     transform: scale(1.01);

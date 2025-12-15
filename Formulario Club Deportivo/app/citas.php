@@ -46,7 +46,7 @@ if (isset($_GET['borrar'])) {
 
 // Obtener citas del mes
 $stmtMes = $pdo->prepare("
-    SELECT c.id, c.fecha, c.hora, u.nombre AS socio, u.telefono, s.nombre AS servicio
+    SELECT c.id, c.fecha, c.hora, u.nombre AS socio, u.telefono, s.nombre AS servicio, s.duracion, s.precio
     FROM cita c
     JOIN usuarios u ON c.socio_id = u.id
     JOIN servicio s ON c.servicio_id = s.id
@@ -65,7 +65,7 @@ foreach ($citasMes as $c) {
 $resultadosBusqueda = [];
 if ($busqueda !== '') {
     $sql = "
-        SELECT c.id, c.fecha, c.hora, u.nombre AS socio, u.telefono, s.nombre AS servicio
+        SELECT c.id, c.fecha, c.hora, u.nombre AS socio, u.telefono, s.nombre AS servicio, s.duracion, s.precio
         FROM cita c
         JOIN usuarios u ON c.socio_id = u.id
         JOIN servicio s ON c.servicio_id = s.id
@@ -157,9 +157,25 @@ function h($s) { return htmlspecialchars($s, ENT_QUOTES, 'UTF-8'); }
             <?php foreach ($resultadosBusqueda as $c): ?>
                 <div class="socio-card cita-card">
                     <p><strong>Fecha:</strong> <?= h(date('d/m/Y', strtotime($c['fecha']))) ?></p>
-                    <p><strong>Hora:</strong> <?= h(date('H:i', strtotime($c['hora']))) ?></p>
+                    <?php
+                        // Mostrar hora como HH:MM seguido de am/pm (ej. 18:00 pm)
+                        $horaParaMostrar = h(date('H:i', strtotime($c['hora'])));
+                        try {
+                            $dtTmp = new DateTime($c['hora']);
+                        } catch (Exception $e) {
+                            $dtTmp = false;
+                        }
+                        if ($dtTmp) {
+                            $horaParaMostrar .= ' ' . $dtTmp->format('a');
+                        }
+                    ?>
+                    <p><strong>Hora:</strong> <?= $horaParaMostrar ?></p>
                     <p><strong>Socio:</strong> <?= h($c['socio']) ?></p>
-                    <p><strong>Servicio:</strong> <?= h($c['servicio']) ?></p>
+                    <p><strong>Servicio:</strong> <?= h($c['servicio']) ?> (<?= h($c['duracion']) ?> min)</p>
+                    <?php
+                        $precioMostrar = (floatval($c['precio']) == 0) ? 'Gratuito' : number_format(floatval($c['precio']), 2, ',', '.') . ' €';
+                    ?>
+                    <p><strong>Precio:</strong> <?= h($precioMostrar) ?></p>
                     <p><strong>Teléfono:</strong> <?= h($c['telefono']) ?></p>
                     
                     <?php if ($c['fecha'] > date('Y-m-d')): ?>
@@ -173,7 +189,9 @@ function h($s) { return htmlspecialchars($s, ENT_QUOTES, 'UTF-8'); }
                 </div>
             <?php endforeach; ?>
         <?php else: ?>
+            <div class="resultados-busqueda">    
             <p>No se encontraron citas.</p>
+            </div>
         <?php endif; ?>
     </div>
 <?php endif; ?>
@@ -190,9 +208,25 @@ function h($s) { return htmlspecialchars($s, ENT_QUOTES, 'UTF-8'); }
         if (!empty($citasPorDia[$diaSeleccionado])) {
             foreach ($citasPorDia[$diaSeleccionado] as $c) {
                 echo '<div class="socio-card cita-card">'; ?>
-                <p><strong>Hora:</strong> <?= h(date('H:i', strtotime($c['hora']))) ?></p>
+                <?php
+                    // Mostrar hora como HH:MM seguido de am/pm (ej. 18:00 pm)
+                    $horaParaMostrar = h(date('H:i', strtotime($c['hora'])));
+                    try {
+                        $dtTmp = new DateTime($c['hora']);
+                    } catch (Exception $e) {
+                        $dtTmp = false;
+                    }
+                    if ($dtTmp) {
+                        $horaParaMostrar .= ' ' . $dtTmp->format('a');
+                    }
+                ?>
+                <p><strong>Hora:</strong> <?= $horaParaMostrar ?></p>
                 <p><strong>Socio:</strong> <?= h($c['socio']) ?></p>
-                <p><strong>Servicio:</strong> <?= h($c['servicio']) ?></p>
+                <p><strong>Servicio:</strong> <?= h($c['servicio']) ?> (<?= h($c['duracion']) ?> min)</p>
+                <?php
+                    $precioMostrar = (floatval($c['precio']) == 0) ? 'Gratuito' : number_format(floatval($c['precio']), 2, ',', '.') . ' €';
+                ?>
+                <p><strong>Precio:</strong> <?= h($precioMostrar) ?></p>
                 <p><strong>Teléfono:</strong> <?= h($c['telefono']) ?></p>
                 <?php
                 
@@ -208,7 +242,9 @@ function h($s) { return htmlspecialchars($s, ENT_QUOTES, 'UTF-8'); }
                 echo '</div>';
             }
         } else {
-            echo '<p>No hay citas ese día.</p>';
+            echo '<div class="resultados-busqueda">
+                    <p>No se encontraron citas</p>
+                 </div>';
         }
         ?>
     </div>

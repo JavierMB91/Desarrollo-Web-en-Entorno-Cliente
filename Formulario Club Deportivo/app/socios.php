@@ -100,7 +100,9 @@ require_once 'conexion.php';
             }
 
         } else {
-            echo "<p>No se encontraron socios.</p>";
+            echo '<div class="resultados-busqueda">
+                    <p>No se encontraron socios</p>
+                 </div>';
         }
         ?>
     </div>

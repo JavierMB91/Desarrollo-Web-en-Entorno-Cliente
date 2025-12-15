@@ -20,13 +20,11 @@ formularioServicio.addEventListener('submit', (e) => {
     const descripcion = document.getElementById('descripcion').value;
     const duracion = document.getElementById('duracion').value;
     const precio = document.getElementById('precio').value;
-    const hora = document.getElementById('hora').value;   // <-- NUEVO
 
     // Expresiones regulares
     const soloLetras = /^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/;
     const soloMinutos = /^[0-9]+$/;
     const soloNumeros = /^[0-9]+(\.[0-9]{1,2})?$/;
-    const formatoHora = /^([01]\d|2[0-3]):([0-5]\d)$/;  // <-- NUEVO
 
     // ============================
     // VALIDACIÓN NOMBRE
@@ -55,18 +53,12 @@ formularioServicio.addEventListener('submit', (e) => {
     // ============================
     // VALIDACIÓN PRECIO
     // ============================
-    if (!soloNumeros.test(precio.trim()) || Number(precio.trim()) <= 0) {
+    if (!soloNumeros.test(precio.trim()) || Number(precio.trim()) < 0) {
         document.getElementById('precioError').innerText = "Introduce un precio válido";
         hayError = true;
     }
 
-    // ============================
-    // VALIDACIÓN HORA (FORMATO ESPAÑA 24H)
-    // ============================
-    if (!formatoHora.test(hora.trim())) {
-        document.getElementById('horaError').innerText = "Formato hora inválido (HH:MM)";
-        hayError = true;
-    }
+    // Nota: validación de hora eliminada (hora gestionada en el servidor o formulario).
 
     // ============================
     // ENVIAR FORMULARIO
