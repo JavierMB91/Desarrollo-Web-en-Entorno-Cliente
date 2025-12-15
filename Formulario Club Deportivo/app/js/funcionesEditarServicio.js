@@ -46,9 +46,9 @@ formularioServicio.addEventListener('submit', (e) => {
     }
 
     // =============================
-    // VALIDAR PRECIO
+    // VALIDAR PRECIO (permitir 0 = Gratuito)
     // =============================
-    if (!soloPrecio.test(precio) || Number(precio) <= 0) {
+    if (!soloPrecio.test(precio) || Number(precio) < 0) {
         document.getElementById('precioError').innerText = "Introduce un precio válido.";
         errores = true;
     }

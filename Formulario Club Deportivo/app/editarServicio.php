@@ -104,8 +104,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <div class="bloque-form">
         <label for="precio">Costo (€)</label>
-        <input type="number" id="precio" name="precio"
+        <input type="number" id="precio" name="precio" min="0" step="0.01"
                value="<?= htmlspecialchars($servicio['precio']) ?>">
+        <?php if (floatval($servicio['precio']) == 0): ?>
+            <p class="nota">Actual: Gratuito</p>
+        <?php endif; ?>
         <span id="precioError" class="error"></span>
     </div>
 
