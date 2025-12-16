@@ -19,9 +19,13 @@ require_once 'conexion.php';
 <div class="container">
 
 <header>
-    <h1 class="titulo-club">Libreria</h1>
+    <div class="titulo-con-logo">
+        <img src="uploads/logo/logo.svg" alt="Logo" class="logo-club">
+        <h1 class="titulo-club">Libreria</h1>
+    </div>
     <div id="nav"></div>
 </header>
+
 
 <main>
     <div class="principal">

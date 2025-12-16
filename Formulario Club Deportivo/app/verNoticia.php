@@ -25,7 +25,10 @@ $noticia = $stmt->fetch(PDO::FETCH_ASSOC);
 <div class="container">
 
 <header>
-    <h1 class="titulo-club"><?= htmlspecialchars($noticia["titulo"]) ?></h1>
+    <div class="titulo-con-logo">
+        <a href="index.php"><img src="uploads/logo/logo.svg" alt="Logo" class="logo-club"></a>
+        <h1 class="titulo-club"><?= htmlspecialchars($noticia["titulo"]) ?></h1>
+    </div>
     <div id="nav"></div>
 </header>
 

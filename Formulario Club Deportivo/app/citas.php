@@ -114,14 +114,13 @@ function h($s) { return htmlspecialchars($s, ENT_QUOTES, 'UTF-8'); }
     </div>
 <?php endif; ?>
 
-
 <header>
-    <h1 class="titulo-club">Sección Citas</h1>
+    <div class="titulo-con-logo">
+        <a href="index.php"><img src="uploads/logo/logo.svg" alt="Logo" class="logo-club"></a>
+        <h1 class="titulo-club">Sección Citas</h1>
+    </div>
     <div id="nav"></div>
 </header>
-
-<div class="container">
-
     <!-- ======================== -->
     <!-- MENSAJE DE ESTADO -->
     <!-- ======================== -->

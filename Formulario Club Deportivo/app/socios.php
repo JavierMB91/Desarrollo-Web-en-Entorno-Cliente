@@ -25,8 +25,11 @@ require_once 'conexion.php';
     <?php endif; ?>
 
 <header>
-<h1 class="titulo-club">Sección Socios</h1>
-<div id="nav"></div>
+    <div class="titulo-con-logo">
+        <a href="index.php"><img src="uploads/logo/logo.svg" alt="Logo" class="logo-club"></a>
+        <h1 class="titulo-club">Sección Socios</h1>
+    </div>
+    <div id="nav"></div>
 </header>
 
 <div class="container">
