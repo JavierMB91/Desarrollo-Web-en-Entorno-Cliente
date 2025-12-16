@@ -19,7 +19,7 @@ $noticia = $stmt->fetch(PDO::FETCH_ASSOC);
 <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
 <link rel="shortcut icon" href="favicon/favicon.ico">
 <link rel="stylesheet" href="css/estilos.css">
-<title><?= htmlspecialchars($noticia["titulo"]) ?></title>
+<title>Noticias</title>
 </head>
 <body class="noticia-body">
 <div class="container">
@@ -27,12 +27,13 @@ $noticia = $stmt->fetch(PDO::FETCH_ASSOC);
 <header>
     <div class="titulo-con-logo">
         <img src="uploads/logo/logo.svg" alt="Logo" class="logo-club">
-        <h1 class="titulo-club"><?= htmlspecialchars($noticia["titulo"]) ?></h1>
+        <h1 class="titulo-club">Noticias</h1>
     </div>
     <div id="nav"></div>
 </header>
 
 <main class="ver-noticia">
+    <h2 class="titulo-noticia"><?= htmlspecialchars($noticia["titulo"]) ?></h2>
     <article class="noticia-detalle">
         <!-- La imagen ahora es clicable -->
         <img id="imagenNoticia" src="uploads/noticias/<?= htmlspecialchars($noticia['imagen']) ?>" alt="<?= htmlspecialchars($noticia['titulo']) ?>" class="imagen-noticia clickable">

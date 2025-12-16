@@ -33,8 +33,8 @@ require_once 'conexion.php';
     <!-- ============================ -->
     <!--          NOTICIAS            -->
     <!-- ============================ -->
+    <h2 class="titulo-seccion">Últimas noticias</h2>
     <section class="lista-noticias">
-    <h2>Últimas noticias</h2>
 
     <?php
         // Solo noticias cuya fecha ya pasó y solo 3
@@ -79,8 +79,8 @@ require_once 'conexion.php';
     <!-- ============================ -->
     <!--        TESTIMONIO            -->
     <!-- ============================ -->
+    <h2 class="titulo-seccion">Testimonio destacado</h2>
     <section class="testimonio">
-    <h2>Testimonio destacado</h2>
 
     <?php
         // Traer 1 testimonio aleatorio con el nombre del autor (uso de alias correcto)

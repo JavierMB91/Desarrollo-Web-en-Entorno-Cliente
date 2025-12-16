@@ -213,6 +213,52 @@ section p {
     border-radius: 2px;
 }
 
+/* Reutilizable para títulos de sección en index.php */
+.titulo-seccion {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    font-family: 'Playfair Display', serif;
+    color: var(--papel-antiguo);
+    font-size: 1.8rem;
+    position: relative;
+    padding-bottom: 0.8rem;
+}
+
+.titulo-seccion::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background: var(--dorado-viejo);
+    border-radius: 2px;
+}
+
+/* Estilo para el título de la vista individual de noticia */
+.titulo-noticia {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    font-family: 'Playfair Display', serif;
+    color: var(--papel-antiguo);
+    font-size: 1.8rem;
+    position: relative;
+    padding-bottom: 0.8rem;
+}
+
+.titulo-noticia::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background: var(--dorado-viejo);
+    border-radius: 2px;
+}
+
 /* ===== FORMULARIOS ===== */
 form {
     max-width: 750px;
@@ -1170,3 +1216,69 @@ footer {
     margin-top: auto;
     border-top: 3px solid var(--dorado-viejo);
 }
+
+/* ===== MEDIA QUERIES: RESPONSIVE (MÓVILES, TABLETS, TABLET+ ===== */
+/* Mobile phones (portrait) */
+@media (max-width: 575.98px) {
+    header { padding: 1rem 0.5rem; }
+    .titulo-club { font-size: 1.6rem; letter-spacing: 1px; }
+    .logo-club {
+        position: absolute;
+        left: 8px;
+        transform: translate(0, -5%);
+        height: 54px;
+        max-width: 140px;
+        z-index: 120;
+    }
+    .titulo-con-logo { padding-left: 160px; }
+    .navegador { top: 70px; padding: 0.6rem; }
+    .menu { gap: 0.5rem; flex-direction: column; align-items: stretch; }
+    .menu li a { padding: 0.6rem 0.8rem; font-size: 0.95rem; border-radius: 20px; }
+    main { margin: 1rem auto; padding: 0 0.75rem; }
+    section { padding: 1rem; border-radius: 10px; }
+    .titulo-seccion, .lista-noticias h2, .titulo-noticia { font-size: 1.4rem; }
+    form { padding: 1.2rem; margin: 1rem; max-width: 100%; }
+    .bloque-form input, .bloque-form select, .bloque-form textarea { font-size: 1rem; padding: 0.8rem; }
+    .bloque-form img { width: 100%; max-width: 100%; margin: 1rem 0; }
+    .noticias-grid, .noticias-grid-3 { grid-template-columns: 1fr; }
+    .noticia-card { height: auto; padding: 1rem; }
+    .noticia-card .imagen-noticia { height: 160px; }
+    .servicio-card { flex: 0 0 100%; max-width: 100%; }
+    .servicios-lista { gap: 12px; padding: 0 0.5rem; }
+    .socios-lista { grid-template-columns: 1fr; gap: 12px; }
+    .socio-card { max-width: 100%; min-height: auto; padding: 1rem; }
+    .tarjeta-testimonio { flex: 0 0 100%; }
+    .contenedor-botones { flex-direction: column; gap: 0.5rem; }
+    footer { padding: 1.5rem; font-size: 0.95rem; }
+}
+
+/* Small devices / tablets */
+@media (min-width: 576px) and (max-width: 991.98px) {
+    header { padding: 1.2rem 0.75rem; }
+    .titulo-club { font-size: 2rem; }
+    .logo-club { height: 62px; transform: translate(-190%, -5%); }
+    .menu { gap: 0.75rem; flex-wrap: wrap; justify-content: center; }
+    .menu li a { padding: 0.7rem 1rem; font-size: 1rem; }
+    main { margin: 1.5rem auto; padding: 0 1rem; }
+    section { padding: 1.2rem; }
+    form { max-width: 90%; padding: 1.5rem; }
+    .noticias-grid { grid-template-columns: repeat(2, 1fr); }
+    .noticia-card { height: auto; }
+    .noticia-card .imagen-noticia { height: 180px; }
+    .servicio-card { flex: 0 0 calc(50% - 20px); }
+    .testimonios-lista .tarjeta-testimonio { flex: 0 0 calc(50% - 25px); }
+    .socios-lista { grid-template-columns: repeat(2, 1fr); }
+    footer { padding: 1.75rem; }
+}
+
+/* Medium and larger: ensure comfortable spacing on narrow desktops */
+@media (min-width: 992px) and (max-width: 1199.98px) {
+    main { max-width: 1000px; }
+    .servicio-card { flex: 0 0 calc(33.333% - 20px); }
+    .noticias-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+/* Utility: ensure images and media scale nicely */
+img, picture, .imagen-noticia { max-width: 100%; height: auto; }
+
+/* Fin Media Queries */
