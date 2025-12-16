@@ -53,7 +53,7 @@ body {
 .logo-club {
     position: absolute;
     left: 50%;
-    transform: translate(-120%, -45%); /* antes -180% */
+    transform: translate(-200%, -5%); /* antes -180% */
     height: 70px;
 }
 
