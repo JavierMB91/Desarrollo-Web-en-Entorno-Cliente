@@ -68,7 +68,6 @@ function h($s) {
   <div class="container">
     <header>
       <div class="titulo-con-logo">
-        <img src="uploads/logo/logo.svg" alt="Logo" class="logo-club">
         <h1 class="titulo-club">Agendar Lectura Guiada</h1>
       </div>
       <div id="nav"></div>

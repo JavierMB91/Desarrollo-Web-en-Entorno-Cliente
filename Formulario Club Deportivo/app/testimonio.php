@@ -60,7 +60,6 @@ $usuarios = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 <header>
     <div class="titulo-con-logo">
-        <img src="uploads/logo/logo.svg" alt="Logo" class="logo-club">
         <h1 class="titulo-club">Nuevo Comentario</h1>
     </div>
     <div id="nav"></div>

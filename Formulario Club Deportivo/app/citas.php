@@ -116,7 +116,6 @@ function h($s) { return htmlspecialchars($s, ENT_QUOTES, 'UTF-8'); }
 
 <header>
     <div class="titulo-con-logo">
-        <img src="uploads/logo/logo.svg" alt="Logo" class="logo-club">
         <h1 class="titulo-club">Sección Citas</h1>
     </div>
     <div id="nav"></div>
