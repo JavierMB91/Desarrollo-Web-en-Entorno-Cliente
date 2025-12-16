@@ -111,7 +111,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <header>
     <div class="titulo-con-logo">
-        <a href="index.php"><img src="uploads/logo/logo.svg" alt="Logo" class="logo-club"></a>
+        <img src="uploads/logo/logo.svg" alt="Logo" class="logo-club">
         <h1 class="titulo-club">Nuevo Socio</h1>
     </div>
     <div id="nav"></div>
