@@ -16,8 +16,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     try {
         // 1️⃣ Insertar noticia sin imagen
-        $sql = "INSERT INTO noticias (titulo, contenido, fecha_publicacion)
-                VALUES (?, ?, ?)";
+        $sql = "INSERT INTO noticia (titulo, contenido, fecha_publicacion)
+            VALUES (?, ?, ?)";
         $stmt = $pdo->prepare($sql);
         $stmt->execute([$titulo, $contenido, $fecha]);
 
@@ -45,7 +45,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             }
 
             // 4️⃣ Actualizar noticia con la imagen
-            $sqlUpdate = "UPDATE noticias SET imagen = ? WHERE id = ?";
+            $sqlUpdate = "UPDATE noticia SET imagen = ? WHERE id = ?";
             $stmtUpdate = $pdo->prepare($sqlUpdate);
             $stmtUpdate->execute([$nombreImagen, $idNoticia]);
         }

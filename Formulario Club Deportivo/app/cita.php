@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 // ==========================
 // 2. Traer participantes y servicios
 // ==========================
-$stmtClientes = $pdo->query("SELECT id, nombre FROM usuarios WHERE rol='socio' ORDER BY nombre");
+$stmtClientes = $pdo->query("SELECT id, nombre FROM usuario WHERE rol='socio' ORDER BY nombre");
 $clientes = $stmtClientes->fetchAll(PDO::FETCH_ASSOC);
 
 $stmtServicios = $pdo->query("SELECT id, nombre, duracion FROM servicio ORDER BY nombre");

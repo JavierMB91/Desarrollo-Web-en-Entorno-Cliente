@@ -15,8 +15,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     try {
         // Insertar comentario con fecha actual
-        $sql = "INSERT INTO testimonios (autor_id, contenido, fecha)
-                VALUES (:autor_id, :contenido, NOW())";
+        $sql = "INSERT INTO testimonio (autor_id, contenido, fecha)
+            VALUES (:autor_id, :contenido, NOW())";
 
         $stmt = $pdo->prepare($sql);
         $stmt->execute([
@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 // Obtener todos los usuarios para el select
-$stmt = $pdo->query("SELECT id, nombre FROM usuarios ORDER BY nombre");
+$stmt = $pdo->query("SELECT id, nombre FROM usuario ORDER BY nombre");
 $usuarios = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 

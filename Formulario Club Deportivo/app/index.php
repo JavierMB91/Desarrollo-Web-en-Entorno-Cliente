@@ -36,7 +36,7 @@ require_once 'conexion.php';
         // Solo noticias cuya fecha ya pasó y solo 3
         $sqlNoticias = "
             SELECT id, titulo, contenido, imagen, fecha_publicacion
-            FROM noticias
+            FROM noticia
             WHERE fecha_publicacion <= NOW()
             ORDER BY fecha_publicacion DESC
             LIMIT 3
@@ -82,8 +82,8 @@ require_once 'conexion.php';
         // Traer 1 testimonio aleatorio con el nombre del autor (uso de alias correcto)
         $sqlTest = "
             SELECT t.contenido, u.nombre
-            FROM testimonios t
-            INNER JOIN usuarios u ON t.autor_id = u.id
+            FROM testimonio t
+            INNER JOIN usuario u ON t.autor_id = u.id
             ORDER BY RAND()
             LIMIT 1
         ";

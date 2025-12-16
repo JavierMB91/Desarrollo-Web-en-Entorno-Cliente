@@ -15,7 +15,7 @@ $id = $_GET['id'];
 // ========================
 // 2. Cargar los datos del socio
 // ========================
-$sql = "SELECT * FROM usuarios WHERE id = :id";
+$sql = "SELECT * FROM usuario WHERE id = :id";
 $stmt = $pdo->prepare($sql);
 $stmt->execute(['id' => $id]);
 $socio = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -100,7 +100,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'id'       => $id
     ];
 
-    $sqlUpdate = "UPDATE usuarios SET 
+    $sqlUpdate = "UPDATE usuario SET 
                     nombre = :nombre,
                     edad = :edad,
                     telefono = :telefono,

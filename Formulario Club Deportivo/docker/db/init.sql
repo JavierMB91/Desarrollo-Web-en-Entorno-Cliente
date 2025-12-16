@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS usuarios
+CREATE TABLE IF NOT EXISTS usuario
 (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(100) NOT NULL,
@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS usuarios
 );
 
 
-INSERT INTO usuarios 
+INSERT INTO usuario 
     (nombre, clave, rol, telefono, foto) 
 VALUES
     ('Juan Perez', '12345', 'administrador', '600123456', 'uploads/usuarios/juan_perez.jpg'),
@@ -45,7 +45,7 @@ CREATE TABLE IF NOT EXISTS testimonio
     autor_id INT NOT NULL,
     contenido TEXT NOT NULL,
     fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    CONSTRAINT fk_testimonio_autor FOREIGN KEY (autor_id) REFERENCES usuarios(id) ON DELETE CASCADE ON UPDATE CASCADE
+    CONSTRAINT fk_testimonio_autor FOREIGN KEY (autor_id) REFERENCES usuario(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 -- Tres testimonios de ejemplo
@@ -82,7 +82,7 @@ CREATE TABLE IF NOT EXISTS cita
     servicio_id INT NOT NULL,
     fecha DATE NOT NULL,
     hora TIME NOT NULL,
-    CONSTRAINT fk_cita_socio FOREIGN KEY (socio_id) REFERENCES usuarios(id) ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT fk_cita_socio FOREIGN KEY (socio_id) REFERENCES usuario(id) ON DELETE CASCADE ON UPDATE CASCADE,
     CONSTRAINT fk_cita_servicio FOREIGN KEY (servicio_id) REFERENCES servicio(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 

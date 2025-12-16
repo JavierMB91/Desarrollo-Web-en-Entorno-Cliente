@@ -13,7 +13,7 @@ if ($pagina < 1) $pagina = 1;
 $inicio = ($pagina - 1) * $porPagina;
 
 // Contar cuántas noticias hay en total
-$sqlTotal = "SELECT COUNT(*) FROM noticias WHERE fecha_publicacion <= NOW()";
+$sqlTotal = "SELECT COUNT(*) FROM noticia WHERE fecha_publicacion <= NOW()";
 $totalNoticias = $pdo->query($sqlTotal)->fetchColumn();
 
 // Calcular total de páginas
@@ -21,10 +21,10 @@ $totalPaginas = ceil($totalNoticias / $porPagina);
 
 // Obtener las noticias de la página actual
 $sql = "SELECT id, titulo, contenido, imagen, fecha_publicacion
-        FROM noticias
-        WHERE fecha_publicacion <= NOW()
-        ORDER BY fecha_publicacion DESC
-        LIMIT :inicio, :porPagina";
+    FROM noticia
+    WHERE fecha_publicacion <= NOW()
+    ORDER BY fecha_publicacion DESC
+    LIMIT :inicio, :porPagina";
 
 $stmt = $pdo->prepare($sql);
 $stmt->bindValue(':inicio', $inicio, PDO::PARAM_INT);

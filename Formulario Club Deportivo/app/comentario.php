@@ -10,8 +10,8 @@ $sql = "SELECT
             u.nombre AS autor, 
             t.contenido, 
             t.fecha
-        FROM testimonios t
-        JOIN usuarios u ON t.autor_id = u.id
+        FROM testimonio t
+        JOIN usuario u ON t.autor_id = u.id
         ORDER BY t.fecha DESC";
 
 $stmt = $pdo->query($sql);

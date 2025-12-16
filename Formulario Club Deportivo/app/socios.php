@@ -41,7 +41,7 @@ require_once 'conexion.php';
             // ========================
             $busqueda = $_GET['q'] ?? '';
 
-            $sql = "SELECT * FROM usuarios 
+                $sql = "SELECT * FROM usuario 
                     WHERE rol='socio'
                     AND (nombre LIKE :q OR telefono LIKE :q)";
             $stmt = $pdo->prepare($sql);

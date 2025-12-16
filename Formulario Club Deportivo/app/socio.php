@@ -51,8 +51,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Insertar en BD
     try {
-        $stmt = $pdo->prepare("INSERT INTO usuarios (nombre, edad, password, rol, telefono, foto, fecha_registro)
-                               VALUES (:nombre, :edad, :password, :rol, :telefono, :foto, NOW())");
+        $stmt = $pdo->prepare("INSERT INTO usuario (nombre, edad, password, rol, telefono, foto, fecha_registro)
+                       VALUES (:nombre, :edad, :password, :rol, :telefono, :foto, NOW())");
 
         $stmt->execute([
             ':nombre'   => $nombre,

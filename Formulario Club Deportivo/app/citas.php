@@ -48,7 +48,7 @@ if (isset($_GET['borrar'])) {
 $stmtMes = $pdo->prepare("
     SELECT c.id, c.fecha, c.hora, u.nombre AS socio, u.telefono, s.nombre AS servicio, s.duracion, s.precio
     FROM cita c
-    JOIN usuarios u ON c.socio_id = u.id
+    JOIN usuario u ON c.socio_id = u.id
     JOIN servicio s ON c.servicio_id = s.id
     WHERE MONTH(c.fecha) = :mes AND YEAR(c.fecha) = :anio
 ");
@@ -67,7 +67,7 @@ if ($busqueda !== '') {
     $sql = "
         SELECT c.id, c.fecha, c.hora, u.nombre AS socio, u.telefono, s.nombre AS servicio, s.duracion, s.precio
         FROM cita c
-        JOIN usuarios u ON c.socio_id = u.id
+        JOIN usuario u ON c.socio_id = u.id
         JOIN servicio s ON c.servicio_id = s.id
         WHERE u.nombre LIKE :likeQ
            OR u.telefono LIKE :likeQ

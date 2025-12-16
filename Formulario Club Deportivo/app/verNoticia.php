@@ -3,7 +3,7 @@ require_once 'conexion.php';
 
 $id = $_GET["id"];
 
-$sql = "SELECT * FROM noticias WHERE id = ?";
+$sql = "SELECT * FROM noticia WHERE id = ?";
 $stmt = $pdo->prepare($sql);
 $stmt->execute([$id]);
 $noticia = $stmt->fetch(PDO::FETCH_ASSOC);
