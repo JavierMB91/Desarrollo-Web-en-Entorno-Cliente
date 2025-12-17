@@ -1141,7 +1141,6 @@ form[action="socios.php"] .contenedor-botones, form[action="servicios.php"] .con
     flex: 0 0 300px;
     display: flex;
     flex-direction: column;
-    align-items: center;
 }
 
 /* ===== ESTADOS DE ERROR ===== */
