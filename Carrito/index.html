@@ -3,9 +3,138 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/estilos.css">
     <title>Carrito</title>
 </head>
 <body>
-    
+    <header>
+        <h1>Venta Componentes</h1>
+    </header>
+
+    <div class="container">
+        <!-- Sección del Catálogo -->
+        <main class="catalogo">
+            <h2>Catálogo de Productos</h2>
+            <div class="grid-productos">
+                <!-- Producto 1 -->
+                <article class="card">
+                    <img src="img/hp_pavilion_15.jpg" alt="HP Pavilion 15">
+                    <div class="card-content">
+                        <span class="codigo">P001</span>
+                        <h3>HP Pavilion 15</h3>
+                        <p class="descripcion">HP Pavilion 15 — Intel Core i5, 8GB RAM, 256GB NVMe SSD</p>
+                        <p class="precio">599,99 €</p>
+                        <button class="btn-add">Añadir al carrito</button>
+                    </div>
+                </article>
+
+                <!-- Producto 2 -->
+                <article class="card">
+                    <img src="img/dell_inspiron.jpg" alt="Dell Inspiron 15 3520">
+                    <div class="card-content">
+                        <span class="codigo">P002</span>
+                        <h3>Dell Inspiron 15 3520</h3>
+                        <p class="descripcion">Dell Inspiron 15 — Intel Core i5, 16GB RAM, 512GB SSD</p>
+                        <p class="precio">749,99 €</p>
+                        <button class="btn-add">Añadir al carrito</button>
+                    </div>
+                </article>
+
+                <!-- Producto 3 -->
+                <article class="card">
+                    <img src="img/rtx_4060_asus.jpg" alt="ASUS GeForce RTX 4060 TUF">
+                    <div class="card-content">
+                        <span class="codigo">P003</span>
+                        <h3>ASUS GeForce RTX 4060 TUF</h3>
+                        <p class="descripcion">ASUS TUF Gaming NVIDIA GeForce RTX 4060 — 8GB GDDR6</p>
+                        <p class="precio">399,99 €</p>
+                        <button class="btn-add">Añadir al carrito</button>
+                    </div>
+                </article>
+
+                <!-- Producto 4 -->
+                <article class="card">
+                    <img src="img/ram_corsair_32gb.jpg" alt="Corsair Vengeance DDR5 32GB">
+                    <div class="card-content">
+                        <span class="codigo">P004</span>
+                        <h3>Corsair Vengeance DDR5 32GB</h3>
+                        <p class="descripcion">Corsair Vengeance DDR5 32GB (2x16GB) 5600MHz</p>
+                        <p class="precio">149,99 €</p>
+                        <button class="btn-add">Añadir al carrito</button>
+                    </div>
+                </article>
+
+                <!-- Producto 5 -->
+                <article class="card">
+                    <img src="img/samsung_980_pro_1tb.jpg" alt="Samsung 980 Pro 1TB">
+                    <div class="card-content">
+                        <span class="codigo">P005</span>
+                        <h3>Samsung 980 Pro 1TB</h3>
+                        <p class="descripcion">Samsung 980 Pro — SSD NVMe M.2 1TB</p>
+                        <p class="precio">129,99 €</p>
+                        <button class="btn-add">Añadir al carrito</button>
+                    </div>
+                </article>
+
+                <!-- Producto 6 -->
+                <article class="card">
+                    <img src="img/lenovo_ideapad_3.jpg" alt="Lenovo IdeaPad 3">
+                    <div class="card-content">
+                        <span class="codigo">P006</span>
+                        <h3>Lenovo IdeaPad 3</h3>
+                        <p class="descripcion">Lenovo IdeaPad 3 — AMD Ryzen 7, 16GB RAM, 512GB SSD</p>
+                        <p class="precio">799,99 €</p>
+                        <button class="btn-add">Añadir al carrito</button>
+                    </div>
+                </article>
+            </div>
+        </main>
+
+        <!-- Sección del Carrito (Visual) -->
+        <aside class="carrito">
+            <h2>Tu Carrito</h2>
+            <div class="carrito-lista">
+                <!-- Item de ejemplo 1 -->
+                <div class="carrito-item">
+                    <div class="item-header">
+                        <h4>ASUS GeForce RTX 4060 TUF</h4>
+                        <span class="item-price">399,99 €</span>
+                    </div>
+                    <div class="item-controls">
+                        <div class="qty-controls">
+                            <button class="btn-qty">-</button>
+                            <span class="qty-value">1</span>
+                            <button class="btn-qty">+</button>
+                        </div>
+                        <button class="btn-delete">Eliminar</button>
+                    </div>
+                </div>
+
+                <!-- Item de ejemplo 2 -->
+                <div class="carrito-item">
+                    <div class="item-header">
+                        <h4>Samsung 980 Pro 1TB</h4>
+                        <span class="item-price">129,99 €</span>
+                    </div>
+                    <div class="item-controls">
+                        <div class="qty-controls">
+                            <button class="btn-qty">-</button>
+                            <span class="qty-value">2</span>
+                            <button class="btn-qty">+</button>
+                        </div>
+                        <button class="btn-delete">Eliminar</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="carrito-footer">
+                <div class="total-row">
+                    <span>Total:</span>
+                    <span>659,97 €</span>
+                </div>
+                <button class="btn-vaciar">Vaciar carrito</button>
+            </div>
+        </aside>
+    </div>
 </body>
 </html>
