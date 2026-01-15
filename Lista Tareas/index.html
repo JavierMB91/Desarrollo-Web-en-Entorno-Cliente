@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="css/estilos.css">
+        <title>Lista Tareas</title>
+    </head>
+    <body>
+        <div class="container">
+            <!-- ID para el js y el name para el servidor-->
+            <input type="text" id="tarea" name="tarea">
+            <button id="agregar">Agregar Tarea</button>
+
+            <select name="tipo" id="tipo">
+                <option value="normal">Normal</option>
+                <option value="opcional">Opcional</option>
+                <option value="urgente">Urgente</option>
+            </select>
+
+            <div class="filtros">
+                <button class="filtro" id="todas">Todas</button>
+                <button class="filtro" id="normal">Normal</button>
+                <button class="filtro" id="opcional">Opcional</button>
+                <button class="filtro" id="urgente">Urgente</button>
+            </div>
+
+            <div id="listado"></div>
+        </div>
+
+        <script>
+            let contador = 0
+            let listaTareas = []
+            const filtros = document.getElementsByClassName('filtro')
+
+            document.getElementById("agregar").addEventListener("click", () => {
+                let tarea = document.getElementById("tarea").value
+                let tipo = document.getElementById("tipo").value
+                let icono = '🙂'
+
+                if (tipo === 'opcional') {
+                    icono = '😒'
+                } else if (tipo === 'urgente') {
+                    icono = '😡'
+                }
+
+                document.getElementById("listado").insertAdjacentHTML("beforeend", `
+                    <div class="tareas">
+                        <p>
+                            ${tarea} ${icono}
+                        </p>
+                        <input type="checkbox" id="realizada${contador}">
+                        <button id="eliminar${contador}">🚮</button>
+                    </div>
+                `);
+
+                document.getElementById("realizada" + contador).addEventListener('click', (event) => {
+                    console.log(event.target)
+
+                    if (event.target.checked) {
+                        console.log('seleccionado')
+                        console.log(event.target.parentElement)
+                        event.target.parentElement.style.textDecoration = 'line-through'
+                    } else {
+                        console.log('no seleccionado')
+                        event.target.parentElement.style.textDecoration = 'none'
+                    }
+                });
+
+                document.getElementById("eliminar" + contador).addEventListener('click', (event) => {
+                    event.target.parentElement.remove()
+                });
+
+                contador++;
+                listaTareas.push([tarea, tipo])
+            });
+
+            for (let i = 0; i < filtros.length; i++) {
+                filtros[i].addEventListener('click', (event) => {
+                    filtro = event.target.id
+                    
+                })
+            }
+
+        </script>
+    </body>
+</html>
