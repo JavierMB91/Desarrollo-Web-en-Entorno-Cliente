@@ -34,7 +34,12 @@
             const filtros = document.getElementsByClassName('filtro')
 
             document.getElementById("agregar").addEventListener("click", () => {
+                
                 let tarea = document.getElementById("tarea").value
+                if(tarea.trim() === '') {
+                    return
+                }
+
                 let tipo = document.getElementById("tipo").value
                 let icono = '🙂'
 
@@ -71,16 +76,55 @@
                     event.target.parentElement.remove()
                 });
 
+                
+                listaTareas.push({
+                    id: contador,
+                    nombre: tarea,
+                    tipo: tipo,
+                    elemento: document.querySelector(`#eliminar${contador}`).parentElement,
+                    completada: false
+                })
+
+                //limpiar el imput
+                document.getElementById("tarea").value = ''
+
+
+                //guardar tareas
+                localStorage.setItem('tareas', JSON.stringify(listaTareas))
                 contador++;
-                listaTareas.push([tarea, tipo])
             });
 
             for (let i = 0; i < filtros.length; i++) {
                 filtros[i].addEventListener('click', (event) => {
-                    filtro = event.target.id
-                    
+                    mostrarTareas(event.target.id)
                 })
             }
+
+            function mostrarTareas(filtro) {
+                const tareas = document.querySelectorAll('.tareas')
+
+                tareas.forEach(tarea => {
+                    if (filtro === 'todas') {
+                        tarea.style.display = 'flex'
+                    } else {
+                        const tareaObj = listaTareas.find(t => t.elemento === tarea)
+                        if(tareaObj && tareaObj.tipo === filtro) {
+                            tarea.style.display = 'flex'
+                        } else {
+                            tarea.style.display = 'none'
+                        }
+                    }
+                })
+            }
+
+            function displayTareas() {
+
+            }
+
+            listaTareas = JSON.parse(localStorage.getItem('tareas')) || []
+            console.log(listaTareas)
+
+
 
         </script>
     </body>
