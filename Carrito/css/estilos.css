@@ -1,16 +1,16 @@
 :root {
-    --primary-color: #2563eb;
-    --primary-hover: #1d4ed8;
-    --danger-color: #ef4444;
-    --danger-hover: #dc2626;
-    --text-dark: #1f2937;
-    --text-light: #6b7280;
-    --bg-body: #f3f4f6;
-    --bg-card: #ffffff;
-    --border-color: #e5e7eb;
-    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-    --radius: 0.5rem;
+    --primary-color: #00e6e6; /* Cian eléctrico */
+    --primary-hover: #00b3b3;
+    --danger-color: #ff4d4d; /* Rojo neón */
+    --danger-hover: #cc0000;
+    --text-dark: #e0ffff; /* Blanco brillante */
+    --text-light: #80e6e6; /* Cian claro para texto secundario */
+    --bg-body: #0a0a1a; /* Fondo muy oscuro, casi negro */
+    --bg-card: #1a1a30; /* Fondo de las tarjetas oscuro con un toque azul/púrpura */
+    --border-color: #004d4d; /* Borde sutil que combina con el primario */
+    --shadow-sm: 0 0 5px rgba(0, 230, 230, 0.1); /* Sombra con brillo sutil */
+    --shadow-md: 0 0 15px rgba(0, 230, 230, 0.2); /* Sombra más pronunciada con brillo */
+    --radius: 0.25rem; /* Bordes más afilados */
 }
 
 * {
@@ -21,15 +21,15 @@
 
 body {
     font-family: system-ui, -apple-system, sans-serif;
-    background-color: var(--bg-body);
+    background-color: var(--bg-body); /* Fondo muy oscuro */
     color: var(--text-dark);
     line-height: 1.5;
 }
 
 header {
-    background-color: var(--bg-card);
-    box-shadow: var(--shadow-sm);
+    background-color: var(--bg-card); /* Usamos el fondo de tarjeta para el header */
     padding: 1.5rem 2rem;
+    border-bottom: 2px solid var(--primary-color); /* Borde inferior más prominente */
     margin-bottom: 2rem;
     text-align: center;
 }
@@ -71,23 +71,26 @@ header h1 {
 .card {
     background-color: var(--bg-card);
     border-radius: var(--radius);
-    box-shadow: var(--shadow-md);
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    transition: transform 0.2s ease;
-    border: 1px solid var(--border-color);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border 0.2s ease;
+    border: 1px solid var(--border-color); /* Borde inicial */
+    box-shadow: var(--shadow-sm); /* Sombra inicial */
 }
 
 .card:hover {
     transform: translateY(-4px);
+    border: 1px solid var(--primary-color); /* Borde brillante al pasar el ratón */
+    box-shadow: 0 0 25px rgba(0, 230, 230, 0.5); /* Brillo más intenso */
 }
 
 .card img {
     width: 100%;
-    height: 200px;
-    object-fit: cover;
-    background-color: #e5e7eb; /* Placeholder color */
+    aspect-ratio: 1 / 1;
+    object-fit: contain;
+    padding: 1rem;
+    background-color: #001a1a; /* Placeholder oscuro */
 }
 
 .card-content {
@@ -100,7 +103,7 @@ header h1 {
 .codigo {
     font-size: 0.75rem;
     text-transform: uppercase;
-    color: var(--text-light);
+    color: var(--primary-color); /* Código en color primario */
     letter-spacing: 0.05em;
     margin-bottom: 0.5rem;
 }
@@ -114,7 +117,7 @@ header h1 {
 
 .descripcion {
     font-size: 0.875rem;
-    color: var(--text-light);
+    color: var(--text-light); /* Descripción en color claro */
     margin-bottom: 1rem;
     flex-grow: 1;
 }
@@ -122,24 +125,28 @@ header h1 {
 .precio {
     font-size: 1.5rem;
     font-weight: 700;
-    color: var(--text-dark);
+    color: var(--primary-color); /* Precio en color primario */
     margin-bottom: 1rem;
 }
 
 .btn-add {
     width: 100%;
     background-color: var(--primary-color);
+    background-image: linear-gradient(to bottom, var(--primary-hover), var(--primary-color)); /* Gradiente sutil */
     color: white;
     border: none;
     padding: 0.75rem;
     border-radius: var(--radius);
     font-weight: 600;
     cursor: pointer;
-    transition: background-color 0.2s;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, background-image 0.2s ease;
+    box-shadow: 0 0 10px rgba(0, 230, 230, 0.3); /* Brillo en el botón */
 }
 
 .btn-add:hover {
     background-color: var(--primary-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 0 20px rgba(0, 230, 230, 0.5); /* Brillo más intenso al pasar el ratón */
 }
 
 /* --- Carrito --- */
@@ -148,7 +155,7 @@ header h1 {
     background-color: var(--bg-card);
     padding: 1.5rem;
     border-radius: var(--radius);
-    box-shadow: var(--shadow-md);
+    border: 1px solid var(--primary-color); /* Borde del carrito en color primario */
     position: sticky;
     top: 2rem;
     flex-shrink: 0;
@@ -162,7 +169,7 @@ header h1 {
 }
 
 .carrito-item {
-    border-bottom: 1px solid var(--border-color);
+    border-bottom: 1px dashed var(--border-color); /* Línea punteada para un toque tecnológico */
     padding-bottom: 1rem;
 }
 
@@ -199,7 +206,7 @@ header h1 {
     align-items: center;
     gap: 0.5rem;
     background-color: var(--bg-body);
-    padding: 0.25rem;
+    padding: 0.3rem;
     border-radius: var(--radius);
 }
 
@@ -207,14 +214,18 @@ header h1 {
     width: 24px;
     height: 24px;
     border: 1px solid var(--border-color);
-    background-color: white;
+    background-color: transparent; /* Fondo transparente para los botones de cantidad */
     border-radius: 4px;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
     font-weight: bold;
-    color: var(--text-dark);
+    color: var(--primary-color); /* Color primario para los botones de cantidad */
+    transition: background-color 0.2s;
+}
+.btn-qty:hover {
+    background-color: var(--border-color); /* Fondo al pasar el ratón */
 }
 
 .qty-value {
@@ -228,13 +239,14 @@ header h1 {
     background: none;
     border: none;
     color: var(--danger-color);
-    font-size: 0.875rem;
+    font-size: 0.9rem;
     cursor: pointer;
     text-decoration: underline;
+    transition: color 0.2s ease;
 }
 
 .btn-delete:hover {
-    color: var(--danger-hover);
+    color: var(--danger-hover); /* Color más intenso al pasar el ratón */
 }
 
 .carrito-footer {
@@ -256,15 +268,16 @@ header h1 {
     background-color: transparent;
     border: 2px solid var(--danger-color);
     color: var(--danger-color);
-    padding: 0.75rem;
+    padding: 0.8rem;
     border-radius: var(--radius);
     font-weight: 600;
     cursor: pointer;
     transition: all 0.2s;
+    box-shadow: 0 0 10px rgba(255, 77, 77, 0.3); /* Brillo en el botón de vaciar */
 }
 
 .btn-vaciar:hover {
-    background-color: var(--danger-color);
+    background-color: var(--danger-hover);
     color: white;
 }
 
