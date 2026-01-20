@@ -3,161 +3,211 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Librería - Catálogo</title>
     <link rel="stylesheet" href="css/estilos.css">
-    <title>Carrito</title>
+    <!-- Fuentes de Google para estilo de librería (Merriweather para títulos, Lato para texto) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Merriweather:ital,wght@0,300;0,700;1,400&display=swap" rel="stylesheet">
 </head>
 <body>
-    <header>
-        <h1>Venta Componentes</h1>
+
+    <header class="site-header">
+        <div class="container">
+            <h1>Librería El Estudiante</h1>
+            <p>Historias que dejan huella</p>
+        </div>
     </header>
 
-    <div class="container">
-        <!-- Sección del Catálogo -->
-        <main class="catalogo">
-            <h2>Catálogo de Productos</h2>
-            <div class="grid-productos">
-                <!-- Producto 1 -->
-                <article class="card">
-                    <img src="img/hp_pavilion_15.jpg" alt="HP Pavilion 15">
-                    <div class="card-content">
-                        <span class="codigo">P001</span>
-                        <h3>HP Pavilion 15</h3>
-                        <p class="descripcion">HP Pavilion 15 — Intel Core i5, 8GB RAM, 256GB NVMe SSD</p>
-                        <p class="precio">599,99 €</p>
+    <main class="container">
+        <h2 class="section-title">Catálogo de Productos</h2>
+        
+        <div class="grid-productos">
+            <!-- Producto 1: Alas de Sangre -->
+            <article class="card">
+                <div class="card-image">
+                    <img src="img/alas_de_sangre.jpg" alt="Alas de Sangre">
+                </div>
+                <div class="card-content">
+                    <div class="card-meta">
+                        <span class="codigo">LIB001</span>
+                    </div>
+                    <h3 class="card-title">Alas de Sangre</h3>
+                    <p class="card-description">El fenómeno de fantasía de Rebecca Yarros.</p>
+                    <div class="card-footer">
+                        <span class="precio">22,90 €</span>
                         <button class="btn-add">Añadir al carrito</button>
-                    </div>
-                </article>
-
-                <!-- Producto 2 -->
-                <article class="card">
-                    <img src="img/dell_inspiron.jpg" alt="Dell Inspiron 15 3520">
-                    <div class="card-content">
-                        <span class="codigo">P002</span>
-                        <h3>Dell Inspiron 15 3520</h3>
-                        <p class="descripcion">Dell Inspiron 15 — Intel Core i5, 16GB RAM, 512GB SSD</p>
-                        <p class="precio">749,99 €</p>
-                        <button class="btn-add">Añadir al carrito</button>
-                    </div>
-                </article>
-
-                <!-- Producto 3 -->
-                <article class="card">
-                    <img src="img/rtx_4060_asus.jpg" alt="ASUS GeForce RTX 4060 TUF">
-                    <div class="card-content">
-                        <span class="codigo">P003</span>
-                        <h3>ASUS GeForce RTX 4060 TUF</h3>
-                        <p class="descripcion">ASUS TUF Gaming NVIDIA GeForce RTX 4060 — 8GB GDDR6</p>
-                        <p class="precio">399,99 €</p>
-                        <button class="btn-add">Añadir al carrito</button>
-                    </div>
-                </article>
-
-                <!-- Producto 4 -->
-                <article class="card">
-                    <img src="img/ram_corsair_32gb.jpg" alt="Corsair Vengeance DDR5 32GB">
-                    <div class="card-content">
-                        <span class="codigo">P004</span>
-                        <h3>Corsair Vengeance DDR5 32GB</h3>
-                        <p class="descripcion">Corsair Vengeance DDR5 32GB (2x16GB) 5600MHz</p>
-                        <p class="precio">149,99 €</p>
-                        <button class="btn-add">Añadir al carrito</button>
-                    </div>
-                </article>
-
-                <!-- Producto 5 -->
-                <article class="card">
-                    <img src="img/samsung_980_pro_1tb.jpg" alt="Samsung 980 Pro 1TB">
-                    <div class="card-content">
-                        <span class="codigo">P005</span>
-                        <h3>Samsung 980 Pro 1TB</h3>
-                        <p class="descripcion">Samsung 980 Pro — SSD NVMe M.2 1TB</p>
-                        <p class="precio">129,99 €</p>
-                        <button class="btn-add">Añadir al carrito</button>
-                    </div>
-                </article>
-
-                <!-- Producto 6 -->
-                <article class="card">
-                    <img src="img/lenovo_ideapad_3.jpg" alt="Lenovo IdeaPad 3">
-                    <div class="card-content">
-                        <span class="codigo">P006</span>
-                        <h3>Lenovo IdeaPad 3</h3>
-                        <p class="descripcion">Lenovo IdeaPad 3 — AMD Ryzen 7, 16GB RAM, 512GB SSD</p>
-                        <p class="precio">799,99 €</p>
-                        <button class="btn-add">Añadir al carrito</button>
-                    </div>
-                </article>
-                <!-- Producto 7 -->
-                <article class="card">
-                    <img src="img/asus_proart_24.jpg" alt="ASUS ProArt 24&quot; Monitor">
-                    <div class="card-content">
-                        <span class="codigo">P007</span>
-                        <h3>ASUS ProArt 24" Monitor</h3>
-                        <p class="descripcion">ASUS ProArt 24 — 24" IPS, 1920x1200, para creación de contenido</p>
-                        <p class="precio">249,99 €</p>
-                        <button class="btn-add">Añadir al carrito</button>
-                    </div>
-                </article>
-
-                <!-- Producto 8 -->
-                <article class="card">
-                    <img src="img/corsair_k70.jpg" alt="Corsair K70 RGB MK.2">
-                    <div class="card-content">
-                        <span class="codigo">P008</span>
-                        <h3>Corsair K70 RGB MK.2</h3>
-                        <p class="descripcion">Corsair K70 RGB — Teclado mecánico con switches Cherry MX</p>
-                        <p class="precio">129,99 €</p>
-                        <button class="btn-add">Añadir al carrito</button>
-                    </div>
-                </article>
-            </div>
-        </main>
-
-        <!-- Sección del Carrito (Visual) -->
-        <aside class="carrito">
-            <h2>Tu Carrito</h2>
-            <div class="carrito-lista">
-                <!-- Item de ejemplo 1 -->
-                <div class="carrito-item">
-                    <div class="item-header">
-                        <h4>ASUS GeForce RTX 4060 TUF</h4>
-                        <span class="item-price">399,99 €</span>
-                    </div>
-                    <div class="item-controls">
-                        <div class="qty-controls">
-                            <button class="btn-qty">-</button>
-                            <span class="qty-value">1</span>
-                            <button class="btn-qty">+</button>
-                        </div>
-                        <button class="btn-delete">Eliminar</button>
                     </div>
                 </div>
+            </article>
 
-                <!-- Item de ejemplo 2 -->
-                <div class="carrito-item">
-                    <div class="item-header">
-                        <h4>Samsung 980 Pro 1TB</h4>
-                        <span class="item-price">129,99 €</span>
+            <!-- Producto 2: Hábitos Atómicos -->
+            <article class="card">
+                <div class="card-image">
+                    <img src="img/habitos_atomicos.jpg" alt="Hábitos Atómicos">
+                </div>
+                <div class="card-content">
+                    <div class="card-meta">
+                        <span class="codigo">LIB002</span>
                     </div>
-                    <div class="item-controls">
-                        <div class="qty-controls">
-                            <button class="btn-qty">-</button>
-                            <span class="qty-value">2</span>
-                            <button class="btn-qty">+</button>
-                        </div>
-                        <button class="btn-delete">Eliminar</button>
+                    <h3 class="card-title">Hábitos Atómicos</h3>
+                    <p class="card-description">Cambios pequeños, resultados extraordinarios de James Clear.</p>
+                    <div class="card-footer">
+                        <span class="precio">19,95 €</span>
+                        <button class="btn-add">Añadir al carrito</button>
                     </div>
                 </div>
-            </div>
+            </article>
 
-            <div class="carrito-footer">
-                <div class="total-row">
-                    <span>Total:</span>
-                    <span>659,97 €</span>
+            <!-- Producto 3: One Piece -->
+            <article class="card">
+                <div class="card-image">
+                    <img src="img/one_piece_105.jpg" alt="One Piece Vol. 105">
                 </div>
-                <button class="btn-vaciar">Vaciar carrito</button>
-            </div>
-        </aside>
-    </div>
+                <div class="card-content">
+                    <div class="card-meta">
+                        <span class="codigo">COM001</span>
+                    </div>
+                    <h3 class="card-title">One Piece Vol. 105</h3>
+                    <p class="card-description">El sueño de Luffy continúa en Wano.</p>
+                    <div class="card-footer">
+                        <span class="precio">8,50 €</span>
+                        <button class="btn-add">Añadir al carrito</button>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Producto 4: El problema de los 3 cuerpos -->
+            <article class="card">
+                <div class="card-image">
+                    <img src="img/tres_cuerpos.jpg" alt="El problema de los 3 cuerpos">
+                </div>
+                <div class="card-content">
+                    <div class="card-meta">
+                        <span class="codigo">LIB003</span>
+                    </div>
+                    <h3 class="card-title">El problema de los 3 cuerpos</h3>
+                    <p class="card-description">La aclamada novela de ciencia ficción de Cixin Liu.</p>
+                    <div class="card-footer">
+                        <span class="precio">21,90 €</span>
+                        <button class="btn-add">Añadir al carrito</button>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Producto 5: Blackwater I: La riada -->
+            <article class="card">
+                <div class="card-image">
+                    <img src="img/blackwater_1.jpg" alt="Blackwater I: La riada">
+                </div>
+                <div class="card-content">
+                    <div class="card-meta">
+                        <span class="codigo">LIB004</span>
+                    </div>
+                    <h3 class="card-title">Blackwater I: La riada</h3>
+                    <p class="card-description">La saga gótica de Michael McDowell que arrasa.</p>
+                    <div class="card-footer">
+                        <span class="precio">9,90 €</span>
+                        <button class="btn-add">Añadir al carrito</button>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Producto 6: La armadura de la luz -->
+            <article class="card">
+                <div class="card-image">
+                    <img src="img/armadura_luz.jpg" alt="La armadura de la luz">
+                </div>
+                <div class="card-content">
+                    <div class="card-meta">
+                        <span class="codigo">LIB005</span>
+                    </div>
+                    <h3 class="card-title">La armadura de la luz</h3>
+                    <p class="card-description">El regreso a Kingsbridge de Ken Follett.</p>
+                    <div class="card-footer">
+                        <span class="precio">24,90 €</span>
+                        <button class="btn-add">Añadir al carrito</button>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Producto 7: Heartstopper 5 -->
+            <article class="card">
+                <div class="card-image">
+                    <img src="img/heartstopper_5.jpg" alt="Heartstopper 5">
+                </div>
+                <div class="card-content">
+                    <div class="card-meta">
+                        <span class="codigo">COM002</span>
+                    </div>
+                    <h3 class="card-title">Heartstopper 5</h3>
+                    <p class="card-description">La novela gráfica romántica de Alice Oseman.</p>
+                    <div class="card-footer">
+                        <span class="precio">15,95 €</span>
+                        <button class="btn-add">Añadir al carrito</button>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Producto 8: Enciclopedia Marvel -->
+            <article class="card">
+                <div class="card-image">
+                    <img src="img/enciclopedia_marvel.jpg" alt="Enciclopedia Marvel">
+                </div>
+                <div class="card-content">
+                    <div class="card-meta">
+                        <span class="codigo">ENC001</span>
+                    </div>
+                    <h3 class="card-title">Enciclopedia Marvel</h3>
+                    <p class="card-description">La guía definitiva del Universo Marvel actualizada.</p>
+                    <div class="card-footer">
+                        <span class="precio">45,00 €</span>
+                        <button class="btn-add">Añadir al carrito</button>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Producto 9: El infinito en un junco -->
+            <article class="card">
+                <div class="card-image">
+                    <img src="img/infinito_junco.jpg" alt="El infinito en un junco">
+                </div>
+                <div class="card-content">
+                    <div class="card-meta">
+                        <span class="codigo">LIB006</span>
+                    </div>
+                    <h3 class="card-title">El infinito en un junco</h3>
+                    <p class="card-description">La invención de los libros por Irene Vallejo.</p>
+                    <div class="card-footer">
+                        <span class="precio">21,90 €</span>
+                        <button class="btn-add">Añadir al carrito</button>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Producto 10: Jujutsu Kaisen 0 -->
+            <article class="card">
+                <div class="card-image">
+                    <img src="img/jujutsu_kaisen_0.jpg" alt="Jujutsu Kaisen 0">
+                </div>
+                <div class="card-content">
+                    <div class="card-meta">
+                        <span class="codigo">COM003</span>
+                    </div>
+                    <h3 class="card-title">Jujutsu Kaisen 0</h3>
+                    <p class="card-description">La precuela del exitoso manga de Gege Akutami.</p>
+                    <div class="card-footer">
+                        <span class="precio">8,00 €</span>
+                        <button class="btn-add">Añadir al carrito</button>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <p>&copy; 2024 Librería El Estudiante. Todos los derechos reservados.</p>
+    </footer>
+
 </body>
 </html>

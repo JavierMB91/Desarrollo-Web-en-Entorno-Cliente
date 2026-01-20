@@ -1,16 +1,15 @@
 :root {
-    --primary-color: #00e6e6; /* Cian eléctrico */
-    --primary-hover: #00b3b3;
-    --danger-color: #ff4d4d; /* Rojo neón */
-    --danger-hover: #cc0000;
-    --text-dark: #e0ffff; /* Blanco brillante */
-    --text-light: #80e6e6; /* Cian claro para texto secundario */
-    --bg-body: #0a0a1a; /* Fondo muy oscuro, casi negro */
-    --bg-card: #1a1a30; /* Fondo de las tarjetas oscuro con un toque azul/púrpura */
-    --border-color: #004d4d; /* Borde sutil que combina con el primario */
-    --shadow-sm: 0 0 5px rgba(0, 230, 230, 0.1); /* Sombra con brillo sutil */
-    --shadow-md: 0 0 15px rgba(0, 230, 230, 0.2); /* Sombra más pronunciada con brillo */
-    --radius: 0.25rem; /* Bordes más afilados */
+    --bg-color: #fdfbf7;       /* Blanco roto / Papel */
+    --card-bg: #ffffff;
+    --text-main: #2c3e50;      /* Azul oscuro casi negro */
+    --text-light: #666666;
+    --accent-color: #8b4513;   /* Marrón cuero para detalles */
+    --btn-color: #2f5e41;      /* Verde bosque */
+    --btn-hover: #1e3d2a;
+    --font-heading: 'Merriweather', serif;
+    --font-body: 'Lato', sans-serif;
+    --shadow: 0 4px 6px rgba(0,0,0,0.05);
+    --shadow-hover: 0 10px 15px rgba(0,0,0,0.1);
 }
 
 * {
@@ -20,275 +19,165 @@
 }
 
 body {
-    font-family: system-ui, -apple-system, sans-serif;
-    background-color: var(--bg-body); /* Fondo muy oscuro */
-    color: var(--text-dark);
-    line-height: 1.5;
-}
-
-header {
-    background-color: var(--bg-card); /* Usamos el fondo de tarjeta para el header */
-    padding: 1.5rem 2rem;
-    border-bottom: 2px solid var(--primary-color); /* Borde inferior más prominente */
-    margin-bottom: 2rem;
-    text-align: center;
-}
-
-header h1 {
-    color: var(--text-dark);
-    font-size: 1.875rem;
-    font-weight: 700;
+    font-family: var(--font-body);
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    line-height: 1.6;
 }
 
 .container {
-    max-width: 1400px;
+    max-width: 1200px;
     margin: 0 auto;
-    padding: 0 1.5rem;
-    display: flex;
-    gap: 2rem;
-    align-items: flex-start;
+    padding: 0 20px;
 }
 
-/* --- Catálogo --- */
-.catalogo {
-    flex: 1;
+/* Header */
+.site-header {
+    background-color: var(--card-bg);
+    border-bottom: 3px solid var(--accent-color);
+    padding: 2rem 0;
+    text-align: center;
+    margin-bottom: 3rem;
+    box-shadow: var(--shadow);
 }
 
-.catalogo h2, .carrito h2 {
-    font-size: 1.5rem;
-    margin-bottom: 1.5rem;
-    color: var(--text-dark);
-    border-bottom: 2px solid var(--border-color);
-    padding-bottom: 0.5rem;
+.site-header h1 {
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    color: var(--text-main);
+    margin-bottom: 0.5rem;
 }
 
+.site-header p {
+    font-style: italic;
+    color: var(--text-light);
+    font-family: var(--font-heading);
+}
+
+/* Títulos de sección */
+.section-title {
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    color: var(--accent-color);
+    border-bottom: 1px solid #e0e0e0;
+    padding-bottom: 10px;
+}
+
+/* Grid de Productos */
 .grid-productos {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 2rem;
+    padding-bottom: 4rem;
 }
 
+/* Tarjeta (Card) */
 .card {
-    background-color: var(--bg-card);
-    border-radius: var(--radius);
+    background-color: var(--card-bg);
+    border-radius: 8px;
     overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
     display: flex;
     flex-direction: column;
-    transition: transform 0.2s ease, box-shadow 0.2s ease, border 0.2s ease;
-    border: 1px solid var(--border-color); /* Borde inicial */
-    box-shadow: var(--shadow-sm); /* Sombra inicial */
+    border: 1px solid #eee;
 }
 
 .card:hover {
-    transform: translateY(-4px);
-    border: 1px solid var(--primary-color); /* Borde brillante al pasar el ratón */
-    box-shadow: 0 0 25px rgba(0, 230, 230, 0.5); /* Brillo más intenso */
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-hover);
 }
 
-.card img {
+.card-image {
+    height: 320px;
+    overflow: hidden;
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-image img {
     width: 100%;
-    aspect-ratio: 1 / 1;
+    height: 100%;
     object-fit: contain;
-    padding: 1rem;
-    background-color: #001a1a; /* Placeholder oscuro */
+    padding: 10px;
+    transition: transform 0.5s ease;
+}
+
+.card:hover .card-image img {
+    transform: scale(1.05);
 }
 
 .card-content {
-    padding: 1.25rem;
+    padding: 1.5rem;
     display: flex;
     flex-direction: column;
     flex-grow: 1;
 }
 
-.codigo {
+.card-meta .codigo {
     font-size: 0.75rem;
     text-transform: uppercase;
-    color: var(--primary-color); /* Código en color primario */
-    letter-spacing: 0.05em;
-    margin-bottom: 0.5rem;
+    letter-spacing: 1px;
+    color: #999;
+    background: #f4f4f4;
+    padding: 2px 6px;
+    border-radius: 4px;
 }
 
-.card h3 {
-    font-size: 1.125rem;
-    font-weight: 600;
-    margin-bottom: 0.5rem;
-    color: var(--text-dark);
+.card-title {
+    font-family: var(--font-heading);
+    font-size: 1.2rem;
+    margin: 0.5rem 0;
+    color: var(--text-main);
 }
 
-.descripcion {
-    font-size: 0.875rem;
-    color: var(--text-light); /* Descripción en color claro */
-    margin-bottom: 1rem;
-    flex-grow: 1;
+.card-description {
+    font-size: 0.95rem;
+    color: var(--text-light);
+    margin-bottom: 1.5rem;
+    flex-grow: 1; /* Empuja el footer hacia abajo para alinear botones */
+}
+
+.card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto;
+    padding-top: 1rem;
+    border-top: 1px solid #f0f0f0;
 }
 
 .precio {
-    font-size: 1.5rem;
+    font-size: 1.25rem;
     font-weight: 700;
-    color: var(--primary-color); /* Precio en color primario */
-    margin-bottom: 1rem;
+    color: var(--accent-color);
 }
 
 .btn-add {
-    width: 100%;
-    background-color: var(--primary-color);
-    background-image: linear-gradient(to bottom, var(--primary-hover), var(--primary-color)); /* Gradiente sutil */
+    background-color: var(--btn-color);
     color: white;
     border: none;
-    padding: 0.75rem;
-    border-radius: var(--radius);
-    font-weight: 600;
+    padding: 0.6rem 1.2rem;
+    border-radius: 4px;
     cursor: pointer;
-    transition: transform 0.15s ease, box-shadow 0.15s ease, background-image 0.2s ease;
-    box-shadow: 0 0 10px rgba(0, 230, 230, 0.3); /* Brillo en el botón */
+    font-family: var(--font-body);
+    font-weight: 700;
+    transition: background-color 0.2s;
 }
 
 .btn-add:hover {
-    background-color: var(--primary-hover);
-    transform: translateY(-2px);
-    box-shadow: 0 0 20px rgba(0, 230, 230, 0.5); /* Brillo más intenso al pasar el ratón */
+    background-color: var(--btn-hover);
 }
 
-/* --- Carrito --- */
-.carrito {
-    width: 350px;
-    background-color: var(--bg-card);
-    padding: 1.5rem;
-    border-radius: var(--radius);
-    border: 1px solid var(--primary-color); /* Borde del carrito en color primario */
-    position: sticky;
-    top: 2rem;
-    flex-shrink: 0;
-}
-
-.carrito-lista {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    margin-bottom: 1.5rem;
-}
-
-.carrito-item {
-    border-bottom: 1px dashed var(--border-color); /* Línea punteada para un toque tecnológico */
-    padding-bottom: 1rem;
-}
-
-.carrito-item:last-child {
-    border-bottom: none;
-}
-
-.item-header {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 0.5rem;
-}
-
-.item-header h4 {
-    font-size: 0.95rem;
-    font-weight: 600;
-    color: var(--text-dark);
-    margin-right: 0.5rem;
-}
-
-.item-price {
-    font-weight: 700;
-    color: var(--text-dark);
-}
-
-.item-controls {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.qty-controls {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    background-color: var(--bg-body);
-    padding: 0.3rem;
-    border-radius: var(--radius);
-}
-
-.btn-qty {
-    width: 24px;
-    height: 24px;
-    border: 1px solid var(--border-color);
-    background-color: transparent; /* Fondo transparente para los botones de cantidad */
-    border-radius: 4px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
-    color: var(--primary-color); /* Color primario para los botones de cantidad */
-    transition: background-color 0.2s;
-}
-.btn-qty:hover {
-    background-color: var(--border-color); /* Fondo al pasar el ratón */
-}
-
-.qty-value {
-    font-size: 0.9rem;
-    font-weight: 600;
-    min-width: 1.5rem;
+/* Footer */
+.site-footer {
     text-align: center;
-}
-
-.btn-delete {
-    background: none;
-    border: none;
-    color: var(--danger-color);
+    padding: 2rem;
+    background-color: #e8e4dc;
+    color: #777;
     font-size: 0.9rem;
-    cursor: pointer;
-    text-decoration: underline;
-    transition: color 0.2s ease;
-}
-
-.btn-delete:hover {
-    color: var(--danger-hover); /* Color más intenso al pasar el ratón */
-}
-
-.carrito-footer {
-    border-top: 2px solid var(--border-color);
-    padding-top: 1rem;
-}
-
-.total-row {
-    display: flex;
-    justify-content: space-between;
-    font-size: 1.25rem;
-    font-weight: 700;
-    margin-bottom: 1rem;
-    color: var(--text-dark);
-}
-
-.btn-vaciar {
-    width: 100%;
-    background-color: transparent;
-    border: 2px solid var(--danger-color);
-    color: var(--danger-color);
-    padding: 0.8rem;
-    border-radius: var(--radius);
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s;
-    box-shadow: 0 0 10px rgba(255, 77, 77, 0.3); /* Brillo en el botón de vaciar */
-}
-
-.btn-vaciar:hover {
-    background-color: var(--danger-hover);
-    color: white;
-}
-
-/* Responsive */
-@media (max-width: 1024px) {
-    .container {
-        flex-direction: column;
-    }
-    
-    .carrito {
-        width: 100%;
-        position: static;
-    }
+    margin-top: auto;
 }

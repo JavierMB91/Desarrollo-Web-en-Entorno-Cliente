@@ -1,66 +1,82 @@
 const productos = [
     {
         id: 1,
-        codigo: 'P001',
-        nombre: 'HP Pavilion 15',
-        precio: 599.99,
-        descripcion: 'HP Pavilion 15 — Intel Core i5, 8GB RAM, 256GB NVMe SSD',
-        imagen: 'img/hp_pavilion_15.jpg'
+        codigo: 'LIB001',
+        nombre: 'Alas de Sangre',
+        precio: 22.90,
+        descripcion: 'El fenómeno de fantasía de Rebecca Yarros.',
+        imagen: 'img/alas_de_sangre.jpg'
     },
     {
         id: 2,
-        codigo: 'P002',
-        nombre: 'Dell Inspiron 15 3520',
-        precio: 749.99,
-        descripcion: 'Dell Inspiron 15 — Intel Core i5, 16GB RAM, 512GB SSD',
-        imagen: 'img/dell_inspiron.jpg'
+        codigo: 'LIB002',
+        nombre: 'Hábitos Atómicos',
+        precio: 19.95,
+        descripcion: 'Cambios pequeños, resultados extraordinarios de James Clear.',
+        imagen: 'img/habitos_atomicos.jpg'
     },
     {
         id: 3,
-        codigo: 'P003',
-        nombre: 'ASUS GeForce RTX 4060 TUF',
-        precio: 399.99,
-        descripcion: 'ASUS TUF Gaming NVIDIA GeForce RTX 4060 — 8GB GDDR6',
-        imagen: 'img/rtx_4060_asus.jpg'
+        codigo: 'COM001',
+        nombre: 'One Piece Vol. 105',
+        precio: 8.50,
+        descripcion: 'El sueño de Luffy continúa en Wano.',
+        imagen: 'img/one_piece_105.jpg'
     },
     {
         id: 4,
-        codigo: 'P004',
-        nombre: 'Corsair Vengeance DDR5 32GB',
-        precio: 149.99,
-        descripcion: 'Corsair Vengeance DDR5 32GB (2x16GB) 5600MHz',
-        imagen: 'img/ram_corsair_32gb.jpg'
+        codigo: 'LIB003',
+        nombre: 'El problema de los 3 cuerpos',
+        precio: 21.90,
+        descripcion: 'La aclamada novela de ciencia ficción de Cixin Liu.',
+        imagen: 'img/tres_cuerpos.jpg'
     },
     {
         id: 5,
-        codigo: 'P005',
-        nombre: 'Samsung 980 Pro 1TB',
-        precio: 129.99,
-        descripcion: 'Samsung 980 Pro — SSD NVMe M.2 1TB',
-        imagen: 'img/samsung_980_pro_1tb.jpg'
+        codigo: 'LIB004',
+        nombre: 'Blackwater I: La riada',
+        precio: 9.90,
+        descripcion: 'La saga gótica de Michael McDowell que arrasa.',
+        imagen: 'img/blackwater_1.jpg'
     },
     {
         id: 6,
-        codigo: 'P006',
-        nombre: 'Lenovo IdeaPad 3',
-        precio: 799.99,
-        descripcion: 'Lenovo IdeaPad 3 — AMD Ryzen 7, 16GB RAM, 512GB SSD',
-        imagen: 'img/lenovo_ideapad_3.jpg'
+        codigo: 'LIB005',
+        nombre: 'La armadura de la luz',
+        precio: 24.90,
+        descripcion: 'El regreso a Kingsbridge de Ken Follett.',
+        imagen: 'img/armadura_luz.jpg'
     },
     {
         id: 7,
-        codigo: 'P007',
-        nombre: 'ASUS ProArt 24" Monitor',
-        precio: 249.99,
-        descripcion: 'ASUS ProArt 24 — 24" IPS, 1920x1200, para creación de contenido',
-        imagen: 'img/asus_proart_24.jpg'
+        codigo: 'COM002',
+        nombre: 'Heartstopper 5',
+        precio: 15.95,
+        descripcion: 'La novela gráfica romántica de Alice Oseman.',
+        imagen: 'img/heartstopper_5.jpg'
     },
     {
         id: 8,
-        codigo: 'P008',
-        nombre: 'Corsair K70 RGB MK.2',
-        precio: 129.99,
-        descripcion: 'Corsair K70 RGB — Teclado mecánico con switches Cherry MX',
-        imagen: 'img/corsair_k70.jpg'
+        codigo: 'ENC001',
+        nombre: 'Enciclopedia Marvel',
+        precio: 45.00,
+        descripcion: 'La guía definitiva del Universo Marvel actualizada.',
+        imagen: 'img/enciclopedia_marvel.jpg'
+    },
+    {
+        id: 9,
+        codigo: 'LIB006',
+        nombre: 'El infinito en un junco',
+        precio: 21.90,
+        descripcion: 'La invención de los libros por Irene Vallejo.',
+        imagen: 'img/infinito_junco.jpg'
+    },
+    {
+        id: 10,
+        codigo: 'COM003',
+        nombre: 'Jujutsu Kaisen 0',
+        precio: 8.00,
+        descripcion: 'La precuela del exitoso manga de Gege Akutami.',
+        imagen: 'img/jujutsu_kaisen_0.jpg'
     }
 ];
