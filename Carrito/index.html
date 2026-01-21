@@ -20,9 +20,11 @@
     </header>
 
     <main class="container">
-        <h2 class="section-title">Catálogo de Productos</h2>
-        
-        <div class="grid-productos">
+        <div class="layout-wrapper">
+            <section class="catalogo-principal">
+                <h2 class="section-title">Catálogo de Productos</h2>
+                
+                <div class="grid-productos">
             <!-- Producto 1: Alas de Sangre -->
             <article class="card">
                 <div class="card-image">
@@ -202,6 +204,61 @@
                     </div>
                 </div>
             </article>
+                </div>
+            </section>
+
+            <!-- Carrito Lateral -->
+            <aside class="carrito-sidebar">
+                <h2 class="section-title">Tu Carrito</h2>
+                
+                <div class="carrito-items">
+                    <!-- Producto 1 en carrito -->
+                    <div class="carrito-item">
+                        <div class="carrito-img">
+                            <img src="img/alas_de_sangre.jpg" alt="Alas de Sangre">
+                        </div>
+                        <div class="carrito-info">
+                            <h4>Alas de Sangre</h4>
+                            <div class="cantidad-control">
+                                <button class="btn-qty">-</button>
+                                <input type="text" value="1" readonly>
+                                <button class="btn-qty">+</button>
+                            </div>
+                            <p class="item-price">22,90 €</p>
+                        </div>
+                        <button class="btn-remove" title="Eliminar">&times;</button>
+                    </div>
+
+                    <!-- Producto 2 en carrito -->
+                    <div class="carrito-item">
+                        <div class="carrito-img">
+                            <img src="img/one_piece_105.jpg" alt="One Piece">
+                        </div>
+                        <div class="carrito-info">
+                            <h4>One Piece Vol. 105</h4>
+                            <div class="cantidad-control">
+                                <button class="btn-qty">-</button>
+                                <input type="text" value="2" readonly>
+                                <button class="btn-qty">+</button>
+                            </div>
+                            <p class="item-price">17,00 €</p>
+                        </div>
+                        <button class="btn-remove" title="Eliminar">&times;</button>
+                    </div>
+                </div>
+
+                <div class="carrito-resumen">
+                    <div class="fila-resumen">
+                        <span>Subtotal</span>
+                        <span>39,90 €</span>
+                    </div>
+                    <div class="fila-resumen total">
+                        <span>Total</span>
+                        <span>39,90 €</span>
+                    </div>
+                    <button class="btn-checkout">Finalizar Pedido</button>
+                </div>
+            </aside>
         </div>
     </main>
 
