@@ -70,8 +70,8 @@ function displayTarea(tarea){
             <input type="checkbox" class="tarea-realizada">
             ${iconoTipo}
             <span class="texto-tarea">${tarea.texto}</span>
+            </div>
             <button class="eliminar">🗑️</button>
-        </div>
     `
 
 
