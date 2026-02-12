@@ -20,11 +20,32 @@ const btnFinalizar = document.querySelector('.btn-checkout');
 // Almacenará objetos, donde cada objeto representa un producto en el carrito.
 // Ejemplo de un objeto: { id: 1, cantidad: 2 }
 let carrito = [];
+const CLAVE_STORAGE_CARRITO = 'carrito';
 
 // --- 3. FUNCIONES DE UTILIDAD ---
 // Función auxiliar para formatear un número y mostrarlo como moneda en formato europeo (€).
 const formatearMoneda = (monto) => {
     return new Intl.NumberFormat('es-ES', { style: 'currency', currency: 'EUR' }).format(monto);
+};
+
+const guardarCarritoEnStorage = () => {
+    localStorage.setItem(CLAVE_STORAGE_CARRITO, JSON.stringify(carrito));
+};
+
+const cargarCarritoDesdeStorage = () => {
+    const carritoGuardado = localStorage.getItem(CLAVE_STORAGE_CARRITO);
+    if (!carritoGuardado) return;
+
+    try {
+        const carritoParseado = JSON.parse(carritoGuardado);
+        if (!Array.isArray(carritoParseado)) return;
+
+        carrito = carritoParseado
+            .filter(item => Number.isInteger(item.id) && Number.isInteger(item.cantidad) && item.cantidad > 0)
+            .filter(item => productos.some(producto => producto.id === item.id));
+    } catch (error) {
+        carrito = [];
+    }
 };
 
 // --- 4. FUNCIONES DE RENDERIZADO (DIBUJAR EN LA PANTALLA) ---
@@ -118,6 +139,7 @@ const renderizarCarrito = () => {
 
     // Después de cualquier cambio en el carrito, recalculamos y mostramos los totales.
     actualizarTotalesCarrito();
+    guardarCarritoEnStorage();
 };
 
 // Función para calcular y mostrar los totales (subtotal y total).
@@ -190,6 +212,7 @@ const finalizarPedido = () => {
 // 'DOMContentLoaded' es un evento que se dispara cuando todo el HTML ha sido cargado.
 // Nos aseguramos de que nuestro script no intente manipular elementos que aún no existen.
 document.addEventListener('DOMContentLoaded', () => {
+    cargarCarritoDesdeStorage();
     renderizarProductos(); // Dibuja la lista de productos en el catálogo.
     renderizarCarrito();     // Dibuja el estado inicial del carrito (vacío).
 
